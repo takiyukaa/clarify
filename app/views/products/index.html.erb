@@ -1,0 +1,7 @@
+
+
+<h3>Browse by category</h3>
+
+<% @products.pluck(:category).uniq.each do |category| %>
+  <h4> <%= category %> </h4>
+<% end %>
