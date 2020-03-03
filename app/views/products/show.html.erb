@@ -1,0 +1,23 @@
+
+<% if @.photo.attached? %>
+  <% @path = @product.photo.key %>
+<% else %>
+  <% @path = 'profile_whubsg' %>
+<% end %>
+
+<p><%= @product.name %></p>
+<p><%= @product.brand %></p>
+<p><%= @product.category %></p>
+<p><%= @product.description %></p>
+<%= @product.reviews.pluck(:rating).sum / @product.reviews.pluck(:rating).length %>
+<p><%= @product.description %></p>
+
+<% @product.reviews.each do |review| %>
+  <% if review.photo.attached? %>
+    <% @path = review.photo.key %>
+  <% else %>
+    <% @path = 'profile_whubsg' %>
+  <% end %>
+  <p><%= review.rating %></p>
+  <p><%= review.content %></p>
+<% end %>
