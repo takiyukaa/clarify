@@ -6,13 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'rest-client'
-Ingredient.destroy_all
 ProductsIngredient.destroy_all
+Flag.destroy_all
+Ingredient.destroy_all
 puts "Ingredients destroyed"
-User.destroy_all
 puts "All users destroyed"
 Review.destroy_all
 Product.destroy_all
+User.destroy_all
 puts "Products and reviews destroyed"
 
 puts "Creating new ingredients"
