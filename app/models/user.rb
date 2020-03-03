@@ -12,4 +12,8 @@ class User < ApplicationRecord
   validates :second_name, presence: true
   validates :email, presence: true
 
+  def full_name
+    "#{first_name} #{second_name}"
+  end
+
 end
