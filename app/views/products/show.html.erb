@@ -21,3 +21,8 @@
   <p><%= review.rating %></p>
   <p><%= review.content %></p>
 <% end %>
+
+<% @product.ingredients.each do |ingredient| %>
+  <p><%= ingredient.name %></p>
+  <p><%= ingredient.effect %></p>
+<% end %>
