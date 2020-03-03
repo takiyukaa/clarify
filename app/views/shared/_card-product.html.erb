@@ -1,30 +1,35 @@
 <div class="row">
   <div class="col-12 col-md-8 col-lg-8">
     <div class="card-white">
-
-      <div class="product-img">
-        <%= image_tag "biore.jpg", alt: "product" %>
+      <div class="card-white-up">
+        <div class="product-img">
+          <%= image_tag "biore.jpg", alt: "product" %>
+        </div>
+        <div class="product-info">
+          <div class="product-detail">
+            <h1><%= product.name %></h1>
+            <p><%= product.brand %></p>
+            <p><%= product.category %></p>
+          </div>
+          <div class="product-rating">
+            <div class="score-rating">
+              <p id="rate"><%= product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length %>.0</p>
+              <p id="rating"><%= product.reviews.size %><br>ratings</p>
+            </div>
+            <div class="stars">
+              <% (product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
+              <i class="fas fa-star" id="star-pink"></i>
+              <% end %>
+              <% (5 - product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
+              <i class="fas fa-star" id="star-gray"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="product-info">
-        <div class="product-detail">
-          <h1>Biore skin care facial foam moisture</h1>
-          <p>Biore</p>
-          <p>face wash</p>
-        </div>
-        <div class="product-rating">
-          <div class="score-rating">
-            <p id="rate">4.0</p>
-            <p id="rating">42<br>ratings</p>
-          </div>
-          <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
+      <hr>
+      <div class="card-white-bottom">
+        <p><%= product.description %></p>
       </div>
     </div>
   </div>

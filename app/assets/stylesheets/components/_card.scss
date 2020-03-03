@@ -1,8 +1,23 @@
 .card-white {
-  margin: 16px;
-  padding: 16px;
   background-color: white;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+
+.card-white-up {
   display: flex;
+}
+
+
+.card-white-bottom {
+  padding: 8px;
+
+  p {
+      font-weight: lighter;
+      margin-bottom: 0;
+      font-size: 12px;
+    }
 }
 
 
@@ -18,7 +33,7 @@
 
 
 .product-info {
-  padding: 16px;
+  padding: 8px;
 
   h1 {
     font-size: 16px;
@@ -39,23 +54,30 @@
 
 .score-rating {
   display: flex;
-}
 
-#rate {
+  #rate {
   font-size: 24px;
   margin-right: 8px;
-}
+  }
 
-#rating {
+  #rating {
     font-size: 8px;
     color: gray;
     line-height: 12px;
     align-self: center;
+  }
 }
 
 .stars {
   i {
     font-size: 12px;
+  }
+
+  #star-pink {
     color: $pink;
+  }
+
+  #star-gray {
+    color: gray;
   }
 }
