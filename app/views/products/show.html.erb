@@ -1,5 +1,5 @@
 
-<% if @.photo.attached? %>
+<% if @product.photo.attached? %>
   <% @path = @product.photo.key %>
 <% else %>
   <% @path = 'profile_whubsg' %>
@@ -13,8 +13,8 @@
 <p><%= @product.description %></p>
 
 <% @product.reviews.each do |review| %>
-  <% if review.photo.attached? %>
-    <% @path = review.photo.key %>
+  <% if review.product.photo.attached? %>
+    <% @path = review.product.photo.key %>
   <% else %>
     <% @path = 'profile_whubsg' %>
   <% end %>
