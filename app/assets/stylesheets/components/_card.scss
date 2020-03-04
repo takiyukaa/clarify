@@ -1,8 +1,29 @@
 .card-white {
-  margin: 16px;
-  padding: 16px;
   background-color: white;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 16px;
+}
+
+.flex {
   display: flex;
+}
+
+// card-product
+
+.card-white-up {
+  padding: 8px;
+}
+
+
+.card-white-bottom {
+  padding: 8px;
+
+  p {
+      font-weight: lighter;
+      margin-bottom: 0;
+      font-size: 12px;
+    }
 }
 
 
@@ -18,7 +39,7 @@
 
 
 .product-info {
-  padding: 16px;
+  padding: 8px;
 
   h1 {
     font-size: 16px;
@@ -39,23 +60,72 @@
 
 .score-rating {
   display: flex;
-}
 
-#rate {
+  #rate {
   font-size: 24px;
   margin-right: 8px;
-}
+  }
 
-#rating {
+  #rating {
     font-size: 8px;
     color: gray;
     line-height: 12px;
     align-self: center;
+  }
 }
 
 .stars {
   i {
     font-size: 12px;
+  }
+
+  #star-pink {
     color: $pink;
   }
+
+  #star-gray {
+    color: gray;
+  }
 }
+
+//card review
+
+.review-user {
+  margin-right: 16px;
+
+  img {
+    margin: 4px 0;
+  }
+
+  p {
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+  }
+}
+
+
+.title-and-star {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  p {
+    font-size: 16px;
+    border-bottom: gray 1px dotted;
+    margin: 0;
+  }
+}
+
+
+.review-content {
+
+  p {
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+
+
+
