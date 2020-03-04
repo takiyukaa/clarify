@@ -1,4 +1,13 @@
-
+   <%= form_tag products_path, method: :get, class: "search-form" do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control search-form-control",
+          placeholder: "Search"
+        %>
+        <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
+            <i class="fas fa-search" style="color: white;"></i>
+        <% end %>
+      <% end %>
 
 <h3>Browse by category</h3>
 
