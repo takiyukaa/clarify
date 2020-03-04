@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'rest-client'
+require 'open-uri'
+
 ProductsIngredient.destroy_all
 Flag.destroy_all
 Ingredient.destroy_all
@@ -26,7 +28,8 @@ result_array.each do |hash|
 end
 
 puts "Creating new users"
-FRANCES = User.create!(
+
+frances = User.create!(
   email: "frances@gmail.com",
   password: "123123",
   first_name: "Frances",
@@ -34,9 +37,10 @@ FRANCES = User.create!(
   gender: "F",
   city: "Tokyo",
 )
+francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
+frances.photo.attach(io: francesfile, filename: 'fZLeDeZpZcXvzjBWUmXNqCDu.jpg', content_type: 'image/jpg')
 
-
-YUKA = User.create!(
+yuka = User.create!(
   email: "yuka@gmail.com",
   password: "123123",
   first_name: "Yuka",
@@ -45,28 +49,88 @@ YUKA = User.create!(
   city: "Tokyo",
 )
 
+yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878427/iSnsb4vKmwU7se6BsXxxzu8u.jpg')
+yuka.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
+
 puts "Creating new products"
-Product.create!(
-  name: "Jeju Bija Anti Trouble Spot Essence",
-  category: "Moisturizer",
-  brand: "Innisfree",
-  barcode: 999,
-  description: " Formulated with Jeju bija oil 750mg, green complex (Jeju green tea, tangerine etc.) Relieves skin troubles and dermatitis and promotes vitality for skin. Fresh scent."
+
+
+product1 = Product.create!(
+    name: "Jeju Bija Anti Trouble Spot Essence",
+    category: "Moisturizer",
+    brand: "Innisfree",
+    barcode: 999,
+    description: "Formulated with Jeju bija oil 750mg, green complex (Jeju green tea, tangerine etc.) Relieves skin troubles and dermatitis and promotes vitality for skin. Fresh scent."
   )
 
+product2 = Product.create!(
+    name: "Bio-enzyme Refining Complex Self-activating Skin Polisher",
+    category: "Exfoliator",
+    brand: "Amore Pacific",
+    barcode: 111,
+    description: "Increases skin's cell turnover and purges skin of toxins to reveal smoother, radiant, youthful, healthy-looking skin. Works with skin's own enzymes to reduce inflammation and redness "
+    )
+
+
+product3 = Product.create!(
+    name: "SNAIL BEE HIGH CONTENT ESSENCE",
+    category: "Supplement",
+    brand: "Benton",
+    barcode: 222,
+    description: "Snail Secretion filtrate is not sticky in texture, it is watery texture close to water's normal texture, instead of water, snail secretion filtrate was used. Even a small amount of stimulating chemical ingredient could be critical to our skin. when the skin could no longer with hold the stimulation, the skin may tend to produce break outs. Snail BEE High Content Essence is a moisturizing essence which does not contain artificial ingredients that enhance stickiness."
+    )
+
+CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
+
+skincare = RestClient.get 'https://skincare-api.herokuapp.com/products'
+
+skincare_array = JSON.parse(skincare)[50..55]
+
+start = 1
+
+skincare_array.each do |hash|
+  Product.create!(
+    name: hash["name"],
+    category: CATEGORIES.sample,
+    brand: hash["brand"],
+    barcode: start,
+    description: "Add a description for this product"
+    )
+  start += 1
+end
+
 puts "Creating new reviews"
-Review.create!(
+
+review_attributes = [
+{
+  title: "I really love this spot treatment",
+  content: "I always have trouble with spot treatments being too strong to the point where they would burn or leave a scar. This one doesn't do that to me, it seems very gentle. It doesn't work as fast, but i love how nicely spots where there was acne heal. There has been way less scarring and pigmentation changes that I have had to deal with while using other products. I can deal with the slower time, especially with the awesome payoff for my skin!",
+  rating: 5,
+  user: yuka,
+  product: product1
+},
+{
+  title: "Just ok",
+  content: "Didn't really notice any effect on my skin, but my friends seem to love it",
+  rating: 3,
+  user: frances,
+  product: product2
+},
+{
   title: "Can't live without it",
   content: "This is my desert island, can't live without it product. My skin loves it!",
   rating: 5,
-  user: YUKA,
-  product: Product.first
-  )
+  user: yuka,
+  product: product3
+}
+]
 
-ProductsIngredient.create!(
-  product: Product.first,
-  ingredient: Ingredient.first
-  )
+Review.create!(review_attributes)
+
+Ingredient.all.each do |ingredient|
+  ProductsIngredient.create!(ingredient: ingredient, product: Product.all.sample)
+end
+
 puts "All complete"
 
 
