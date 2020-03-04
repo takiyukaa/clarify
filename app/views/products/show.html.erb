@@ -7,14 +7,9 @@
 
   <%= render 'shared/card-product', product: @product %>
 
-
   <% @product.reviews.each do |review| %>
-    <% if review.product.photo.attached? %>
-      <% @path = review.product.photo.key %>
-    <% else %>
-      <% @path = 'profile_whubsg' %>
-    <% end %>
-    <p><%= review.rating %></p>
-    <p><%= review.content %></p>
+
+    <%= render 'shared/card-review', review: review %>
+
   <% end %>
 </div>

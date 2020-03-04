@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 col-md-8 col-lg-8">
     <div class="card-white">
-      <div class="card-white-up">
+      <div class="card-white-up flex">
         <div class="product-img">
           <%= image_tag "biore.jpg", alt: "product" %>
         </div>
@@ -18,10 +18,10 @@
             </div>
             <div class="stars">
               <% (product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
-              <i class="fas fa-star" id="star-pink"></i>
+                <i class="fas fa-star" id="star-pink"></i>
               <% end %>
               <% (5 - product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
-              <i class="fas fa-star" id="star-gray"></i>
+                <i class="fas fa-star" id="star-gray"></i>
               <% end %>
             </div>
           </div>

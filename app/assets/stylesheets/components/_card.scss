@@ -5,9 +5,13 @@
   border-radius: 16px;
 }
 
+.flex {
+  display: flex;
+}
+
+// card-product
 
 .card-white-up {
-  display: flex;
   padding: 8px;
 }
 
@@ -83,3 +87,45 @@
     color: gray;
   }
 }
+
+//card review
+
+.review-user {
+  margin-right: 16px;
+
+  img {
+    margin: 4px 0;
+  }
+
+  p {
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+  }
+}
+
+
+.title-and-star {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  p {
+    font-size: 16px;
+    border-bottom: gray 1px dotted;
+    margin: 0;
+  }
+}
+
+
+.review-content {
+
+  p {
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+
+
+
