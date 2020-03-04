@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_many :products_ingredients
   has_many :reviews
-  has_many :ingredients, through: :products_ingredient
+  has_many :ingredients, through: :products_ingredients
 
   has_one_attached :photo
   validates :name, presence: true
