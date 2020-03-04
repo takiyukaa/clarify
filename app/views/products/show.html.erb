@@ -10,9 +10,19 @@
   <% @product.reviews.each do |review| %>
     <%= render 'shared/card-review', review: review %>
   <% end %>
+
+  <div class="ingredient-list">
+    <div class="card-white">
+      <h2>Ingredients</h2>
+      <ul class="list-group list-group-flush">
+        <% @product.ingredients.each do |ingredient| %>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center"><p>ingredient.name</p></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
-<% @product.ingredients.each do |ingredient| %>
-  <p><%= ingredient.name %></p>
-  <p><%= ingredient.effect %></p>
-<% end %>
+
