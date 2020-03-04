@@ -15,6 +15,7 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'pundit'
 
 # Tags
 gem 'acts-as-taggable-on', '~> 6.5'
