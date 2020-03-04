@@ -1,10 +1,15 @@
 class ProductsController < ApplicationController
   def index
+    # @products = Product.all
+    # @products = Product.where(param[:category])
     if params[:query].present?
       @products = Product.global_search(params[:query])
+      # @moisturisers = @products.where(category: "Moisturizer")
     else
       @products = Product.all
+      # @moisturisers = []
     end
+
   end
 
   def show
