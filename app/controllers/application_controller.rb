@@ -19,21 +19,3 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end
-USAGE
-PROTECT RESTAURANT
-rails g pundit:policy restaurant
-# => generates the file `app/policies/restaurant_policy.rb`
-Question: Who can create a restaurant?
-
-ADMIN USERS
-rails g migration AddAdminToUsers admin:boolean
-rails db:migrate
-rails c
-pry> user = User.where(email: 'seb@lewagon.org').first
-pry> user.admin = true
-pry> user.save
-You can now use this admin field in your policies!
-
-HAPPY AUTHORIZING!
-
-end

@@ -1,9 +1,15 @@
 <div class="navbar-mobile">
 
-    <%= image_tag "home.png", alt: "home", class: "navbar-img" %>
+    <%= link_to root_path do %>
+      <%= image_tag "home.png", alt: "home", class: "navbar-img" %>
+    <% end %>
 
-    <%= image_tag "scan.png", alt: "scan", class: "navbar-img" %>
+    <%= link_to scan_path do %>
+      <%= image_tag "scan.png", alt: "scan", class: "navbar-img" %>
+    <% end %>
 
-    <%= image_tag "user.png", alt: "user", class: "navbar-img" %>
+    <%= link_to "#" do %>
+      <%= image_tag "user.png", alt: "user", class: "navbar-img" %>
+    <% end %>
 
 </div>
