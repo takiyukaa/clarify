@@ -1,3 +1,18 @@
+//products#index
+
+.card-category {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $creme;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 16px;
+}
+
+//products#show
+
 .card-white {
   background-color: white;
   padding: 16px;
