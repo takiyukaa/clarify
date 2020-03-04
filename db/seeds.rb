@@ -36,7 +36,8 @@ FRANCES = User.create!(
   gender: "F",
   city: "Tokyo",
 )
-
+francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
+FRANCES.photo.attach(io: francesfile, filename: 'fZLeDeZpZcXvzjBWUmXNqCDu.jpg', content_type: 'image/jpg')
 
 YUKA = User.create!(
   email: "yuka@gmail.com",
@@ -47,17 +48,21 @@ YUKA = User.create!(
   city: "Tokyo",
 )
 
+yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582854470/yuka.jpg')
+YUKA.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
+
 puts "Creating new products"
 
 
 product1 = Product.create!(
-    photo:
     name: "Jeju Bija Anti Trouble Spot Essence",
     category: "Moisturizer",
     brand: "Innisfree",
     barcode: 999,
     description: "Formulated with Jeju bija oil 750mg, green complex (Jeju green tea, tangerine etc.) Relieves skin troubles and dermatitis and promotes vitality for skin. Fresh scent."
   )
+photo1 = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582854043/hiro.jpg')
+HIRO.photo.attach(io: hirofile, filename: 'hiro.jpg', content_type: 'image/jpg')
 
 product2 = Product.create!(
     name: "Bio-enzyme Refining Complex Self-activating Skin Polisher",
@@ -68,7 +73,7 @@ product2 = Product.create!(
     )
 
 
-product3 = (
+product3 = Product.create!(
     name: "SNAIL BEE HIGH CONTENT ESSENCE",
     category: "Supplement",
     brand: "Benton",
