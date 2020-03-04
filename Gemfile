@@ -15,12 +15,19 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'pundit'
 
 # Tags
 gem 'acts-as-taggable-on', '~> 6.5'
 
 #rest-client
 gem 'rest-client'
+
+#pg_search
+gem 'pg_search', '~> 2.3', '>= 2.3.2'
+
+#cloudinary
+gem 'cloudinary', '~> 1.12.0'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
