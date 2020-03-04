@@ -29,7 +29,7 @@ end
 
 puts "Creating new users"
 
-FRANCES = User.create!(
+frances = User.create!(
   email: "frances@gmail.com",
   password: "123123",
   first_name: "Frances",
@@ -38,9 +38,9 @@ FRANCES = User.create!(
   city: "Tokyo",
 )
 francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
-FRANCES.photo.attach(io: francesfile, filename: 'fZLeDeZpZcXvzjBWUmXNqCDu.jpg', content_type: 'image/jpg')
+frances.photo.attach(io: francesfile, filename: 'fZLeDeZpZcXvzjBWUmXNqCDu.jpg', content_type: 'image/jpg')
 
-YUKA = User.create!(
+yuka = User.create!(
   email: "yuka@gmail.com",
   password: "123123",
   first_name: "Yuka",
@@ -49,8 +49,8 @@ YUKA = User.create!(
   city: "Tokyo",
 )
 
-yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582854470/yuka.jpg')
-YUKA.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
+yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878427/iSnsb4vKmwU7se6BsXxxzu8u.jpg')
+yuka.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
 
 puts "Creating new products"
 
@@ -62,8 +62,6 @@ product1 = Product.create!(
     barcode: 999,
     description: "Formulated with Jeju bija oil 750mg, green complex (Jeju green tea, tangerine etc.) Relieves skin troubles and dermatitis and promotes vitality for skin. Fresh scent."
   )
-photo1 = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582854043/hiro.jpg')
-HIRO.photo.attach(io: hirofile, filename: 'hiro.jpg', content_type: 'image/jpg')
 
 product2 = Product.create!(
     name: "Bio-enzyme Refining Complex Self-activating Skin Polisher",
@@ -84,9 +82,9 @@ product3 = Product.create!(
 
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
-skincare = RestClient.get 'https://skincare-api.herokuapp.com/product'
+skincare = RestClient.get 'https://skincare-api.herokuapp.com/products'
 
-skincare_array = JSON.parse(skincare)[100..105]
+skincare_array = JSON.parse(skincare)[50..55]
 
 start = 1
 
@@ -108,24 +106,25 @@ review_attributes = [
   title: "I really love this spot treatment",
   content: "I always have trouble with spot treatments being too strong to the point where they would burn or leave a scar. This one doesn't do that to me, it seems very gentle. It doesn't work as fast, but i love how nicely spots where there was acne heal. There has been way less scarring and pigmentation changes that I have had to deal with while using other products. I can deal with the slower time, especially with the awesome payoff for my skin!",
   rating: 5,
-  user: YUKA,
+  user: yuka,
   product: product1
 },
 {
   title: "Just ok",
   content: "Didn't really notice any effect on my skin, but my friends seem to love it",
   rating: 3,
-  user: FRANCES,
+  user: frances,
   product: product2
 },
 {
   title: "Can't live without it",
   content: "This is my desert island, can't live without it product. My skin loves it!",
   rating: 5,
-  user: YUKA,
+  user: yuka,
   product: product3
 }
 ]
+
 Review.create!(review_attributes)
 
 Ingredient.all.each do |ingredient|
