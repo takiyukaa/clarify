@@ -8,13 +8,14 @@
 require 'rest-client'
 require 'open-uri'
 
-Ingredient.destroy_all
 ProductsIngredient.destroy_all
+Flag.destroy_all
+Ingredient.destroy_all
 puts "Ingredients destroyed"
-User.destroy_all
 puts "All users destroyed"
 Review.destroy_all
 Product.destroy_all
+User.destroy_all
 puts "Products and reviews destroyed"
 
 puts "Creating new ingredients"
