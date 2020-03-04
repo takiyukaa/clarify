@@ -9,8 +9,9 @@
   <div class="browse-by-category">
     <h2>Browse by category</h2>
   </div>
-
-  <% @products.pluck(:category).uniq.each do |category| %>
-    <%= render 'shared/card-category', category: category %>
-  <% end %>
+  <div class="row">
+    <% @products.pluck(:category).uniq.each do |category| %>
+      <%= render 'shared/card-category', category: category %>
+    <% end %>
+  </div>
 </div>
