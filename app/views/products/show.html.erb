@@ -10,7 +10,7 @@
 <p><%= @product.category %></p>
 <p><%= @product.description %></p>
 <%= @product.reviews.pluck(:rating).sum / @product.reviews.pluck(:rating).length %>
-<p><%= @product.description %></p>
+<p><%= @product.ingredients %></p>
 
 <% @product.reviews.each do |review| %>
   <% if review.product.photo.attached? %>
