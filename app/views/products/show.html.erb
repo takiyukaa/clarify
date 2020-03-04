@@ -1,23 +1,18 @@
-
-<% if @product.photo.attached? %>
-  <% @path = @product.photo.key %>
-<% else %>
-  <% @path = 'profile_whubsg' %>
-<% end %>
-
-<p><%= @product.name %></p>
-<p><%= @product.brand %></p>
-<p><%= @product.category %></p>
-<p><%= @product.description %></p>
-<%= @product.reviews.pluck(:rating).sum / @product.reviews.pluck(:rating).length %>
-<p><%#= @product.ingredients %></p>
-
-<% @product.reviews.each do |review| %>
-  <% if review.product.photo.attached? %>
-    <% @path = review.product.photo.key %>
+<div class="container">
+  <% if @product.photo.attached? %>
+    <% @path = @product.photo.key %>
   <% else %>
     <% @path = 'profile_whubsg' %>
   <% end %>
-  <p><%= review.rating %></p>
-  <p><%= review.content %></p>
+
+  <%= render 'shared/card-product', product: @product %>
+
+  <% @product.reviews.each do |review| %>
+    <%= render 'shared/card-review', review: review %>
+  <% end %>
+</div>
+
+<% @product.ingredients.each do |ingredient| %>
+  <p><%= ingredient.name %></p>
+  <p><%= ingredient.effect %></p>
 <% end %>

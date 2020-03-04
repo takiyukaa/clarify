@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-12 col-md-8 col-lg-8">
+    <div class="card-white flex">
+
+      <div class="review-user">
+        <%= image_tag "avatar.jpg", alt: "user", class: "avatar"  %>
+        <p><%= review.user.first_name %></p>
+      </div>
+
+      <div class="review">
+
+        <div class="title-and-star flex">
+          <div class="review-title">
+            <p><%= review.title %></p>
+          </div>
+          <div class="stars">
+              <% (review.rating).times do %>
+                <i class="fas fa-star" id="star-pink"></i>
+              <% end %>
+              <% (5 - review.rating).times do %>
+                <i class="fas fa-star" id="star-gray"></i>
+              <% end %>
+          </div>
+        </div>
+
+        <div class="review-content">
+          <p><%= review.content %></p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

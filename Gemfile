@@ -22,6 +22,9 @@ gem 'acts-as-taggable-on', '~> 6.5'
 #rest-client
 gem 'rest-client'
 
+#cloudinary
+gem 'cloudinary', '~> 1.12.0'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
