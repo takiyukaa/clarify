@@ -53,7 +53,7 @@
       picker.applyScanSettings(scanSettings);
       picker.on("scan", scanResult => {
         console.log(scanResult.barcodes)
-        document.getElementById('barcode').value = scanResult.barcodes[0].data
+        document.getElementById('barcode').value = scanResult.barcodes[0].data.toString()
         document.getElementById('barcode-form').submit()
         // alert(scanResult.barcodes.reduce(function(string, barcode) {
         //   return string + ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology) + ": " + barcode.data + "\n";
