@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
   def index
     if params[:query].present?
-      @products = Product.global_search(params[:query])
+      @products = policy_scope(Product).global_search(params[:query])
     else
-      @products = Product.all
+      @products = policy_scope(Product)
     end
   end
 
@@ -14,8 +14,10 @@ class ProductsController < ApplicationController
       else
         Product.find_by_barcode(params[:barcode])
       end
+        authorize @product
   end
 
   def scan
+    authorize Product
   end
 end

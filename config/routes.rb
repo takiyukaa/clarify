@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'flags/create'
   devise_for :users
   root to: 'pages#home'
   get 'scan', to: 'products#scan'
@@ -7,4 +8,5 @@ Rails.application.routes.draw do
     resources :review, only: [:new, :create]
     end
   resources :products, only: [:index, :show]
+  resources :flags, only: [:create]
 end

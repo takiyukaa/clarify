@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one_attached :photo
   has_many :flags
   has_many :reviews, dependent: :destroy
+  has_many :ingredients, through: :flags
   validates :first_name, presence: true
   validates :second_name, presence: true
   validates :email, presence: true
