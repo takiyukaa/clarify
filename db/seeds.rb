@@ -15,32 +15,32 @@ require 'open-uri'
 # puts "All users destroyed"
 Review.destroy_all
 # Product.destroy_all
-# User.destroy_all
+User.destroy_all
 # puts "Products and reviews destroyed"
 
-# frances = User.create!(
-#   email: "frances@gmail.com",
-#   password: "123123",
-#   first_name: "Frances",
-#   second_name: "Cheng",
-#   gender: "F",
-#   city: "Tokyo",
-# )
+frances = User.create!(
+  email: "frances@gmail.com",
+  password: "123123",
+  first_name: "Frances",
+  second_name: "Cheng",
+  gender: "F",
+  city: "Tokyo",
+)
 
 # francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
-# frances.photo.attach(io: francesfile, filename: 'fZLeDeZpZcXvzjBWUmXNqCDu.jpg', content_type: 'image/jpg')
+frances.photo.attach(io: File.open('app/assets/images/frances.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
 
-# yuka = User.create!(
-#   email: "yuka@gmail.com",
-#   password: "123123",
-#   first_name: "Yuka",
-#   second_name: "Takiyama",
-#   gender: "F",
-#   city: "Tokyo",
-# )
+yuka = User.create!(
+  email: "yuka@gmail.com",
+  password: "123123",
+  first_name: "Yuka",
+  second_name: "Takiyama",
+  gender: "F",
+  city: "Tokyo",
+)
 
 # yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878427/iSnsb4vKmwU7se6BsXxxzu8u.jpg')
-# yuka.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
+yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
 
 puts "Creating new products"
 
@@ -52,12 +52,14 @@ product0 = Product.find_or_create_by!(
   description: "Our award-winning shea butter hand cream with lavender oil leaves your hands feeling incredibly smooth and soft. Absorbing deep into the skin and leaving no greasy residue, our naturally formulated Lavender Hand Therapy in a tube is ideal for travel and on the go daily treatment and care."
   )
 
+product0.photo.attach(io: File.open('app/assets/images/lavender.jpg'), filename: 'lavender.jpg', content_type: 'image/jpg')
+
 ingredients0 = %w(Water Macadamia\ Ternifolia\ Seed\ Oil Zea\ Mays\ (Corn)\ Starch Hydroxyethyl\ Urea Cetearyl\ Alcohol Stearic\ Acid Cetyl\ Alcohol Parfum\ (Fragrance) Butyrospermum\ Parkii\ (Shea)\ Butter Isopropyl\ Myristate Lippia\ Citriodora\ (Lemon\ Verbena)\ Flower\ Extract Lavandula\ Angustifolia\ (Lavender) Flower/Leaf/Stem Extract Commiphora Myrrha\ (Myrrh)\ Resin\ Extract Ceramide\ NP Ceramide\ AP Ceramide\ EOP Caprylic/Capric\ Triglyceride Saccharide\ Isomerate Polysorbate\ 60 Sucrose\ Stearate Arginine Dimethicone Sucrose\ Tristearate Behentrimonium\ Methosulfate Caprylyl\ Methicone Glycerin Sodium\ Lauroyl Lactylate Benzoic\ Acid Disodium\ EDTA Limonene Polysorbate\ 20 Ethylhexylglycerin Glycereth-2\ Cocoate Citronellol Hydroxycitronellal Citral Coumarin Linalool Butylene\ Glycol Citric\ Acid Sodium\ Citrate Cholesterol Phytosphingosine Carbomer Xanthan\ Gum Geraniol Lecithin Potassium\ Sorbate Sodium\ Benzoate Caprylyl\ Glycol Hyaluronic\ Acid Hydrolyzed\ Soy\ Protein Hexylene\ Glycol Ascorbyl\ Glucoside Tocotrienols Tocopherol Elaeis\ Guineensis (Palm)\ Oil Phenoxyethanol Squalane)
 
 ingredients0.each do |ingredient|
   ingredient.downcase!
-  Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.create!(product: product0, ingredient: ingredient)
+  ing_name = Ingredient.find_or_create_by!(name: ingredient)
+  ProductsIngredient.create!(product: product0, ingredient: ing_name)
 end
 
 product1 = Product.find_or_create_by!(
@@ -68,12 +70,14 @@ product1 = Product.find_or_create_by!(
   description: "Skin care series made using natural water from Kamaishi in Iwate prefecture. Provides fresh hydration for sensitive skin that dries easily. Low-irritation, making it gentle on delicate skin. ・Fragrance free・Artificial color free,・Mineral oil free・Mildly acidic ・Paraben-free・Alcohol free・allergy tested (This does not mean that the product does not cause allergy to anyone) ◎how to use：After using toner, take an appropriate amount on your hand, and apply thoroughly on your face."
   )
 
+product1.photo.attach(io: File.open('app/assets/images/muji.jpg'), filename: 'muji.jpg', content_type: 'image/jpg')
+
 ingredients1 = %w(Water Olive\ Fruit\ Oil Dipropylene\ Glycol Glycerin PEG-32 Ethylhexyl\ Palmitate Pentylene\ Glycol Glycosyl\ Trehalose Glyceryl\ Stearate Jojoba\ Seed\ Oil Hydrolysate PEG-75\ Stearate Behenyl\ Alcohol Polysorbate\ 80 Phenoxyethanol Carbomer Arginine Butylene\ Glycol Allantoin Xanthan\ Gum Tocopherol Tetrasodium\ Etidronate Polyquaternium-51 Grapefruit\ Seed\ Extract Purslane\ Extract)
 
 ingredients1.each do |ingredient|
   ingredient.downcase!
-  Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.create!(product: product1, ingredient: ingredient)
+  ing_name= Ingredient.find_or_create_by!(name: ingredient)
+  ProductsIngredient.create!(product: product1, ingredient: ing_name)
 end
 
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
@@ -99,24 +103,24 @@ review_attributes = [
 
 Review.create!(review_attributes)
 
-# api = RestClient.get 'https://skincare-api.herokuapp.com/products'
+api = RestClient.get 'https://skincare-api.herokuapp.com/products'
 
-# products = JSON.parse(api)
+products = JSON.parse(api)
 
-# if Product.all.count < 100
-#   products.each do |product|
-#     new_product = Product.create!(
-#     name: product["name"],
-#     brand: product["brand"],
-#     category: CATEGORIES.sample,
-#     description: "Add a description for this product"
-#     )
-#     product["ingredient_list"].each do |ingredient_name|
-#       ingredient = Ingredient.find_or_create_by!(name: ingredient_name)
-#       ProductsIngredient.create!(ingredient: ingredient, product: new_product)
-#     end
-#   end
-# end
+if Product.all.count < 100
+  products.each do |product|
+    new_product = Product.create!(
+    name: product["name"],
+    brand: product["brand"],
+    category: CATEGORIES.sample,
+    description: "Add a description for this product"
+    )
+    product["ingredient_list"].each do |ingredient_name|
+      ingredient = Ingredient.find_or_create_by!(name: ingredient_name)
+      ProductsIngredient.create!(ingredient: ingredient, product: new_product)
+    end
+  end
+end
 
 # tags = ["parabens", "fragrance", "sensitizing", ]
 
@@ -147,16 +151,4 @@ Review.create!(review_attributes)
 #   )
 # end
 
-
-
 puts "All complete"
-
-
-
-
-
-#iterate through "ingredient_list", find the ingredient that matches the name
-#assign the ingredient to the product
-#
-# Product_ingredient.create!(product_id: 1, ingredient_id.find_by(name: ))
-
