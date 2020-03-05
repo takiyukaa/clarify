@@ -1,20 +1,11 @@
-<%# unless @moisturisers.empty? %>
-<!-- <h1>Moisturisers</h1>
- -->  <%# @moisturisers.each do |m| %>
-    <%#= m.name %>
-  <%# end %>
-<%# else %>
-<!--   There are no moisturizers!
- --><%# end %>
-
   <% if @products.count == 1 %>
     <h4>Found <%= @products.count %> result:</h4>
   <% else %>
     <h4>Found <%= @products.count %> results:</h4>
   <% end %>
 
-        <% @products.each do |product| %>
-          <%= cl_image_tag(@path, crop:"fill", format:"png") %>
-            <p><%= product.brand %></p>
-            <h2><%= product.name %></h2>
-        <% end %>
+  <% @products.each do |product| %>
+    <%= cl_image_tag(@path, crop:"fill", format:"png") %>
+    <p><%= product.brand %></p>
+    <h2><%= product.name %></h2>
+  <% end %>
