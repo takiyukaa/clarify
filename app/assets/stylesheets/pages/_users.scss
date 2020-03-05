@@ -1,0 +1,36 @@
+.user-banner {
+  height: 10vh;
+  background-color: $creme;
+  position: relative;
+
+  .user {
+    position: absolute;
+    bottom: -32px;
+    left: calc(50% - 32px);
+  }
+}
+
+.my-shelf {
+  h1 {
+    margin-top: 40px;
+    text-align: center;
+  }
+}
+
+.card-product {
+  height: 30vw;
+  background-color: white;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 50%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+}
