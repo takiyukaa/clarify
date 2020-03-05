@@ -8,11 +8,11 @@
       <%= image_tag "scan.png", alt: "scan", class: "navbar-img" %>
     <% end %>
 
-    <%= link_to shelf_user_path do %>
+    <%= link_to shelf_user_path(current_user) do %>
       <%= image_tag "cosmetics.png", alt: "user", class: "navbar-img" %>
     <% end %>
 
-    <%= link_to user_path do %>
+    <%= link_to user_path(current_user) do %>
       <%= image_tag "user.png", alt: "user", class: "navbar-img" %>
     <% end %>
 
