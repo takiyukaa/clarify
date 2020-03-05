@@ -1,17 +1,11 @@
-<div class="banner">
-  <div class="container">
-    <h1>Clarify</h1>
-    <p>A skincare app that helps you make smart decisions</p>
-  </div>
-</div>
+  <% if @products.count == 1 %>
+    <h4>Found <%= @products.count %> result:</h4>
+  <% else %>
+    <h4>Found <%= @products.count %> results:</h4>
+  <% end %>
 
-<div class="container">
-  <div class="browse-by-category">
-    <h2>Browse by category</h2>
-  </div>
-  <div class="row">
-    <% @products.pluck(:category).uniq.each do |category| %>
-      <%= render 'shared/card-category', category: category %>
-    <% end %>
-  </div>
-</div>
+  <% @products.each do |product| %>
+    <%= cl_image_tag(@path, crop:"fill", format:"png") %>
+    <p><%= product.brand %></p>
+    <h2><%= product.name %></h2>
+  <% end %>

@@ -7,8 +7,17 @@
   }
 }
 
-.ingredients {
-  p {
-    margin: 0;
+.card-category {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $creme;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 16px;
+
+  &:hover {
+    background-color: #f1d7f2;
   }
 }

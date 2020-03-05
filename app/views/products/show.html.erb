@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
-
       <% if @product.photo.attached? %>
         <% @path = @product.photo.key %>
       <% else %>
@@ -9,15 +8,32 @@
       <% end %>
 
       <div class="product">
-        <%= render 'shared/card-product', product: @product %>
+        <%= render 'shared/card-productinfo', product: @product %>
       </div>
+    </div>
 
+    <div class="col-8">
+      <div class="flag">
+        <div class="card-flag">
+          <p> ! ! Flag ! ! </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-10 col-lg-8">
       <div class="ingredients">
         <h2>Ingredients</h2>
         <div class="card-white">
           <ul class="list-group list-group-flush">
             <% @product.ingredients.each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-between align-items-center"><p><%= ingredient.name %></p></li>
+              <div class="d-flex justify-content-between">
+                <li class="list-group-item d-flex justify-content-between align-items-center"><p><%= ingredient.name %></p></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
+                    <p><%= ingredient.tag_list.first %></p>
+                  <% end %>
+                  </li>
+              </div>
             <% end %>
           </ul>
         </div>

@@ -16,7 +16,7 @@
     }
   }
   const licenseKey =
-    "AZBu1jTCKkM4KFihPBqR2VAsEK9mKWY+InG21Gt34hHzXsLtvHPWR0Bao9nnNzM9NGuQSm5G2lzCY5PIMzmCAcB/3F6JcU1KY3MH47l7WP1VHNV6AlFpN8BhGoeGYvpBKVBHrqoeytcfJT/QRDv1iL6sqOEN8Efa6f+Rg3/H4LoeI1dkC+KnHkicN2wE0FZvwyTISupSG2EKdX6hWbjt9//CU4jezZcH65mmZr4DX6zu0fIsT0EvD3vYLWCvrlRLcfEubO00if5odIs9BG8M5j+nENymgviTROyMgyd2omTwy9qQRjA2DjSoeqap2MtjNBBfREKjETSMrsiZYHeV0qGKT2S79tsgQdT1r9Wr3SN7hHK5HjGFLI6E0So5pLYQJJYtcuIVukVqAbhHAev+5ZP2Uhh2+nSqCieiEjoCmpsRtrTDTApie8+VZyLEx/E44Diimlum9KXy7ZKT/d3yj69Q+1rga4PgYo6cm4D0ysRxY/N6SV2M4T1SFydlZkIAWYcE2EJeqryB5rioiL70NbDgRoJmzuVi+si1U5TV6v/NKvAstcIe3gAjfWE6lwDLMlsIpTHcaaWQ1+jBQVMysYxAfmfZA4kUpsF1/iDSX1v3f/IV22+/7+lZXRBlxyKHTvQo9x7XvfbfOYg7S2DD+ZZVBmRBI3cEmaiDkgwa4FxZF9Yv5eVkqaObcwfAZoZxIjnbNsxvNryUcKmhyk5RLQ0mYoTnEJytBcwtkl73CH+DeXzTr+VVZSvHblMK0z52X7BtfyjZdM048mO3LJ2wGNj1GmIp1D5UtGABPxTDvz+UeH8MjqQLoqxALdTC4X0H";
+    "AR7OBxXCC+FZEslnBTT41oEcEW1AKpDltX+CVDt4PQx5aHRkP3XgnNl/UavvXJi6EnBolO8VVzMDCbXGD1Eth15vxXpiRX2x9A+luUlViEWBXVVtfiRxI+EsLLfkFKRaTzKPXeQYsXVlP3lwdB5u1cjLo7IL/tv/Rf7lDWcSJtuxMV3DnjGecInoMfQtVjAbGvuB/jkSrKrCm0V0eokSijXXznHP7t1dC1j2x2gWeDDgnmQvgIyV4U3lBYE20hlT9XYjtJfubvSgWGYrDwYp6HzzWS50bbX8VQFFHQyD9peiA7DaL5aaTQbisoUOO9jsXhhXcKHCFHYRNoAQdjloAxi0D0GRbwBIfCp4OmHn32zS0D43h/6LFtu2XjCNsCX0G5+iKDQWCI978Nf8Si07xK6YghEHYAgYuspx+xab2lc4FQInNJXzwZmKGvr0X+27vAJV9cGjIq57pqd8SWflsFFapIESuHjErygX17i/uSI3BaqHdsi05qe9PubQ7klPya4CBFhHU2Qi2DDHX7Yt7zAmJZmKqnLMTjgGI1vrunV9AwChb4lLp3cLn9RW6otZ57c65xCXGSmQtZNsAIMly9M08WrPPHlGNaNbDrr56Q/ivXBj/qTdmzOYX1bdLZBsp/8I8Cah5IbkuX/I9fEdMxx4BTGxl0LtUoe1OZjkl+zyOU73F74e8qVaqOwf1tEl87Q8+96umPT73M63mJpmfel1A5XhWafcbB55dHrlPeTLJ9giLHcRHoVhFcjWZ6tjCSQGaXlVWwBYcciAXZAds/DoU9p8629QKiY0Bmz9v+l6a3rvbaY=";
   const engineLocation =
     "https://cdn.jsdelivr.net/npm/scandit-sdk@4.x/build";
   ScanditSDK.configure(licenseKey, { engineLocation: engineLocation });
@@ -53,7 +53,7 @@
       picker.applyScanSettings(scanSettings);
       picker.on("scan", scanResult => {
         console.log(scanResult.barcodes)
-        document.getElementById('barcode').value = scanResult.barcodes[0].data
+        document.getElementById('barcode').value = scanResult.barcodes[0].data.toString()
         document.getElementById('barcode-form').submit()
         // alert(scanResult.barcodes.reduce(function(string, barcode) {
         //   return string + ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology) + ": " + barcode.data + "\n";

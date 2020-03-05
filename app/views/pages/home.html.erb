@@ -1,2 +1,34 @@
-<h1>Clarify</h1>
-<p>A skincare app that helps you make smart decisions</p>
+<%= form_tag products_path, method: :get, class: "search-form" do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control search-form-control",
+    placeholder: "Search"
+  %>
+  <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
+    <i class="fas fa-search" style="color: white;"></i>
+  <% end %>
+<% end %>
+
+<div class="banner">
+  <div class="container">
+    <h1>Clarify</h1>
+    <p>A skincare app that helps you make smart decisions</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="browse-by-category">
+    <h2>Browse by category</h2>
+    <div class="row">
+      <% @products.pluck(:category).uniq.each do |category| %>
+        <div class="col-12 col-md-6 col-lg-6">
+          <%= link_to products_path do %>
+            <div class="card-category">
+              <%= category %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
