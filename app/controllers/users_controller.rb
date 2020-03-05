@@ -3,4 +3,9 @@ class UsersController < ApplicationController
     @path = ""
     authorize current_user
   end
+
+  def shelf
+    @path = ""
+    authorize current_user
+  end
 end
