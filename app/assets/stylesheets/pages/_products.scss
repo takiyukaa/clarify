@@ -32,3 +32,24 @@
     margin: 0;
   }
 }
+
+.product-info {
+  position: relative;
+}
+
+.like {
+  font-size: 24px;
+  color: $pink;
+  position: absolute;
+  top: -8px;
+  right: 0;
+}
+
+.unlike {
+  font-size: 24px;
+  color: gray;
+  position: absolute;
+  top: -8px;
+  right: 0;
+}
+

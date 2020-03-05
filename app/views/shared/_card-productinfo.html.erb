@@ -4,6 +4,19 @@
       <%= image_tag "biore.jpg", alt: "product" %>
     </div>
     <div class="product-info">
+      <div class="favorite">
+          <% if current_user.liked?(@product) %>
+            <%= link_to unlike_product_path(@product), method: :post do %>
+              <i class="fas fa-bookmark like"></i>
+            <% end %>
+          <% else %>
+            <%= link_to like_product_path(@product), method: :post do %>
+              <i class="far fa-bookmark unlike"></i>
+            <% end %>
+          <% end %>
+        </div>
+        <%# list ofall liked products %>
+        <%#= current_user.find_up_voted_items %>
       <div class="product-detail">
         <h1><%= product.name %></h1>
         <p><%= product.brand %></p>

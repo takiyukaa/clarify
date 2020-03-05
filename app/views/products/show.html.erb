@@ -9,14 +9,6 @@
 
       <div class="product">
         <%= render 'shared/card-productinfo', product: @product %>
-        
-        <% if current_user.liked?(@product) %>
-          <%= link_to "unlike", unlike_product_path(@product), method: :post %>
-        <% else %>
-          <%= link_to "like", like_product_path(@product), method: :post %>
-        <% end %>
-        <%# list ofall liked products %>
-        <%#= current_user.find_up_voted_items %>
       </div>
     </div>
 
