@@ -7,29 +7,19 @@
 <div class="container">
   <div class="my-shelf">
     <h1>My Shelf</h1>
-
     <div class="product-cards">
-
       <div class="row">
-
-        <% Product.all.each do |product| %>
+        <% current_user.find_up_voted_items.each do |product| %>
           <div class="col-6 col-md-6 col-lg-4">
-
             <div class="card-product">
               <%= image_tag "biore.jpg", alt: "product" %>
-              <p id="product-name">mashmallow whip wash</p>
-              <p>biore</p>
-              <p>facewash</p>
+              <p id="product-name"><%= product.brand %></p>
+              <p><%= product.name %></p>
+              <p><%= product.category%></p>
             </div>
-
           </div>
-
         <% end %>
-
       </div>
-
-
     </div>
-
   </div>
 </div>
