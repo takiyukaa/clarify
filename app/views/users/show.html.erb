@@ -6,13 +6,14 @@
       <% @path = 'profile_whubsg' %>
     <% end %>
   <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
+  <p><%= current_user.first_name %></p>
 </div>
 
 
 
 <div class="container">
   <div class="my-shelf">
-    <h1>My Shelf</h1>
+    <h1>My Profile</h1>
     <div class="product-cards">
       <div class="row">
         <% current_user.find_up_voted_items.each do |product| %>

@@ -3,18 +3,24 @@
   background-color: $creme;
   position: relative;
 
-  .user {
-    position: absolute;
-    bottom: -32px;
-    left: calc(50% - 32px);
-  }
-
   .fa-cog {
     position: absolute;
     color: gray;
     font-size: 24px;
     top: 16px;
     left: 16px;
+  }
+
+  .user {
+    position: absolute;
+    bottom: -32px;
+    left: calc(50% - 32px);
+  }
+
+  p {
+    position: absolute;
+    bottom: -32px;
+    left: calc(50% - 32px);
   }
 }
 
