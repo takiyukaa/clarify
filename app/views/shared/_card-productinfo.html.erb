@@ -24,15 +24,17 @@
       </div>
       <div class="product-rating">
         <div class="score-rating">
-          <p id="rate"><%= product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length %>.0</p>
-          <p id="rating"><%= product.reviews.size %><br>ratings</p>
+          <% if !product.reviews.empty? %>
+            <p id="rate"><%= product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length %>.0</p>
+            <p id="rating"><%= product.reviews.size %><br>ratings</p>
         </div>
         <div class="stars">
           <% (product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
             <i class="fas fa-star" id="star-pink"></i>
           <% end %>
-          <% (5 - product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
-            <i class="fas fa-star" id="star-gray"></i>
+            <% (5 - product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
+              <i class="fas fa-star" id="star-gray"></i>
+            <% end %>
           <% end %>
         </div>
       </div>
