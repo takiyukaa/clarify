@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def shelf
     @path = ""
+    @path_pro = ""
     authorize current_user
   end
 end

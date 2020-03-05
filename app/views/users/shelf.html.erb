@@ -1,9 +1,10 @@
+<% if current_user.photo.attached? %>
+  <% @path = current_user.photo.key %>
+<% else %>
+  <% @path = 'profile_whubsg' %>
+<% end %>
+
 <div class="user-banner">
-  <% if current_user.photo.attached? %>
-      <% @path = current_user.photo.key %>
-    <% else %>
-      <% @path = 'profile_whubsg' %>
-    <% end %>
   <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
 </div>
 
@@ -15,14 +16,22 @@
     <div class="product-cards">
       <div class="row">
         <% current_user.find_up_voted_items.each do |product| %>
+
+          <% if product.photo.attached? %>
+            <% @path_pro = product.photo.key %>
+          <% else %>
+            <% @path_pro = 'profile_whubsg' %>
+          <% end %>
+
           <div class="col-6 col-md-6 col-lg-4">
             <div class="card-product">
-              <%= image_tag "biore.jpg", alt: "product" %>
+              <%= cl_image_tag @path_pro, alt: "product" %>
               <p id="product-name"><%= product.brand %></p>
               <p><%= product.name %></p>
               <p><%= product.category%></p>
             </div>
           </div>
+
         <% end %>
       </div>
     </div>
