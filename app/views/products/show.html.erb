@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
 
       <% if @product.photo.attached? %>
@@ -11,7 +11,17 @@
       <div class="product">
         <%= render 'shared/card-productinfo', product: @product %>
       </div>
+    </div>
 
+    <div class="col-8">
+      <div class="flag">
+        <div class="card-flag">
+          <p> ! ! Flag ! ! </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-10 col-lg-8">
       <div class="ingredients">
         <h2>Ingredients</h2>
         <div class="card-white">

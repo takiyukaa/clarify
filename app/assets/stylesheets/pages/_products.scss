@@ -18,3 +18,17 @@
   }
 
 }
+
+.card-flag {
+  background-color: $pink;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+}
