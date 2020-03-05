@@ -54,8 +54,23 @@ yuka.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
 
 puts "Creating new products"
 
+product0 = Product.create!(
+  name: "Ultra-Moisturising Hand Therapy, Lavender, 0.9 oz"
+  category: "Moisturizer",
+  brand: "Crabtree & Evelyn",
+  barcode: 044936274975,
+  description: "Our award-winning shea butter hand cream with lavender oil leaves your hands feeling incredibly smooth and soft. Absorbing deep into the skin and leaving no greasy residue, our naturally formulated Lavender Hand Therapy in a tube is ideal for travel and on the go daily treatment and care."
+  )
 
 product1 = Product.create!(
+  name: "Moisturizing Milk",
+  category: "Moisturizer",
+  brand: "MUJI",
+  barcode: 4550182202236,
+  description: "Skin care series made using natural water from Kamaishi in Iwate prefecture. Provides fresh hydration for sensitive skin that dries easily. Low-irritation, making it gentle on delicate skin. ・Fragrance free・Artificial color free,・Mineral oil free・Mildly acidic ・Paraben-free・Alcohol free・allergy tested (This does not mean that the product does not cause allergy to anyone) ◎how to use：After using toner, take an appropriate amount on your hand, and apply thoroughly on your face. "
+  )
+
+product2 = Product.create!(
     name: "Jeju Bija Anti Trouble Spot Essence",
     category: "Moisturizer",
     brand: "Innisfree",
@@ -63,7 +78,7 @@ product1 = Product.create!(
     description: "Formulated with Jeju bija oil 750mg, green complex (Jeju green tea, tangerine etc.) Relieves skin troubles and dermatitis and promotes vitality for skin. Fresh scent."
   )
 
-product2 = Product.create!(
+product3 = Product.create!(
     name: "Bio-enzyme Refining Complex Self-activating Skin Polisher",
     category: "Exfoliator",
     brand: "Amore Pacific",
@@ -72,7 +87,7 @@ product2 = Product.create!(
     )
 
 
-product3 = Product.create!(
+product4 = Product.create!(
     name: "SNAIL BEE HIGH CONTENT ESSENCE",
     category: "Supplement",
     brand: "Benton",
@@ -107,21 +122,21 @@ review_attributes = [
   content: "I always have trouble with spot treatments being too strong to the point where they would burn or leave a scar. This one doesn't do that to me, it seems very gentle. It doesn't work as fast, but i love how nicely spots where there was acne heal. There has been way less scarring and pigmentation changes that I have had to deal with while using other products. I can deal with the slower time, especially with the awesome payoff for my skin!",
   rating: 5,
   user: yuka,
-  product: product1
+  product: product2
 },
 {
   title: "Just ok",
   content: "Didn't really notice any effect on my skin, but my friends seem to love it",
   rating: 3,
   user: frances,
-  product: product2
+  product: product3
 },
 {
   title: "Can't live without it",
   content: "This is my desert island, can't live without it product. My skin loves it!",
   rating: 5,
   user: yuka,
-  product: product3
+  product: product4
 }
 ]
 
@@ -130,6 +145,29 @@ Review.create!(review_attributes)
 Ingredient.all.each do |ingredient|
   ProductsIngredient.create!(ingredient: ingredient, product: Product.all.sample)
 end
+
+frances_ing = ["methylparaben", "propylparaben", "fragrance"]
+
+frances_flags = [
+{
+  user: frances,
+  ingredient:
+}
+]
+3.times do
+  Flag.create!(
+    user: frances,
+  )
+end
+
+10.times do
+  Flag.create!(
+    user: yuka,
+    ingredient: Ingredient.all.sample
+  )
+end
+
+
 
 puts "All complete"
 
