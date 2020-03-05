@@ -6,5 +6,10 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :new, :show] do
     resources :review, only: [:new, :create]
     end
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] do
+    member do
+    post "like", to: 'products#like'
+    post "unlike", to: 'products#unlike'
+    end
+  end
 end

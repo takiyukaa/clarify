@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  acts_as_votable
   has_many :products_ingredients
   has_many :reviews
   has_many :ingredients, through: :products_ingredients

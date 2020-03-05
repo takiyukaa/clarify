@@ -7,6 +7,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  def like
+    product = Product.find(params[:id])
+    authorize product
+    current_user.likes(product)
+    redirect_to product_path(product)
+  end
+
+  def unlike
+    product = Product.find(params[:id])
+    authorize product
+    current_user.unlike(product)
+    redirect_to product_path(product)
+  end
+
   def show
     @product =
       if params[:barcode].blank?

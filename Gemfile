@@ -29,6 +29,9 @@ gem 'pg_search', '~> 2.3', '>= 2.3.2'
 #cloudinary
 gem 'cloudinary', '~> 1.12.0'
 
+#acts_as_votable
+gem 'acts_as_votable', '~> 0.12.1'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end

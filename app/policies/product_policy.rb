@@ -5,6 +5,14 @@ class ProductPolicy < ApplicationPolicy
     end
   end
 
+  def like?
+    !user.nil?
+  end
+
+  def unlike?
+    !user.nil?
+  end
+
   def show?
     true
   end
