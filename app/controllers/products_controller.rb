@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @path = ""
     @product =
       if params[:barcode].blank?
         Product.find(params[:id])
