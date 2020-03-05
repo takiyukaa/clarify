@@ -3,7 +3,7 @@ class Ingredient < ApplicationRecord
   has_many :flags
   has_many :products_ingredients
   has_many :products, through: :products_ingredients
-  has_many :users, through: :flag
+  has_many :users, through: :flags
 
   validates :name, presence: true
 end
