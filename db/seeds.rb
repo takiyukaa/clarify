@@ -8,49 +8,43 @@
 require 'rest-client'
 require 'open-uri'
 
-Flag.destroy_all
-puts "All users destroyed"
+# ProductsIngredient.destroy_all
+# Flag.destroy_all
+# Ingredient.destroy_all
+# puts "Ingredients destroyed"
+# puts "All users destroyed"
 Review.destroy_all
-User.destroy_all
-puts "Products and reviews destroyed"
+# Product.destroy_all
+# User.destroy_all
+# puts "Products and reviews destroyed"
 
-# # puts "Creating new ingredients"
-# # result = RestClient.get 'https://skincare-api.herokuapp.com/ingredients'
+# frances = User.create!(
+#   email: "frances@gmail.com",
+#   password: "123123",
+#   first_name: "Frances",
+#   second_name: "Cheng",
+#   gender: "F",
+#   city: "Tokyo",
+# )
 
-# # result_array = JSON.parse(result)[0..50]
+# francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
+# frances.photo.attach(io: francesfile, filename: 'fZLeDeZpZcXvzjBWUmXNqCDu.jpg', content_type: 'image/jpg')
 
-# # result_array.each do |hash|
-# #   Ingredient.create!(name: hash["ingredient"])
-# # end
+# yuka = User.create!(
+#   email: "yuka@gmail.com",
+#   password: "123123",
+#   first_name: "Yuka",
+#   second_name: "Takiyama",
+#   gender: "F",
+#   city: "Tokyo",
+# )
 
-# puts "Creating new users"
-
-frances = User.create!(
-  email: "frances@gmail.com",
-  password: "123123",
-  first_name: "Frances",
-  second_name: "Cheng",
-  gender: "F",
-  city: "Tokyo",
-)
-francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
-frances.photo.attach(io: francesfile, filename: 'fZLeDeZpZcXvzjBWUmXNqCDu.jpg', content_type: 'image/jpg')
-
-yuka = User.create!(
-  email: "yuka@gmail.com",
-  password: "123123",
-  first_name: "Yuka",
-  second_name: "Takiyama",
-  gender: "F",
-  city: "Tokyo",
-)
-
-yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878427/iSnsb4vKmwU7se6BsXxxzu8u.jpg')
-yuka.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
+# yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878427/iSnsb4vKmwU7se6BsXxxzu8u.jpg')
+# yuka.photo.attach(io: yukafile, filename: 'yuka.jpg', content_type: 'image/jpg')
 
 puts "Creating new products"
 
-product0 = Product.create!(
+product0 = Product.find_or_create_by!(
   name: "Ultra-Moisturising Hand Therapy, Lavender, 0.9 oz",
   category: "Moisturizer",
   brand: "Crabtree & Evelyn",
@@ -58,102 +52,71 @@ product0 = Product.create!(
   description: "Our award-winning shea butter hand cream with lavender oil leaves your hands feeling incredibly smooth and soft. Absorbing deep into the skin and leaving no greasy residue, our naturally formulated Lavender Hand Therapy in a tube is ideal for travel and on the go daily treatment and care."
   )
 
-product1 = Product.create!(
+ingredients0 = %w(Water Macadamia\ Ternifolia\ Seed\ Oil Zea\ Mays\ (Corn)\ Starch Hydroxyethyl\ Urea Cetearyl\ Alcohol Stearic\ Acid Cetyl\ Alcohol Parfum\ (Fragrance) Butyrospermum\ Parkii\ (Shea)\ Butter Isopropyl\ Myristate Lippia\ Citriodora\ (Lemon\ Verbena)\ Flower\ Extract Lavandula\ Angustifolia\ (Lavender) Flower/Leaf/Stem Extract Commiphora Myrrha\ (Myrrh)\ Resin\ Extract Ceramide\ NP Ceramide\ AP Ceramide\ EOP Caprylic/Capric\ Triglyceride Saccharide\ Isomerate Polysorbate\ 60 Sucrose\ Stearate Arginine Dimethicone Sucrose\ Tristearate Behentrimonium\ Methosulfate Caprylyl\ Methicone Glycerin Sodium\ Lauroyl Lactylate Benzoic\ Acid Disodium\ EDTA Limonene Polysorbate\ 20 Ethylhexylglycerin Glycereth-2\ Cocoate Citronellol Hydroxycitronellal Citral Coumarin Linalool Butylene\ Glycol Citric\ Acid Sodium\ Citrate Cholesterol Phytosphingosine Carbomer Xanthan\ Gum Geraniol Lecithin Potassium\ Sorbate Sodium\ Benzoate Caprylyl\ Glycol Hyaluronic\ Acid Hydrolyzed\ Soy\ Protein Hexylene\ Glycol Ascorbyl\ Glucoside Tocotrienols Tocopherol Elaeis\ Guineensis (Palm)\ Oil Phenoxyethanol Squalane)
+
+ingredients0.each do |ingredient|
+  ingredient.downcase!
+  Ingredient.find_or_create_by!(name: ingredient)
+  ProductsIngredient.create!(product: product0, ingredient: ingredient)
+end
+
+product1 = Product.find_or_create_by!(
   name: "Moisturizing Milk",
   category: "Moisturizer",
   brand: "MUJI",
   barcode: "4550182202236",
-  description: "Skin care series made using natural water from Kamaishi in Iwate prefecture. Provides fresh hydration for sensitive skin that dries easily. Low-irritation, making it gentle on delicate skin. ・Fragrance free・Artificial color free,・Mineral oil free・Mildly acidic ・Paraben-free・Alcohol free・allergy tested (This does not mean that the product does not cause allergy to anyone) ◎how to use：After using toner, take an appropriate amount on your hand, and apply thoroughly on your face. "
+  description: "Skin care series made using natural water from Kamaishi in Iwate prefecture. Provides fresh hydration for sensitive skin that dries easily. Low-irritation, making it gentle on delicate skin. ・Fragrance free・Artificial color free,・Mineral oil free・Mildly acidic ・Paraben-free・Alcohol free・allergy tested (This does not mean that the product does not cause allergy to anyone) ◎how to use：After using toner, take an appropriate amount on your hand, and apply thoroughly on your face."
   )
 
-# product2 = Product.create!(
-#     name: "Jeju Bija Anti Trouble Spot Essence",
-#     category: "Moisturizer",
-#     brand: "Innisfree",
-#     barcode: 999,
-#     description: "Formulated with Jeju bija oil 750mg, green complex (Jeju green tea, tangerine etc.) Relieves skin troubles and dermatitis and promotes vitality for skin. Fresh scent."
-#   )
+ingredients1 = %w(Water Olive\ Fruit\ Oil Dipropylene\ Glycol Glycerin PEG-32 Ethylhexyl\ Palmitate Pentylene\ Glycol Glycosyl\ Trehalose Glyceryl\ Stearate Jojoba\ Seed\ Oil Hydrolysate PEG-75\ Stearate Behenyl\ Alcohol Polysorbate\ 80 Phenoxyethanol Carbomer Arginine Butylene\ Glycol Allantoin Xanthan\ Gum Tocopherol Tetrasodium\ Etidronate Polyquaternium-51 Grapefruit\ Seed\ Extract Purslane\ Extract)
 
-# product3 = Product.create!(
-#     name: "Bio-enzyme Refining Complex Self-activating Skin Polisher",
-#     category: "Exfoliator",
-#     brand: "Amore Pacific",
-#     barcode: 111,
-#     description: "Increases skin's cell turnover and purges skin of toxins to reveal smoother, radiant, youthful, healthy-looking skin. Works with skin's own enzymes to reduce inflammation and redness "
-#     )
-
-
-# product4 = Product.create!(
-#     name: "SNAIL BEE HIGH CONTENT ESSENCE",
-#     category: "Supplement",
-#     brand: "Benton",
-#     barcode: 222,
-#     description: "Snail Secretion filtrate is not sticky in texture, it is watery texture close to water's normal texture, instead of water, snail secretion filtrate was used. Even a small amount of stimulating chemical ingredient could be critical to our skin. when the skin could no longer with hold the stimulation, the skin may tend to produce break outs. Snail BEE High Content Essence is a moisturizing essence which does not contain artificial ingredients that enhance stickiness."
-#     )
+ingredients1.each do |ingredient|
+  ingredient.downcase!
+  Ingredient.find_or_create_by!(name: ingredient)
+  ProductsIngredient.create!(product: product1, ingredient: ingredient)
+end
 
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
-# skincare = RestClient.get 'https://skincare-api.herokuapp.com/products'
-
-# skincare_array = JSON.parse(skincare)[50..55]
-
-# start = 1
-
-# skincare_array.each do |hash|
-#   Product.create!(
-#     name: hash["name"],
-#     category: CATEGORIES.sample,
-#     brand: hash["brand"],
-#     barcode: start,
-#     description: "Add a description for this product"
-#     )
-#   start += 1
-# end
-
-# puts "Creating new reviews"
+puts "Creating new reviews"
 
 review_attributes = [
-{
-  title: "I really love this spot treatment",
-  content: "I always have trouble with spot treatments being too strong to the point where they would burn or leave a scar. This one doesn't do that to me, it seems very gentle. It doesn't work as fast, but i love how nicely spots where there was acne heal. There has been way less scarring and pigmentation changes that I have had to deal with while using other products. I can deal with the slower time, especially with the awesome payoff for my skin!",
-  rating: 5,
-  user: yuka,
-  product: product0
-},
-{
-  title: "Can't live without it",
-  content: "This is my desert island, can't live without it product. My skin loves it!",
-  rating: 5,
-  user: frances,
-  product: product1
-}
+  {
+    title: "I am disappointed that Crabtree & Evelyn discontinued the Lavender Hand Therapy",
+    content: "The new Lavender's fragrance is much too strong for me. I can't tell that it has lavender in it. The only reason I gave it a second star was that the rich, non-greasy texture is the same. Unfortunately, the strong, masculine fragrance is not to my liking.",
+    rating: 5,
+    user: yuka,
+    product: product0
+  },
+  {
+    title: "Wonderful for sensitive skin!",
+    content: "I cannot rave enough about this moisturizer! I have incredibly sensitive combination skin. I have tried so many different products. And then I saw Gothamista recommend this in one of her best affordable products videos. I am so glad that I took a chance! My skin feels so much better and I'm no longer as irritated. It's so gentle I can even use it on my eyes. For me, this is a must have.",
+    rating: 5,
+    user: yuka,
+    product: product1
+  }
 ]
 
 Review.create!(review_attributes)
 
-## Ingredient.all.each do |ingredient|
-##   ProductsIngredient.create!(ingredient: ingredient, product: Product.all.sample)
-## end
+# api = RestClient.get 'https://skincare-api.herokuapp.com/products'
 
-# puts "Creating new ingredients"
-api = RestClient.get 'https://skincare-api.herokuapp.com/products'
+# products = JSON.parse(api)
 
-products = JSON.parse(api)
-
-if Product.all.count < 100
-  products.each do |product|
-    new_product = Product.create!(
-    name: product["name"],
-    brand: product["brand"],
-    category: CATEGORIES.sample,
-    description: "Add a description for this product"
-    )
-    product["ingredient_list"].each do |ingredient_name|
-      ingredient = Ingredient.find_or_create_by!(name: ingredient_name)
-      ProductsIngredient.create!(ingredient: ingredient, product: new_product)
-    end
-  end
-end
+# if Product.all.count < 100
+#   products.each do |product|
+#     new_product = Product.create!(
+#     name: product["name"],
+#     brand: product["brand"],
+#     category: CATEGORIES.sample,
+#     description: "Add a description for this product"
+#     )
+#     product["ingredient_list"].each do |ingredient_name|
+#       ingredient = Ingredient.find_or_create_by!(name: ingredient_name)
+#       ProductsIngredient.create!(ingredient: ingredient, product: new_product)
+#     end
+#   end
+# end
 
 # tags = ["parabens", "fragrance", "sensitizing", ]
 
