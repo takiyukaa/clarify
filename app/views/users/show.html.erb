@@ -1,0 +1,35 @@
+<div class="user-banner">
+  <%= image_tag "avatar.jpg", alt: "user", class: "avatar-large user"  %>
+</div>
+
+
+
+<div class="container">
+  <div class="my-shelf">
+    <h1>My Shelf</h1>
+
+    <div class="product-cards">
+
+      <div class="row">
+
+        <% Product.all.each do |product| %>
+          <div class="col-6 col-md-6 col-lg-4">
+
+            <div class="card-product">
+              <%= image_tag "biore.jpg", alt: "product" %>
+              <p id="product-name">mashmallow whip wash</p>
+              <p>biore</p>
+              <p>facewash</p>
+            </div>
+
+          </div>
+
+        <% end %>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

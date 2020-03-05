@@ -9,14 +9,14 @@ class Product < ApplicationRecord
   validates :category, presence: true
   validates :brand, presence: true
 
-    include PgSearch::Model
-  pg_search_scope :global_search,
+  include PgSearch::Model
+    pg_search_scope :global_search,
     against: [ :name, :brand, :category ],
     associated_against: {
       ingredients: [ :name ]
     },
     using: {
-      tsearch: { prefix: true } # <-- now `superman batm` will return something!
+      tsearch: { prefix: true }
     }
 end
 

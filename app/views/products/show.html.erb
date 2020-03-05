@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
       <% if @product.photo.attached? %>
         <% @path = @product.photo.key %>
@@ -8,7 +8,8 @@
       <% end %>
 
       <div class="product">
-        <%= render 'shared/card-product', product: @product %>
+        <%= render 'shared/card-productinfo', product: @product %>
+        
         <% if current_user.liked?(@product) %>
           <%= link_to "unlike", unlike_product_path(@product), method: :post %>
         <% else %>
@@ -17,7 +18,17 @@
         <%# list ofall liked products %>
         <%#= current_user.find_up_voted_items %>
       </div>
+    </div>
 
+    <div class="col-8">
+      <div class="flag">
+        <div class="card-flag">
+          <p> ! ! Flag ! ! </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-10 col-lg-8">
       <div class="ingredients">
         <h2>Ingredients</h2>
         <div class="card-white">
