@@ -9,16 +9,18 @@ require 'rest-client'
 require 'open-uri'
 
 # ProductsIngredient.destroy_all
-# Flag.destroy_all
+puts "destroying flags"
+Flag.destroy_all
 # Ingredient.destroy_all
 # puts "Ingredients destroyed"
-# puts "All users destroyed"
+puts "destroying reviews"
 Review.destroy_all
 # Product.destroy_all
-# User.destroy_all
+puts "destroying users"
+User.destroy_all
 # puts "Products and reviews destroyed"
 
-frances = User.find_or_create_by!(
+frances = User.create!(
   email: "frances@gmail.com",
   password: "123123",
   first_name: "Frances",
@@ -27,11 +29,10 @@ frances = User.find_or_create_by!(
   city: "Tokyo",
 )
 
-if !frances.photo.attached?
 frances.photo.attach(io: File.open('app/assets/images/frances.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
-end
 
-yuka = User.find_or_create_by!(
+
+yuka = User.create!(
   email: "yuka@gmail.com",
   password: "123123",
   first_name: "Yuka",
@@ -40,11 +41,8 @@ yuka = User.find_or_create_by!(
   city: "Tokyo",
 )
 
-if !yuka.photo.attached?
 yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
-end
 
-puts "Creating new products"
 
 product0 = Product.find_or_create_by!(
   name: "Ultra-Moisturising Hand Therapy, Lavender, 0.9 oz",
@@ -61,7 +59,7 @@ ingredients0 = %w(Water Macadamia\ Ternifolia\ Seed\ Oil Zea\ Mays\ (Corn)\ Star
 ingredients0.each do |ingredient|
   ingredient.downcase!
   ing_name = Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.create!(product: product0, ingredient: ing_name)
+  ProductsIngredient.find_or_create_by!(product: product0, ingredient: ing_name)
 end
 
 product1 = Product.find_or_create_by!(
@@ -79,7 +77,7 @@ ingredients1 = %w(Water Olive\ Fruit\ Oil Dipropylene\ Glycol Glycerin PEG-32 Et
 ingredients1.each do |ingredient|
   ingredient.downcase!
   ing_name = Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.create!(product: product1, ingredient: ing_name)
+  ProductsIngredient.find_or_create_by!(product: product1, ingredient: ing_name)
 end
 
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
@@ -125,6 +123,8 @@ if Product.all.count < 100
 end
 
 frances.tag_list = "sensitive skin, oily skin"
+frances.save
+frances.reload
 
 lavender = Ingredient.find_by(name: "lavandula angustifolia (lavender)")
 lavender.tag_list.add("sensitive skin")
