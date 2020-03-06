@@ -15,10 +15,10 @@ require 'open-uri'
 # puts "All users destroyed"
 Review.destroy_all
 # Product.destroy_all
-User.destroy_all
+# User.destroy_all
 # puts "Products and reviews destroyed"
 
-frances = User.create!(
+frances = User.find_or_create_by!(
   email: "frances@gmail.com",
   password: "123123",
   first_name: "Frances",
@@ -27,10 +27,11 @@ frances = User.create!(
   city: "Tokyo",
 )
 
-# francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
+if !frances.photo.attached?
 frances.photo.attach(io: File.open('app/assets/images/frances.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
+end
 
-yuka = User.create!(
+yuka = User.find_or_create_by!(
   email: "yuka@gmail.com",
   password: "123123",
   first_name: "Yuka",
@@ -39,8 +40,9 @@ yuka = User.create!(
   city: "Tokyo",
 )
 
-# yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878427/iSnsb4vKmwU7se6BsXxxzu8u.jpg')
+if !yuka.photo.attached?
 yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
+end
 
 puts "Creating new products"
 
@@ -48,7 +50,7 @@ product0 = Product.find_or_create_by!(
   name: "Ultra-Moisturising Hand Therapy, Lavender, 0.9 oz",
   category: "Moisturizer",
   brand: "Crabtree & Evelyn",
-  barcode: "044936274975",
+  barcode: "0044936274975",
   description: "Our award-winning shea butter hand cream with lavender oil leaves your hands feeling incredibly smooth and soft. Absorbing deep into the skin and leaving no greasy residue, our naturally formulated Lavender Hand Therapy in a tube is ideal for travel and on the go daily treatment and care."
   )
 
@@ -76,7 +78,7 @@ ingredients1 = %w(Water Olive\ Fruit\ Oil Dipropylene\ Glycol Glycerin PEG-32 Et
 
 ingredients1.each do |ingredient|
   ingredient.downcase!
-  ing_name= Ingredient.find_or_create_by!(name: ingredient)
+  ing_name = Ingredient.find_or_create_by!(name: ingredient)
   ProductsIngredient.create!(product: product1, ingredient: ing_name)
 end
 
@@ -122,33 +124,39 @@ if Product.all.count < 100
   end
 end
 
-# tags = ["parabens", "fragrance", "sensitizing", ]
+frances.tag_list = "sensitive skin, oily skin"
 
-# parabens = RestClient.get 'https://skincare-api.herokuapp.com/ingredient?q=paraben'
-# fragrance =
+lavender = Ingredient.find_by(name: "lavandula angustifolia (lavender)")
+lavender.tag_list.add("sensitive skin")
 
-# result_array.each do |hash|
-#   Ingredient.create!(name: hash["ingredient"])
-# end
-# frances_ing = ["methylparaben", "propylparaben", "fragrance"]
+Flag.create!(ingredient: lavender, user: frances)
 
-# frances_flags = [
-# {
-#   user: frances,
-#   ingredient:
-# }
-# ]
-# 3.times do
-#   Flag.create!(
-#     user: frances,
-#   )
-# end
+oily_ingredients = []
+oily_ingredients << Ingredient.find_by(name: "zea mays (corn) starch")
+oily_ingredients << Ingredient.find_by(name: "stearic acid")
+oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea) butter")
 
-# 10.times do
-#   Flag.create!(
-#     user: yuka,
-#     ingredient: Ingredient.all.sample
-#   )
-# end
+oily_ingredients.each do |ingredient|
+  ingredient.tag_list.add("oily skin")
+  Flag.create!(ingredient: ingredient, user: frances)
+end
+
+mask = Product.find_by(name: "moisture bond sleeping recovery masque")
+toner = Product.find_by(name: "don't worry bee care calendula toner")
+foam = Product.find_by(name: "treatment cleansing foam")
+bee = Product.find_by(name: "snail bee high content lotion")
+snail = Product.find_by(name: "urban dollkiss snail therapy sleeping pack")
+
+frances_liked = [mask, toner, foam, bee, snail]
+
+frances_liked.each do |product|
+  frances.likes product
+end
+
+mask.photo.attach(io: File.open("app/assets/images/mask.jpg"), filename: 'mask.jpg', content_type: 'image/jpg')
+toner.photo.attach(io: File.open("app/assets/images/toner.jpg"), filename: 'toner.jpg', content_type: 'image/jpg')
+foam.photo.attach(io: File.open("app/assets/images/foam.jpg"), filename: 'foam.jpg', content_type: 'image/jpg')
+bee.photo.attach(io: File.open("app/assets/images/bee.jpg"), filename: 'bee.jpg', content_type: 'image/jpg')
+snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
 
 puts "All complete"
