@@ -8,17 +8,17 @@
 require 'rest-client'
 require 'open-uri'
 
-# ProductsIngredient.destroy_all
+ProductsIngredient.destroy_all
 puts "destroying flags"
 Flag.destroy_all
-# Ingredient.destroy_all
-# puts "Ingredients destroyed"
+Ingredient.destroy_all
+puts "Ingredients destroyed"
 puts "destroying reviews"
 Review.destroy_all
-# Product.destroy_all
+Product.destroy_all
 puts "destroying users"
 User.destroy_all
-# puts "Products and reviews destroyed"
+
 
 frances = User.create!(
   email: "frances@gmail.com",
@@ -43,6 +43,27 @@ yuka = User.create!(
 
 yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
 
+CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
+
+puts "creating products"
+api = RestClient.get 'https://skincare-api.herokuapp.com/products'
+
+products = JSON.parse(api)
+
+if Product.all.count < 100
+  products.each do |product|
+    new_product = Product.create!(
+    name: product["name"],
+    brand: product["brand"],
+    category: CATEGORIES.sample,
+    description: "Add a description for this product"
+    )
+    product["ingredient_list"].each do |ingredient_name|
+      ingredient = Ingredient.find_or_create_by!(name: ingredient_name)
+      ProductsIngredient.create!(ingredient: ingredient, product: new_product)
+    end
+  end
+end
 
 product0 = Product.find_or_create_by!(
   name: "Ultra-Moisturising Hand Therapy, Lavender, 0.9 oz",
@@ -80,8 +101,6 @@ ingredients1.each do |ingredient|
   ProductsIngredient.find_or_create_by!(product: product1, ingredient: ing_name)
 end
 
-CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
-
 puts "Creating new reviews"
 
 review_attributes = [
@@ -103,24 +122,7 @@ review_attributes = [
 
 Review.create!(review_attributes)
 
-api = RestClient.get 'https://skincare-api.herokuapp.com/products'
-
-products = JSON.parse(api)
-
-if Product.all.count < 100
-  products.each do |product|
-    new_product = Product.create!(
-    name: product["name"],
-    brand: product["brand"],
-    category: CATEGORIES.sample,
-    description: "Add a description for this product"
-    )
-    product["ingredient_list"].each do |ingredient_name|
-      ingredient = Ingredient.find_or_create_by!(name: ingredient_name)
-      ProductsIngredient.create!(ingredient: ingredient, product: new_product)
-    end
-  end
-end
+puts "creating tags"
 
 frances.tag_list = "sensitive skin, oily skin"
 frances.save
@@ -138,6 +140,7 @@ oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea) butter
 
 oily_ingredients.each do |ingredient|
   ingredient.tag_list.add("oily skin")
+  ingredient.save
   Flag.create!(ingredient: ingredient, user: frances)
 end
 

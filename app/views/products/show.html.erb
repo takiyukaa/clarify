@@ -40,6 +40,16 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 0;">
                   <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
                     <i class="fab fa-font-awesome-flag"></i><p><%= ingredient.tag_list.first %></p>
+                  <%# elsif current_user.ingredients.include?(ingredient) %>
+                  <%# else %>
+                    <%#= simple_form_for(Flag.new) do |f| %>
+                      <%#= f.association :ingredient, as: :hidden, input_html: {value: ingredient.id} %>
+                      <%#= f.input :product_id, as: :hidden, input_html: {value: @product.id} %>
+                      <%#= button_tag class: "border-0" do %>
+                        <!-- <i class="fas fa-plus"></i> -->
+                      <%# end %>
+                    <%# end %>
+
                   <% end %>
                   </li>
               </div>
