@@ -43,8 +43,9 @@ yuka = User.create!(
 
 yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
 
-puts "creating products"
+CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
+puts "creating products"
 api = RestClient.get 'https://skincare-api.herokuapp.com/products'
 
 products = JSON.parse(api)
@@ -99,8 +100,6 @@ ingredients1.each do |ingredient|
   ing_name = Ingredient.find_or_create_by!(name: ingredient)
   ProductsIngredient.find_or_create_by!(product: product1, ingredient: ing_name)
 end
-
-CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
 puts "Creating new reviews"
 
