@@ -9,9 +9,23 @@
 
     <div class="col-8">
       <div class="flag">
-        <div class="card-flag">
-          <p> ! ! Flag ! ! </p>
-        </div>
+
+        <% @product.ingredients.each do |ingredient|  %>
+          <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
+            <% @count += 1 %>
+          <% end %>
+        <% end %>
+
+        <% if @count == 0 %>
+          <div class="card-safe">
+            <i class="far fa-thumbs-up"></i><p>Good for you</p>
+          </div>
+        <% else %>
+          <div class="card-flag">
+            <p>This product contains <%= @count %> flags</p>
+          </div>
+        <% end %>
+
       </div>
     </div>
 

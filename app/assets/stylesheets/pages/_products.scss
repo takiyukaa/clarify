@@ -20,7 +20,8 @@
 }
 
 .card-flag {
-  background-color: $pink;
+  background-color: $red;
+  border: 3px solid white;
   padding: 8px;
   margin: 8px;
   border-radius: 16px;
@@ -31,6 +32,26 @@
   p {
     margin: 0;
   }
+}
+
+.card-safe {
+  background-color: $green;
+  border: 3px solid white;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    margin-right: 3px;
+  }
+
+  p {
+    margin: 0;
+  }
+
 }
 
 .product-info {
