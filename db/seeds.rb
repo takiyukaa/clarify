@@ -138,6 +138,7 @@ oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea) butter
 
 oily_ingredients.each do |ingredient|
   ingredient.tag_list.add("oily skin")
+  ingredient.save
   Flag.create!(ingredient: ingredient, user: frances)
 end
 
