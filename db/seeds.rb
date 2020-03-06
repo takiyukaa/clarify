@@ -9,12 +9,14 @@ require 'rest-client'
 require 'open-uri'
 
 # ProductsIngredient.destroy_all
-# Flag.destroy_all
+puts "destroying flags"
+Flag.destroy_all
 # Ingredient.destroy_all
 # puts "Ingredients destroyed"
-# puts "All users destroyed"
+puts "destroying reviews"
 Review.destroy_all
 # Product.destroy_all
+puts "destroying users"
 User.destroy_all
 # puts "Products and reviews destroyed"
 
@@ -27,8 +29,8 @@ frances = User.create!(
   city: "Tokyo",
 )
 
-# francesfile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878432/fZLeDeZpZcXvzjBWUmXNqCDu.jpg')
 frances.photo.attach(io: File.open('app/assets/images/frances.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
+
 
 yuka = User.create!(
   email: "yuka@gmail.com",
@@ -39,16 +41,14 @@ yuka = User.create!(
   city: "Tokyo",
 )
 
-# yukafile = URI.open('https://res.cloudinary.com/dopoqpdhm/image/upload/v1582878427/iSnsb4vKmwU7se6BsXxxzu8u.jpg')
 yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
 
-puts "Creating new products"
 
 product0 = Product.find_or_create_by!(
   name: "Ultra-Moisturising Hand Therapy, Lavender, 0.9 oz",
   category: "Moisturizer",
   brand: "Crabtree & Evelyn",
-  barcode: "044936274975",
+  barcode: "0044936274975",
   description: "Our award-winning shea butter hand cream with lavender oil leaves your hands feeling incredibly smooth and soft. Absorbing deep into the skin and leaving no greasy residue, our naturally formulated Lavender Hand Therapy in a tube is ideal for travel and on the go daily treatment and care."
   )
 
@@ -59,7 +59,7 @@ ingredients0 = %w(Water Macadamia\ Ternifolia\ Seed\ Oil Zea\ Mays\ (Corn)\ Star
 ingredients0.each do |ingredient|
   ingredient.downcase!
   ing_name = Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.create!(product: product0, ingredient: ing_name)
+  ProductsIngredient.find_or_create_by!(product: product0, ingredient: ing_name)
 end
 
 product1 = Product.find_or_create_by!(
@@ -76,8 +76,8 @@ ingredients1 = %w(Water Olive\ Fruit\ Oil Dipropylene\ Glycol Glycerin PEG-32 Et
 
 ingredients1.each do |ingredient|
   ingredient.downcase!
-  ing_name= Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.create!(product: product1, ingredient: ing_name)
+  ing_name = Ingredient.find_or_create_by!(name: ingredient)
+  ProductsIngredient.find_or_create_by!(product: product1, ingredient: ing_name)
 end
 
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
@@ -122,33 +122,41 @@ if Product.all.count < 100
   end
 end
 
-# tags = ["parabens", "fragrance", "sensitizing", ]
+frances.tag_list = "sensitive skin, oily skin"
+frances.save
+frances.reload
 
-# parabens = RestClient.get 'https://skincare-api.herokuapp.com/ingredient?q=paraben'
-# fragrance =
+lavender = Ingredient.find_by(name: "lavandula angustifolia (lavender)")
+lavender.tag_list.add("sensitive skin")
 
-# result_array.each do |hash|
-#   Ingredient.create!(name: hash["ingredient"])
-# end
-# frances_ing = ["methylparaben", "propylparaben", "fragrance"]
+Flag.create!(ingredient: lavender, user: frances)
 
-# frances_flags = [
-# {
-#   user: frances,
-#   ingredient:
-# }
-# ]
-# 3.times do
-#   Flag.create!(
-#     user: frances,
-#   )
-# end
+oily_ingredients = []
+oily_ingredients << Ingredient.find_by(name: "zea mays (corn) starch")
+oily_ingredients << Ingredient.find_by(name: "stearic acid")
+oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea) butter")
 
-# 10.times do
-#   Flag.create!(
-#     user: yuka,
-#     ingredient: Ingredient.all.sample
-#   )
-# end
+oily_ingredients.each do |ingredient|
+  ingredient.tag_list.add("oily skin")
+  Flag.create!(ingredient: ingredient, user: frances)
+end
+
+mask = Product.find_by(name: "moisture bond sleeping recovery masque")
+toner = Product.find_by(name: "don't worry bee care calendula toner")
+foam = Product.find_by(name: "treatment cleansing foam")
+bee = Product.find_by(name: "snail bee high content lotion")
+snail = Product.find_by(name: "urban dollkiss snail therapy sleeping pack")
+
+frances_liked = [mask, toner, foam, bee, snail]
+
+frances_liked.each do |product|
+  frances.likes product
+end
+
+mask.photo.attach(io: File.open("app/assets/images/mask.jpg"), filename: 'mask.jpg', content_type: 'image/jpg')
+toner.photo.attach(io: File.open("app/assets/images/toner.jpg"), filename: 'toner.jpg', content_type: 'image/jpg')
+foam.photo.attach(io: File.open("app/assets/images/foam.jpg"), filename: 'foam.jpg', content_type: 'image/jpg')
+bee.photo.attach(io: File.open("app/assets/images/bee.jpg"), filename: 'bee.jpg', content_type: 'image/jpg')
+snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
 
 puts "All complete"
