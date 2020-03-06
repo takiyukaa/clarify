@@ -9,9 +9,23 @@
 
     <div class="col-8">
       <div class="flag">
-        <div class="card-flag">
-          <p> ! ! Flag ! ! </p>
-        </div>
+
+        <% @product.ingredients.each do |ingredient|  %>
+          <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
+            <% @count += 1 %>
+          <% end %>
+        <% end %>
+
+        <% if @count == 0 %>
+          <div class="card-safe">
+            <i class="far fa-thumbs-up"></i><p>Good for you</p>
+          </div>
+        <% else %>
+          <div class="card-flag">
+            <i class="fab fa-font-awesome-flag"></i><p>This product contains <%= @count %> flags</p>
+          </div>
+        <% end %>
+
       </div>
     </div>
 
@@ -36,11 +50,15 @@
 
       <div class="reviews">
         <h2>Reviews</h2>
-        <% @product.reviews.each do |review| %>
-          <%= render 'shared/card-review', review: review %>
+
+        <% if @product.reviews.empty? %>
+          <p style="font-size: 16px;"><strong>No Reviews yet</strong></p>
+        <% else %>
+          <% @product.reviews.each do |review| %>
+            <%= render 'shared/card-review', review: review %>
+          <% end %>
         <% end %>
       </div>
-
     </div>
   </div>
 </div>
