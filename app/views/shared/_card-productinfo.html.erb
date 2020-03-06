@@ -13,14 +13,15 @@
       <div class="favorite">
           <% if current_user.liked?(@product) %>
             <%= link_to unlike_product_path(@product), method: :post do %>
-              <i class="fas fa-bookmark like"></i>
+              <i class="fas fa-heart like"></i>
             <% end %>
           <% else %>
             <%= link_to like_product_path(@product), method: :post do %>
-              <i class="far fa-bookmark unlike"></i>
+              <i class="far fa-heart unlike"></i>
             <% end %>
           <% end %>
         </div>
+
         <%# list ofall liked products %>
         <%#= current_user.find_up_voted_items %>
       <div class="product-detail">
