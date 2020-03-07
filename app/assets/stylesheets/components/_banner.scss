@@ -1,5 +1,7 @@
 .banner {
-  background-color: $creme;
+  // background-color: $creme;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), asset_url("skincare.png");
+  background-size: cover;
   color: $navy;
   height: 40vh;
   display: flex;

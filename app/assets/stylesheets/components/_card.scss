@@ -41,8 +41,8 @@
 
 
 .product-info {
-  padding: 8px;
-  width: 30vh;
+  padding: 8px 16px;
+  width: max-content;
 
   h1 {
     font-size: 16px;
@@ -59,6 +59,7 @@
 
 .product-rating {
   margin-top: 16px;
+  text-align: center;
 }
 
 .score-rating {
@@ -78,6 +79,8 @@
 }
 
 .stars {
+  text-align: center;
+
   i {
     font-size: 12px;
   }
