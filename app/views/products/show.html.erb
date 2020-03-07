@@ -9,7 +9,6 @@
 
     <div class="col-8">
       <div class="flag">
-
         <% @product.ingredients.each do |ingredient|  %>
           <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
             <% @count += 1 %>
@@ -25,15 +24,30 @@
             <i class="fab fa-font-awesome-flag"></i><p>This product contains <%= @count %> flags</p>
           </div>
         <% end %>
-
       </div>
     </div>
+  </div>
 
-    <div class="col-12 col-md-10 col-lg-8">
-      <div class="ingredients">
-        <h2>Ingredients</h2>
-        <div class="card-white">
-          <ul class="list-group list-group-flush">
+
+  <div class="text-center">
+    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tab-content" id="myTabContent">
+
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="col-xs-12 col-sm-8 offset-sm-2">
+        <div class="ingredients">
+          <h2>Ingredients</h2>
+          <div class="card-white">
+            <ul class="list-group list-group-flush">
             <% @product.ingredients.each do |ingredient| %>
               <div class="d-flex justify-content-between">
                 <li class="list-group-item d-flex justify-content-between align-items-center"><p><%= ingredient.name %></p></li>
@@ -49,18 +63,20 @@
                         <!-- <i class="fas fa-plus"></i> -->
                       <%# end %>
                     <%# end %>
-
                   <% end %>
-                  </li>
+                </li>
               </div>
             <% end %>
-          </ul>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="reviews">
+
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="reviews col-xs-12 col-sm-8 offset-sm-2">
         <h2>Reviews</h2>
-
         <% if @product.reviews.empty? %>
           <p style="font-size: 16px;"><strong>No Reviews yet</strong></p>
         <% else %>
@@ -70,5 +86,6 @@
         <% end %>
       </div>
     </div>
+
   </div>
 </div>

@@ -1,4 +1,4 @@
-// import "bootstrap";
+import "bootstrap";
 // import * as ScanditSDK from "scandit-sdk";
 
 // import { Barcode, BarcodePicker, ScanSettings, configure } from "scandit-sdk";
