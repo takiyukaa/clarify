@@ -10,6 +10,19 @@
 </div>
 
 
+<div class="container">
+  <%= form_for @user, url: {controller: "post", action: "create" } do |f| %>
+  <div class="tags">
+    <%= f.label :tag_list %>
+    <%= text_field_tag 'user[tag_list]', @user.tag_list.join(",") %>
+  </div>
+  <%= f.submit "send" %>
+  <% end %>
+
+</div>
+
+
+
 
 <div class="container">
   <div class="my-shelf">
