@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     @flag_ings = []
     @tag_ings = []
     @normal_ings =[]
+    @skintypeicon = ""
     @path = ""
     authorize current_user
   end

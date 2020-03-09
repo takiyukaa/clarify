@@ -1,35 +1,52 @@
 <div class="user-banner">
+
   <% if current_user.photo.attached? %>
     <% @path = current_user.photo.key %>
   <% else %>
     <% @path = 'profile_whubsg' %>
   <% end %>
-  <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
+  <div class="user-info">
+    <%= cl_image_tag @path, alt: "user", class: "avatar-large"  %>
+    <p><%= current_user.first_name %></p>
+  </div>
+
 </div>
 
-<p class="text-center mt-5 mb-2"><%= current_user.first_name %></p>
-<p class="text-center mb-0">My skin type:<i class="fas fa-edit btn p-1" data-toggle="modal" data-target="#tagsModal"></i></p>
-<%= render 'tags/modal' %>
-  <% current_user.tag_list.each do |tag| %>
-    <p class="text-center mb-0"><%= tag %></p>
-  <% end %>
-
 <div class="container">
-  <div class="my-shelf">
-    <h1>My Profile</h1>
-    <div class="product-cards">
-      <div class="row">
-        <% current_user.find_up_voted_items.each do |product| %>
-          <div class="col-6 col-md-6 col-lg-4">
-            <div class="card-product">
-              <%= image_tag "biore.jpg", alt: "product" %>
-              <p id="product-name"><%= product.brand %></p>
-              <p><%= product.name %></p>
-              <p><%= product.category%></p>
-            </div>
-          </div>
+  <div class="skin-type card-white">
+
+    <p class="my-skin-type">My skin concern</p>
+    <i class="fas fa-edit btn" data-toggle="modal" data-target="#tagsModal"></i>
+    <%= render 'tags/modal' %>
+
+    <div class="skin-types">
+
+      <% current_user.tag_list.each do |tag| %>
+
+        <% if tag == "dry skin" %>
+          <% @skintypecolor = "#e0ae8d" %>
+          <% @skintypeicon = "fas fa-fire-alt" %>
+        <% elsif tag == "oily skin" %>
+          <% @skintypecolor = "#f9f59f" %>
+          <% @skintypeicon = "fas fa-tint" %>
+        <% elsif tag == "sensitive skin" %>
+          <% @skintypecolor = "#a8e28e" %>
+          <% @skintypeicon = "fas fa-feather" %>
+        <% else %>
+          <% @skintypecolor = "#a6caed" %>
+          <% @skintypeicon = "fas fa-surprise" %>
         <% end %>
-      </div>
+
+        <div class="card-skin-type">
+          <div class="icon" style="border: 3px solid <%= @skintypecolor %>">
+            <i class="<%= @skintypeicon %>" style="color: <%= @skintypecolor %>"></i>
+          </div>
+          <p><%= tag %></p>
+        </div>
+
+      <% end %>
+
     </div>
+
   </div>
 </div>
