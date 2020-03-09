@@ -14,7 +14,9 @@
 // card-product
 
 .card-white-up {
+  position: relative;
   padding: 8px;
+  align-items: center;
 }
 
 
@@ -24,7 +26,6 @@
   p {
       font-weight: lighter;
       margin-bottom: 0;
-      font-size: 12px;
     }
 }
 
@@ -35,17 +36,15 @@
   align-items: center;
 
   img {
-    width: 30vw;
+    height: 180px;
   }
 }
 
 
 .product-info {
   padding: 8px 16px;
-  width: max-content;
 
   h1 {
-    font-size: 16px;
     font-weight: bolder;
     margin-bottom: 8px;
   }
@@ -53,17 +52,20 @@
   p {
     font-weight: lighter;
     margin-bottom: 0;
-    font-size: 12px;
   }
 }
 
 .product-rating {
-  margin-top: 16px;
   text-align: center;
+  min-width: max-content;
 }
 
 .score-rating {
   display: flex;
+
+  p {
+    margin: 0;
+  }
 
   #rate {
   font-size: 24px;
@@ -79,7 +81,7 @@
 }
 
 .stars {
-  text-align: center;
+  text-align: left;
 
   i {
     font-size: 12px;
@@ -106,7 +108,6 @@
   p {
     margin: 0;
     text-align: center;
-    font-size: 12px;
   }
 }
 
@@ -117,17 +118,21 @@
   margin-bottom: 16px;
 
   p {
-    font-size: 16px;
     border-bottom: gray 1px dotted;
     margin: 0;
   }
+
+  .stars {
+    text-align: center;
+  }
+
 }
 
 
 .review-content {
 
   p {
-    font-size: 12px;
+    font-weight: lighter;
     margin: 0;
   }
 }

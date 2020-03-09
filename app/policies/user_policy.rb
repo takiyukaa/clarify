@@ -14,6 +14,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def shelf?
-    true
+    user == record || user.friends_with?(record)
   end
 end

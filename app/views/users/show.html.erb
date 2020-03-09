@@ -1,11 +1,12 @@
 <div class="user-banner">
   <% if current_user.photo.attached? %>
-      <% @path = current_user.photo.key %>
-    <% else %>
-      <% @path = 'profile_whubsg' %>
-    <% end %>
+    <% @path = current_user.photo.key %>
+  <% else %>
+    <% @path = 'profile_whubsg' %>
+  <% end %>
   <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
 </div>
+
 <p class="text-center mt-5 mb-2"><%= current_user.first_name %></p>
 <p class="text-center mb-0">My skin type:<i class="fas fa-edit btn p-1" data-toggle="modal" data-target="#tagsModal"></i></p>
 <%= render 'tags/modal' %>
