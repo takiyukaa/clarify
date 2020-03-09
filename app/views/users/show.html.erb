@@ -20,7 +20,6 @@
     <%= render 'tags/modal' %>
 
     <div class="skin-types">
-
       <% current_user.tag_list.each do |tag| %>
 
         <% if tag == "dry skin" %>
@@ -45,20 +44,31 @@
         </div>
 
       <% end %>
-
     </div>
-
   </div>
+
+  <div class="my-flag card-white">
+
+    <p class="text-center mb-0">My flags</p>
+
+    <%= simple_form_for :flags, url: flags_multi_create_path, method: :post do |f| %>
+      <%= f.input :id, placeholder: 'Add flags', label: false, class: "w-100", as: :select, input_html: {class:'select2', multiple:'multiple'}, collection:
+            Ingredient.all
+            .sort_by { |ingredient| ingredient.name }, include_hidden: false %>
+      <%= f.submit %>
+    <% end %>
+
+    <ul class="list-group list-group-flush">
+      <% current_user.flags.each do |flag| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i><p><%= flag.ingredient.name %></p></div>
+      </li>
+      <% end %>
+
+    </ul>
+
+   </div>
+
 </div>
 
-<p class="text-center mb-0">My flags:</p>
-<% current_user.flags.each do |flag| %>
-  <p class="text-center mb-0"><%= flag.ingredient.name %></p>
-<% end %>
 
-<%= simple_form_for :flags, url: flags_multi_create_path, method: :post do |f| %>
-  <%= f.input :id, placeholder: 'Add flags', label: false, class: "w-100", as: :select, input_html: {class:'select2', multiple:'multiple'}, collection:
-        Ingredient.all
-        .sort_by { |ingredient| ingredient.name }, include_hidden: false %>
-  <%= f.submit %>
-<% end %>
