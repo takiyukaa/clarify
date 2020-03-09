@@ -12,6 +12,17 @@ class FlagsController < ApplicationController
     end
   end
 
+  def multi_create
+    params[:flags][:id].each do |ingredient_id|
+      flag = Flag.new(ingredient: Ingredient.find(ingredient_id), user: current_user)
+        authorize flag
+      unless flag.save
+        render 'users/show'
+      end
+    end
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def flag_params
