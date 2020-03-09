@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_friendship
   acts_as_taggable_on :tags
   acts_as_voter
   devise :database_authenticatable, :registerable,
@@ -13,7 +14,6 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :second_name, presence: true
   validates :email, presence: true
-  has_friendship
 
   def full_name
     "#{first_name} #{second_name}"
