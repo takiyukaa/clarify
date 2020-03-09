@@ -5,7 +5,6 @@ class FlagsController < ApplicationController
     @flag.save
     authorize @flag
     if params[:flag][:product_id]
-      raise
       redirect_to product_path(params[:flag][:product_id].to_i)
     else
       redirect_to user_path(current_user)
