@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :second_name, presence: true
   validates :email, presence: true
+  has_friendship
 
   def full_name
     "#{first_name} #{second_name}"
