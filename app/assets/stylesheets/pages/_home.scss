@@ -7,15 +7,23 @@
   }
 }
 
+.category-cards {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
 .card-category {
-  height: 80px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), asset_url("cosme.png");
+  background-size: contain;
+  height: 136px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $creme;
+  background-color: white;
   padding: 16px;
   margin: 16px;
-  border-radius: 16px;
+  border-radius: 50%;
+  text-align: center;
 
   &:hover {
     background-color: #f1d7f2;
