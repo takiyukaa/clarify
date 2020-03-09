@@ -20,18 +20,13 @@
 }
 
 .card-flag {
-  background-color: $red;
-  border: 3px solid white;
+  background-color: white;
   padding: 8px;
   margin: 8px;
   border-radius: 16px;
-  display: flex;
   justify-content: center;
   align-items: center;
-
-  i {
-    margin-right: 3px;
-  }
+  display: flex;
 
   p {
     margin: 0;
@@ -95,3 +90,16 @@
     color: $red;
   }
 }
+
+.border-0 {
+  background-color: white;
+}
+
+.red {
+  color: $red;
+}
+
+.green {
+  color: $green;
+}
+

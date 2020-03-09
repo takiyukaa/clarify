@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'scan', to: 'products#scan'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users, only: [:create, :new, :show] do
+  resources :users, only: [:create, :new, :show, :update] do
+    post 'friend_request'
     resources :review, only: [:new, :create]
     member do
       get 'shelf'
     end
-   end
+  end
   resources :products, only: [:index, :show] do
     member do
     post "like", to: 'products#like'
@@ -18,3 +19,5 @@ Rails.application.routes.draw do
   end
   resources :flags, only: [:create]
 end
+
+

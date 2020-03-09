@@ -1,28 +1,18 @@
 <div class="user-banner">
-  <i class="fas fa-cog"></i>
   <% if current_user.photo.attached? %>
-      <% @path = current_user.photo.key %>
-    <% else %>
-      <% @path = 'profile_whubsg' %>
-    <% end %>
-  <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
-  <p><%= current_user.first_name %></p>
-</div>
-
-
-<div class="container">
-  <%= form_for @user, url: {controller: "post", action: "create" } do |f| %>
-  <div class="tags">
-    <%= f.label :tag_list %>
-    <%= text_field_tag 'user[tag_list]', @user.tag_list.join(",") %>
-  </div>
-  <%= f.submit "send" %>
+    <% @path = current_user.photo.key %>
+  <% else %>
+    <% @path = 'profile_whubsg' %>
   <% end %>
-
+  <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
 </div>
 
-
-
+<p class="text-center mt-5 mb-2"><%= current_user.first_name %></p>
+<p class="text-center mb-0">My skin type:<i class="fas fa-edit btn p-1" data-toggle="modal" data-target="#tagsModal"></i></p>
+<%= render 'tags/modal' %>
+  <% current_user.tag_list.each do |tag| %>
+    <p class="text-center mb-0"><%= tag %></p>
+  <% end %>
 
 <div class="container">
   <div class="my-shelf">

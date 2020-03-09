@@ -9,7 +9,11 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
-  def shelf?
+  def update?
     true
+  end
+
+  def shelf?
+    user == record || user.friends_with?(record)
   end
 end
