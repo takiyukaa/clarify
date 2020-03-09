@@ -7,30 +7,42 @@
       </div>
     </div>
 
-    <div class="col-8">
-      <div class="flag">
-        <% @product.ingredients.each do |ingredient|  %>
-          <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
-            <% @count += 1 %>
-          <% end %>
-        <% end %>
+    <div class="flags">
 
-        <% if @count == 0 %>
-          <div class="card-safe">
-            <i class="far fa-thumbs-up"></i><p>Good for you</p>
-          </div>
-        <% else %>
-          <div class="card-flag">
-            <i class="fab fa-font-awesome-flag"></i><p>This product contains <%= @count %> flags</p>
-          </div>
+      <% @product.ingredients.each do |ingredient|  %>
+        <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
+          <% @count += 1 %>
+        <% elsif current_user.ingredients.include?(ingredient) %>
+          <% @count += 1 %>
         <% end %>
+      <% end %>
+
+      <% if @count == 0 %>
+        <div class="card-flag">
+          <i class="far fa-thumbs-up green mr-2"></i>
+          <p>Good for you</p>
+        </div>
+      <% else %>
+        <div class="card-flag">
+          <i class="fab fa-font-awesome-flag red mr-2"></i>
+          <p>You may want to avoid <%= @count %> ingredients</p>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="friends">
+      <div class="card-flag">
+        <i class="far fa-smile green mr-2"></i>
+        <p>6 friends are using this product</p>
       </div>
     </div>
+
   </div>
 
 
+
   <div class="text-center">
-    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+    <ul class="nav nav-tabs justify-content-center my-3" id="myTab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients</a>
       </li>
@@ -47,25 +59,45 @@
         <div class="ingredients">
           <div class="card-white">
             <ul class="list-group list-group-flush">
-            <% @product.ingredients.each do |ingredient| %>
 
+            <% @flag_ings = [] %>
+            <% @tag_ings = [] %>
+            <% @normal_ings = [] %>
+
+            <% @product.ingredients.each do |ingredient| %>
+              <% if current_user.ingredients.include?(ingredient) %>
+                <% @flag_ings << ingredient %>
+              <% elsif current_user.tag_list.include?(ingredient.tag_list.first) %>
+                <% @tag_ings << ingredient %>
+              <% else %>
+                <% @normal_ings << ingredient %>
+              <% end %>
+            <% end %>
+
+
+            <% @flag_ings.each do |ingredient| %>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <p><%= ingredient.name %></p>
-                <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
-                  <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag"></i><p><%= ingredient.tag_list.first %></p></div>
-                <% elsif current_user.ingredients.include?(ingredient) %>
-                  <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i></div>
-                <% else %>
-                  <%= simple_form_for(Flag.new) do |f| %>
-                    <%= f.association :ingredient, as: :hidden, input_html: {value: ingredient.id} %>
-                    <%= f.input :product_id, as: :hidden, input_html: {value: @product.id} %>
-                    <%= button_tag class: "border-0" do %>
-                      <i class="fas fa-plus"></i>
-                    <% end %>
+                <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i></div>
+              </li>
+            <% end %>
+            <% @tag_ings.each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p><%= ingredient.name %></p>
+                <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag"></i><p><%= ingredient.tag_list.first %></p></div>
+              </li>
+            <% end %>
+            <% @normal_ings.each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p><%= ingredient.name %></p>
+                <%= simple_form_for(Flag.new) do |f| %>
+                  <%= f.association :ingredient, as: :hidden, input_html: {value: ingredient.id} %>
+                  <%= f.input :product_id, as: :hidden, input_html: {value: @product.id} %>
+                  <%= button_tag class: "border-0" do %>
+                    <i class="fas fa-plus"></i>
                   <% end %>
                 <% end %>
               </li>
-
             <% end %>
             </ul>
           </div>
