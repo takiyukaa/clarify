@@ -5,38 +5,42 @@
 <% end %>
 
 <div class="user-banner">
+  <h2>my shelf</h2>
   <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
 </div>
 
 
 
 <div class="container">
-  <div class="my-shelf">
-    <h1>My Shelf</h1>
-    <div class="product-cards">
-      <div class="row">
-        <% @user.find_up_voted_items.each do |product| %>
 
+
+  <div class="my-shelf">
+    <div class="product-cards">
+      
+        <% @user.find_up_voted_items.each do |product| %>
           <% if product.photo.attached? %>
             <% @path_pro = product.photo.key %>
           <% else %>
-            <% @path_pro = 'profile_whubsg' %>
+            <% @path_pro = 'no_image' %>
           <% end %>
 
-          <div class="col-6 col-md-6 col-lg-4">
 
             <%= link_to product_path(product) do %>
               <div class="card-product">
                 <%= cl_image_tag @path_pro, alt: "product" %>
-                <p id="product-name"><%= product.brand %></p>
-                <p><%= product.name %></p>
-                <p><%= product.category%></p>
+                <p class="mt-2"><%= product.brand.truncate(16) %></p>
+                <p><%= product.name.truncate(16) %></p>
+                <p><%= product.category.truncate(16) %></p>
               </div>
             <% end %>
-          </div>
 
         <% end %>
-      </div>
+
+
     </div>
+
+
   </div>
+
+
 </div>

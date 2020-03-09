@@ -1,0 +1,31 @@
+
+.product-cards {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.card-product {
+  background-color: white;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  img {
+    width: 140px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  p {
+    margin: 0;
+    overflow: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+}
