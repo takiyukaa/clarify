@@ -1,0 +1,34 @@
+<div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+          <!-- <span aria-hidden="true">&times;</span> -->
+
+      </div>
+      <div class="modal-body form-tag">
+        <%= simple_form_for current_user do |f| %>
+          <%#= f.input :tag_list, label: false, as: :hidden, collection: ActsAsTaggableOn::Tag.all %>
+          <div class="form-group">
+            <label class="control-label check_boxes optional">Skin concerns</label>
+            <input type="hidden" name="user[tag_list][]" value="">
+            <div class="category-choices">
+              <% ActsAsTaggableOn::Tag.all.each do |tag| %>
+                <input type="checkbox" class="d-none" value="<%= tag.name %>" name="user[tag_list][]" id="user_tag_list_<%= tag.name %>" <%= "checked" if current_user.tag_list.include?(tag.name) %>>
+                <label for="user_tag_list_<%= tag.name %>" class="category-choice <%= "active" if current_user.tag_list.include?(tag.name) %>">
+                  <%= tag.name %>
+                  <!-- <i class="fa fa-check"></i> -->
+                </label>
+              <% end %>
+             </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light-gray" data-dismiss="modal">Close</button>
+          <%= f.submit class: "btn btn-sky"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

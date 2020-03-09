@@ -9,6 +9,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    true
+  end
+
   def shelf?
     true
   end
