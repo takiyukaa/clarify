@@ -7,30 +7,42 @@
       </div>
     </div>
 
-    <div class="col-8">
-      <div class="flag">
-        <% @product.ingredients.each do |ingredient|  %>
-          <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
-            <% @count += 1 %>
-          <% end %>
-        <% end %>
+    <div class="flags">
 
-        <% if @count == 0 %>
-          <div class="card-safe">
-            <i class="far fa-thumbs-up"></i><p>Good for you</p>
-          </div>
-        <% else %>
-          <div class="card-flag">
-            <i class="fab fa-font-awesome-flag"></i><p>This product contains <%= @count %> flags</p>
-          </div>
+      <% @product.ingredients.each do |ingredient|  %>
+        <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
+          <% @count += 1 %>
+        <% elsif current_user.ingredients.include?(ingredient) %>
+          <% @count += 1 %>
         <% end %>
+      <% end %>
+
+      <% if @count == 0 %>
+        <div class="card-safe">
+          <i class="far fa-thumbs-up"></i>
+          <p>Good for you</p>
+        </div>
+      <% else %>
+        <div class="card-flag">
+          <i class="fab fa-font-awesome-flag red mr-2"></i>
+          <p>You may want to avoid <%= @count %> ingredients</p>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="friends">
+      <div class="card-flag">
+        <i class="far fa-smile green mr-2"></i>
+        <p>6 friends are using this product</p>
       </div>
     </div>
+
   </div>
 
 
+
   <div class="text-center">
-    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+    <ul class="nav nav-tabs justify-content-center my-3" id="myTab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients</a>
       </li>
