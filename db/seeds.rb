@@ -8,44 +8,57 @@
 require 'rest-client'
 require 'open-uri'
 
-ProductsIngredient.destroy_all
-puts "destroying flags"
-Flag.destroy_all
-Ingredient.destroy_all
-puts "Ingredients destroyed"
-puts "destroying reviews"
-Review.destroy_all
-Product.destroy_all
-puts "destroying users"
-User.destroy_all
+# ProductsIngredient.destroy_all
+# puts "destroying flags"
+# Flag.destroy_all
+# Ingredient.destroy_all
+# puts "Ingredients destroyed"
+# puts "destroying reviews"
+# Review.destroy_all
+# Product.destroy_all
+# puts "destroying users"
+# User.destroy_all
 
+#rails g task Model action (create all) (rake task)
+#heroku run rails flag:create_all
 
-frances = User.create!(
-  email: "frances@gmail.com",
-  password: "123123",
-  first_name: "Frances",
-  second_name: "Cheng",
-  gender: "F",
-  city: "Tokyo",
-)
+#frances find_by email, unless frances, create user
 
-frances.photo.attach(io: File.open('app/assets/images/frances.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
+frances = User.find_by(email: "frances@gmail.com")
+unless frances
+  frances = User.create!(
+    email: "frances@gmail.com",
+    password: "123123",
+    first_name: "Frances",
+    second_name: "Cheng",
+    gender: "F",
+    city: "Tokyo",
+  )
+end
 
+unless frances.photo.attached?
+  frances.photo.attach(io: File.open('app/assets/images/frances.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
+end
 
-yuka = User.create!(
-  email: "yuka@gmail.com",
-  password: "123123",
-  first_name: "Yuka",
-  second_name: "Takiyama",
-  gender: "F",
-  city: "Tokyo",
-)
+yuka = User.find_by(email: "yuka@gmail.com")
+unless yuka
+    yuka = User.create!(
+    email: "yuka@gmail.com",
+    password: "123123",
+    first_name: "Yuka",
+    second_name: "Takiyama",
+    gender: "F",
+    city: "Tokyo",
+  )
+end
 
-yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
+unless yuka.photo.attached?
+  yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
+end
 
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
-puts "creating products"
+puts "find or create products"
 api = RestClient.get 'https://skincare-api.herokuapp.com/products'
 
 products = JSON.parse(api)
@@ -60,7 +73,7 @@ if Product.all.count < 100
     )
     product["ingredient_list"].each do |ingredient_name|
       ingredient = Ingredient.find_or_create_by!(name: ingredient_name)
-      ProductsIngredient.create!(ingredient: ingredient, product: new_product)
+      ProductsIngredient.create(ingredient: ingredient, product: new_product)
     end
   end
 end
@@ -73,14 +86,16 @@ product0 = Product.find_or_create_by!(
   description: "Our award-winning shea butter hand cream with lavender oil leaves your hands feeling incredibly smooth and soft. Absorbing deep into the skin and leaving no greasy residue, our naturally formulated Lavender Hand Therapy in a tube is ideal for travel and on the go daily treatment and care."
   )
 
-product0.photo.attach(io: File.open('app/assets/images/lavender.jpg'), filename: 'lavender.jpg', content_type: 'image/jpg')
+unless product0.photo.attached?
+  product0.photo.attach(io: File.open('app/assets/images/lavender.jpg'), filename: 'lavender.jpg', content_type: 'image/jpg')
+end
 
 ingredients0 = %w(Water Macadamia\ Ternifolia\ Seed\ Oil Zea\ Mays\ (Corn)\ Starch Hydroxyethyl\ Urea Cetearyl\ Alcohol Stearic\ Acid Cetyl\ Alcohol Parfum\ (Fragrance) Butyrospermum\ Parkii\ (Shea)\ Butter Isopropyl\ Myristate Lippia\ Citriodora\ (Lemon\ Verbena)\ Flower\ Extract Lavandula\ Angustifolia\ (Lavender) Flower/Leaf/Stem Extract Commiphora Myrrha\ (Myrrh)\ Resin\ Extract Ceramide\ NP Ceramide\ AP Ceramide\ EOP Caprylic/Capric\ Triglyceride Saccharide\ Isomerate Polysorbate\ 60 Sucrose\ Stearate Arginine Dimethicone Sucrose\ Tristearate Behentrimonium\ Methosulfate Caprylyl\ Methicone Glycerin Sodium\ Lauroyl Lactylate Benzoic\ Acid Disodium\ EDTA Limonene Polysorbate\ 20 Ethylhexylglycerin Glycereth-2\ Cocoate Citronellol Hydroxycitronellal Citral Coumarin Linalool Butylene\ Glycol Citric\ Acid Sodium\ Citrate Cholesterol Phytosphingosine Carbomer Xanthan\ Gum Geraniol Lecithin Potassium\ Sorbate Sodium\ Benzoate Caprylyl\ Glycol Hyaluronic\ Acid Hydrolyzed\ Soy\ Protein Hexylene\ Glycol Ascorbyl\ Glucoside Tocotrienols Tocopherol Elaeis\ Guineensis (Palm)\ Oil Phenoxyethanol Squalane)
 
 ingredients0.each do |ingredient|
   ingredient.downcase!
   ing_name = Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.find_or_create_by!(product: product0, ingredient: ing_name)
+  ProductsIngredient.create(product: product0, ingredient: ing_name)
 end
 
 product1 = Product.find_or_create_by!(
@@ -91,17 +106,19 @@ product1 = Product.find_or_create_by!(
   description: "Skin care series made using natural water from Kamaishi in Iwate prefecture. Provides fresh hydration for sensitive skin that dries easily. Low-irritation, making it gentle on delicate skin. ・Fragrance free・Artificial color free,・Mineral oil free・Mildly acidic ・Paraben-free・Alcohol free・allergy tested (This does not mean that the product does not cause allergy to anyone) ◎how to use：After using toner, take an appropriate amount on your hand, and apply thoroughly on your face."
   )
 
-product1.photo.attach(io: File.open('app/assets/images/muji.jpg'), filename: 'muji.jpg', content_type: 'image/jpg')
+unless product1.photo.attached?
+  product1.photo.attach(io: File.open('app/assets/images/muji.jpg'), filename: 'muji.jpg', content_type: 'image/jpg')
+end
 
 ingredients1 = %w(Water Olive\ Fruit\ Oil Dipropylene\ Glycol Glycerin PEG-32 Ethylhexyl\ Palmitate Pentylene\ Glycol Glycosyl\ Trehalose Glyceryl\ Stearate Jojoba\ Seed\ Oil Hydrolysate PEG-75\ Stearate Behenyl\ Alcohol Polysorbate\ 80 Phenoxyethanol Carbomer Arginine Butylene\ Glycol Allantoin Xanthan\ Gum Tocopherol Tetrasodium\ Etidronate Polyquaternium-51 Grapefruit\ Seed\ Extract Purslane\ Extract)
 
 ingredients1.each do |ingredient|
   ingredient.downcase!
   ing_name = Ingredient.find_or_create_by!(name: ingredient)
-  ProductsIngredient.find_or_create_by!(product: product1, ingredient: ing_name)
+  ProductsIngredient.create(product: product1, ingredient: ing_name)
 end
 
-puts "Creating new reviews"
+puts "Find or create new reviews"
 
 review_attributes = [
   {
@@ -120,18 +137,20 @@ review_attributes = [
   }
 ]
 
-Review.create!(review_attributes)
+review_attributes.each do |hash|
+  Review.find_or_create_by!(hash)
+end
 
-puts "creating tags"
+puts "finding or creating tags"
 
 frances.tag_list = "sensitive skin, oily skin"
 frances.save
 frances.reload
 
 lavender = Ingredient.find_by(name: "lavandula angustifolia (lavender)")
-lavender.tag_list.add("sensitive skin")
+lavender.tag_list = "sensitive skin"
 
-Flag.create!(ingredient: lavender, user: frances)
+Flag.find_or_create_by!(ingredient: lavender, user: frances)
 
 oily_ingredients = []
 oily_ingredients << Ingredient.find_by(name: "zea mays (corn) starch")
@@ -141,7 +160,7 @@ oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea) butter
 oily_ingredients.each do |ingredient|
   ingredient.tag_list.add("oily skin")
   ingredient.save
-  Flag.create!(ingredient: ingredient, user: frances)
+  Flag.find_or_create_by!(ingredient: ingredient, user: frances)
 end
 
 mask = Product.find_by(name: "moisture bond sleeping recovery masque")
@@ -156,10 +175,24 @@ frances_liked.each do |product|
   frances.likes product
 end
 
-mask.photo.attach(io: File.open("app/assets/images/mask.jpg"), filename: 'mask.jpg', content_type: 'image/jpg')
-toner.photo.attach(io: File.open("app/assets/images/toner.jpg"), filename: 'toner.jpg', content_type: 'image/jpg')
-foam.photo.attach(io: File.open("app/assets/images/foam.jpg"), filename: 'foam.jpg', content_type: 'image/jpg')
-bee.photo.attach(io: File.open("app/assets/images/bee.jpg"), filename: 'bee.jpg', content_type: 'image/jpg')
-snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
+unless mask.photo.attached?
+  mask.photo.attach(io: File.open("app/assets/images/mask.jpg"), filename: 'mask.jpg', content_type: 'image/jpg')
+end
+
+unless toner.photo.attached?
+  toner.photo.attach(io: File.open("app/assets/images/toner.jpg"), filename: 'toner.jpg', content_type: 'image/jpg')
+end
+
+unless foam.photo.attached?
+  foam.photo.attach(io: File.open("app/assets/images/foam.jpg"), filename: 'foam.jpg', content_type: 'image/jpg')
+end
+
+unless bee.photo.attached?
+  bee.photo.attach(io: File.open("app/assets/images/bee.jpg"), filename: 'bee.jpg', content_type: 'image/jpg')
+end
+
+unless snail.photo.attached?
+  snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
+end
 
 puts "All complete"

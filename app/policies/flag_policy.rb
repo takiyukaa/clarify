@@ -8,4 +8,8 @@ class FlagPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def multi_create?
+    true
+  end
 end

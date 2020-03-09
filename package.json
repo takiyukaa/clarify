@@ -6,7 +6,8 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.1",
-    "scandit-sdk": "^4.6.2"
+    "scandit-sdk": "^4.6.2",
+    "select2": "^4.0.13"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"
