@@ -1,14 +1,13 @@
 <div class="user-banner">
   <i class="fas fa-cog"></i>
   <% if current_user.photo.attached? %>
-      <% @path = current_user.photo.key %>
-    <% else %>
-      <% @path = 'profile_whubsg' %>
-    <% end %>
+    <% @path = current_user.photo.key %>
+  <% else %>
+    <% @path = 'profile_whubsg' %>
+  <% end %>
   <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
   <p><%= current_user.first_name %></p>
 </div>
-
 
 
 <div class="container">

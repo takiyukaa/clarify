@@ -20,6 +20,9 @@ gem 'pundit'
 # Tags
 gem 'acts-as-taggable-on', '~> 6.5'
 
+# Friendship
+gem 'has_friendship', '~> 1.1', '>= 1.1.8'
+
 #rest-client
 gem 'rest-client'
 
