@@ -9,57 +9,52 @@
     <div class="product-img">
       <%= cl_image_tag @path, alt: "product" %>
     </div>
-    <div class="product-info">
-      <div class="favorite">
-          <% if current_user.liked?(@product) %>
-            <%= link_to unlike_product_path(@product), method: :post do %>
-              <i class="fas fa-heart like"></i>
-            <% end %>
-          <% else %>
-            <%= link_to like_product_path(@product), method: :post do %>
-              <i class="far fa-heart unlike"></i>
-            <% end %>
-          <% end %>
-        </div>
+
+
+
+
+    <div class="favorite">
+      <% if current_user.liked?(@product) %>
+        <%= link_to unlike_product_path(@product), method: :post do %>
+          <i class="fas fa-heart like"></i>
+        <% end %>
+      <% else %>
+        <%= link_to like_product_path(@product), method: :post do %>
+          <i class="far fa-heart unlike"></i>
+        <% end %>
+      <% end %>
+    </div>
+
+  <div class="product-rating">
+    <% if product.reviews.empty? %>
+      <p style="font-size: 16px;"><strong>No Ratings yet</strong></p>
+    <% else %>
+      <div class="score-rating">
+          <p id="rate"><%= product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length %>.0</p>
+          <p id="rating"><%= product.reviews.size %><br>ratings</p>
+      </div>
+
+      <div class="stars">
+        <% (product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
+          <i class="fas fa-star" id="star-pink"></i>
+        <% end %>
+
+        <% (5 - product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
+          <i class="fas fa-star" id="star-gray"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
         <%# list ofall liked products %>
         <%#= current_user.find_up_voted_items %>
-      <div class="product-detail">
-        <h1><%= product.name %></h1>
-        <p><%= product.brand %></p>
-        <p><%= product.category %></p>
-      </div>
 
-
-      <div class="product-rating">
-        <% if product.reviews.empty? %>
-          <p style="font-size: 16px;"><strong>No Ratings yet</strong></p>
-        <% else %>
-          <div class="score-rating">
-
-              <p id="rate"><%= product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length %>.0</p>
-              <p id="rating"><%= product.reviews.size %><br>ratings</p>
-          </div>
-
-          <div class="stars">
-
-            <% (product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
-              <i class="fas fa-star" id="star-pink"></i>
-            <% end %>
-
-            <% (5 - product.reviews.pluck(:rating).sum / product.reviews.pluck(:rating).length).times do %>
-              <i class="fas fa-star" id="star-gray"></i>
-            <% end %>
-          </div>
-        <% end %>
-
-      </div>
-
-
-    </div>
   </div>
-  <hr>
   <div class="card-white-bottom">
+    <h5><%= product.name %></h5>
+    <p><%= product.brand %></p>
+    <p><%= product.category %></p>
+    <hr>
     <p><%= product.description %></p>
   </div>
 </div>
