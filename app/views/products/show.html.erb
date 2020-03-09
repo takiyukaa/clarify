@@ -55,6 +55,7 @@
                 <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
                   <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag"></i><p><%= ingredient.tag_list.first %></p></div>
                 <% elsif current_user.ingredients.include?(ingredient) %>
+                  <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i></div>
                 <% else %>
                   <%= simple_form_for(Flag.new) do |f| %>
                     <%= f.association :ingredient, as: :hidden, input_html: {value: ingredient.id} %>
