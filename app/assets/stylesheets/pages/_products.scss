@@ -79,6 +79,19 @@
 }
 
 .reviews {
-  text-align: center;
+  text-align: center
 }
 
+.fa-plus {
+  color: gray;
+}
+
+#new_flag {
+  display: flex;
+}
+
+.flag-item {
+  i {
+    color: $red;
+  }
+}
