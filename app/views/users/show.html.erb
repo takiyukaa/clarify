@@ -1,10 +1,11 @@
-<div class="user-banner">
+<% if current_user.photo.attached? %>
+  <% @path = current_user.photo.key %>
+<% else %>
+  <% @path = 'profile_whubsg' %>
+<% end %>
 
-  <% if current_user.photo.attached? %>
-    <% @path = current_user.photo.key %>
-  <% else %>
-    <% @path = 'profile_whubsg' %>
-  <% end %>
+<div class="user-banner">
+  <h2>my profile</h2>
   <div class="user-info">
     <%= cl_image_tag @path, alt: "user", class: "avatar-large"  %>
     <p><%= current_user.first_name %></p>
@@ -49,7 +50,7 @@
 
   <div class="my-flag card-white">
 
-    <p class="text-center mb-0">My flags</p>
+    <p class="text-center my-skin-type">My flags</p>
 
     <%= simple_form_for :flags, url: flags_multi_create_path, method: :post do |f| %>
       <%= f.input :id, placeholder: 'Add flags', label: false, class: "w-100", as: :select, input_html: {class:'select2', multiple:'multiple'}, collection:
