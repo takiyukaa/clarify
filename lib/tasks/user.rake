@@ -1,9 +1,6 @@
-require 'faker'
-
-
 namespace :user do
-  desc "TODO"
-  task create_users: :environment do
+  desc "create users and reviews"
+  task create_user_reviews: :environment do
 
     USERS =[]
     PHOTOS_URLS= [ "https://avatars0.githubusercontent.com/u/21108437?s=400&v=4",
@@ -21,7 +18,7 @@ namespace :user do
 
     PHOTOS_URLS.each do |url|
       user = User.create!(
-        email: Faker::Internet,
+        email: Faker::Internet.free_email,
         password: "123123",
         first_name: Faker::Name.first_name,
         second_name: Faker::Name.last_name,
