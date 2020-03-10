@@ -10,8 +10,10 @@
 
 
   <div class="review-user">
+    <%= link_to shelf_user_path(review.user)  do %>
     <%= cl_image_tag @path, alt: "user", class: "avatar"  %>
     <p><%= review.user.first_name %></p>
+    <% end %>
   </div>
 
   <div class="review">
