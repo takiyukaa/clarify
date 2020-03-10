@@ -6,7 +6,10 @@
 
 <div class="user-banner">
   <h2>my shelf</h2>
-  <%= cl_image_tag @path, alt: "user", class: "avatar-large user"  %>
+  <div class="user-info">
+    <%= cl_image_tag @path, alt: "user", class: "avatar-large"  %>
+    <p><%= @user.first_name %></p>
+  </div>
 </div>
 
 
@@ -16,7 +19,7 @@
 
   <div class="my-shelf">
     <div class="product-cards">
-      
+
         <% @user.find_up_voted_items.each do |product| %>
           <% if product.photo.attached? %>
             <% @path_pro = product.photo.key %>
