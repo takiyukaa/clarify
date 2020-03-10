@@ -38,7 +38,7 @@
       <div class="friends">
         <div class="card-flag">
           <i class="far fa-smile green"></i>
-          <p>6 friends are using this product</p>
+          <p>3 friends are using this product</p>
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@
           <% if @product.reviews.empty? %>
             <p style="font-size: 16px;"><strong>No Reviews yet</strong></p>
           <% else %>
-        <p>Friend Reviews</p>
+        <h5>Reviews from friends</h5>
         <% @product.reviews.each do |review| %>
           <% if current_user.friends.include?(review.user) %>
             <% friend_reviews << review %>
@@ -157,7 +157,7 @@
           <% end %>
         <% end %>
 
-        <p>Other Reviews</p>
+        <h5>Other Reviews</h5>
         <% @product.reviews.each do |review| %>
           <% if !current_user.friends.include?(review.user) %>
             <% random_reviews << review %>

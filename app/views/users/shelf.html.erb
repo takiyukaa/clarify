@@ -6,12 +6,12 @@
 
 <div class="user-banner">
   <% if @user == current_user %>
-    <h2> My shelf</h2>
+    <h2> My Shelf</h2>
   <% else %>
     <% if @user.first_name[-1].include?('s') %>
-      <h2><%= @user.first_name+"'"+" "+'shelf' %></h2>
+      <h2><%= @user.first_name+"'"+" "+'Shelf' %></h2>
     <% else %>
-      <h2><%= @user.first_name+'\'s'+ ' '+'shelf' %></h2>
+      <h2><%= @user.first_name+'\'s'+ ' '+'Shelf' %></h2>
     <% end %>
   <% end %>
   <div class="user-info">

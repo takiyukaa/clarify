@@ -21,13 +21,13 @@
 }
 
 .user-info {
-  width: 90px;
+  // width: 90px;
   height: 90px;
   position: absolute;
   bottom: -60px;
-  left: calc(50% - 32px);
-
-
+  // left: calc(50% - 32px);
+  left: 50%;
+  transform: translateX(-50%);
   p {
     color: white;
   }
