@@ -29,3 +29,8 @@
   }
 
 }
+
+// for modal, make select2 full width
+.modal-body span.select2 {
+  width: 100% !important;
+}

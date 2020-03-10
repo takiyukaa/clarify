@@ -91,3 +91,13 @@
   }
 }
 
+.my-flag {
+  position: relative;
+
+  .fa-plus {
+    position: absolute;
+    color: gray;
+    top: 8px;
+    right: 2px;
+  }
+}

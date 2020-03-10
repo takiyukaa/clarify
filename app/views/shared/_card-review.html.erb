@@ -1,8 +1,19 @@
 <div class="card-white flex">
 
+  <% if review.user.photo.attached? %>
+    <% @path = review.user.photo.key %>
+  <% else %>
+    <% @path = 'profile_whubsg' %>
+  <% end %>
+
+
+
+
   <div class="review-user">
-    <%= image_tag "avatar.jpg", alt: "user", class: "avatar"  %>
+    <%= link_to shelf_user_path(review.user)  do %>
+    <%= cl_image_tag @path, alt: "user", class: "avatar"  %>
     <p><%= review.user.first_name %></p>
+    <% end %>
   </div>
 
   <div class="review">
