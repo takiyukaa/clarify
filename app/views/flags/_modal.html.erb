@@ -1,0 +1,20 @@
+<div class="modal fade" id="flagsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body form-tag">
+        <p>Add flags</p>
+        <%= simple_form_for :flags, url: flags_multi_create_path, method: :post do |f| %>
+          <%= f.input :id, placeholder: 'Add flags', label: false, as: :select, input_html: {class:'select2', multiple:'multiple'}, collection:
+                ingredients
+                .sort_by { |ingredient| ingredient.name }, include_hidden: false %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light-gray" data-dismiss="modal">Close</button>
+          <%= f.submit class: "btn btn-sky"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
