@@ -103,6 +103,9 @@
               <% elsif ingredient.tag_list.first == "sensitive skin" %>
                 <% @skintypecolor = "#a8e28e" %>
                 <% @skintypeicon = "fas fa-feather" %>
+              <% elsif tag == "fragrance" %>
+                <% @skintypecolor = "#ddbff2" %>
+                <% @skintypeicon = "fas fa-apple-alt" %>
               <% else %>
                 <% @skintypecolor = "#a6caed" %>
                 <% @skintypeicon = "fas fa-surprise" %>
@@ -111,7 +114,7 @@
 
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <p><%= ingredient.name %></p>
-                <div class="flex align-items-center flag-item"><i class="<%= @skintypeicon %>" style="color: <%= @skintypecolor %>"></i><p style="color: gray"><%= ingredient.tag_list.first %></p></div>
+                <div class="flex align-items-center flag-item"><i class="<%= @skintypeicon %>" style="color: #ff5555"></i><p style="color: gray"><%= ingredient.tag_list.first %></p></div>
               </li>
             <% end %>
 
@@ -166,4 +169,13 @@
     </div>
 
   </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="d-flex justify-content-center">
+        <a href="#top" class="btn btn-ghost">Go to top</a>
+      </div>
+    </div>
+  </div>
+
 </div>
