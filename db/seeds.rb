@@ -195,4 +195,67 @@ unless snail.photo.attached?
   snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
 end
 
+# photoes to products (by Hiro)
+white = Product.find_by(name: "white pore facial cleanser")
+wonder = Product.find_by(name: "wonder pore deep foaming cleanser")
+green_tea = Product.find_by(name: "the green tea seed oil")
+rice_water = Product.find_by(name: "rice water cleansing oil")
+strawberry = Product.find_by(name: "strawberry face scrub")
+creamy = Product.find_by(name: "creamy deep moist moisturizer")
+oil = Product.find_by(name: "oil control fresh moisturizer")
+priming = Product.find_by(name: "priming moisturizer")
+ac_clinic = Product.find_by(name: "ac clinic daily toner")
+aloe = Product.find_by(name: "aloe bha skin toner")
+super_aqua = Product.find_by(name: "super aqua hydrating toner")
+
+yuka_liked = [white, wonder, green_tea, rice_water, strawberry, creamy, oil, priming, ac_clinic, aloe, super_aqua]
+
+yuka_liked.each do |product|
+  yuka.likes product
+end
+
+unless white.photo.attached?
+  white.photo.attach(io: File.open("app/assets/images/seed_photos/cleanser/white.jpg"), filename: 'white.jpg', content_type: 'image/jpg')
+end
+
+unless wonder.photo.attached?
+  wonder.photo.attach(io: File.open("app/assets/images/seed_photos/cleanser/wonder.jpg"), filename: 'wonder.jpg', content_type: 'image/jpg')
+end
+
+unless green_tea.photo.attached?
+  green_tea.photo.attach(io: File.open("app/assets/images/seed_photos/face_oil/green_tea.jpg"), filename: 'green_tea.jpg', content_type: 'image/jpg')
+end
+
+unless rice_water.photo.attached?
+  rice_water.photo.attach(io: File.open("app/assets/images/seed_photos/face_oil/rice_water.jpg"), filename: 'rice_water.jpg', content_type: 'image/jpg')
+end
+
+unless strawberry.photo.attached?
+  strawberry.photo.attach(io: File.open("app/assets/images/seed_photos/face_oil/strawberry.jpg"), filename: 'strawberry.jpg', content_type: 'image/jpg')
+end
+
+unless creamy.photo.attached?
+  creamy.photo.attach(io: File.open("app/assets/images/seed_photos/moisturizer/creamy.jpg"), filename: 'creamy.jpg', content_type: 'image/jpg')
+end
+
+unless oil.photo.attached?
+  oil.photo.attach(io: File.open("app/assets/images/seed_photos/moisturizer/oil.jpg"), filename: 'oil.jpg', content_type: 'image/jpg')
+end
+
+unless priming.photo.attached?
+  priming.photo.attach(io: File.open("app/assets/images/seed_photos/moisturizer/priming.jpg"), filename: 'priming.jpg', content_type: 'image/jpg')
+end
+
+unless ac_clinic.photo.attached?
+  ac_clinic.photo.attach(io: File.open("app/assets/images/seed_photos/toner/ac_clinic.jpg"), filename: 'ac_clinic.jpg', content_type: 'image/jpg')
+end
+
+unless aloe.photo.attached?
+  aloe.photo.attach(io: File.open("app/assets/images/seed_photos/toner/aloe.jpg"), filename: 'aloe.jpg', content_type: 'image/jpg')
+end
+
+unless super_aqua.photo.attached?
+  super_aqua.photo.attach(io: File.open("app/assets/images/seed_photos/toner/super_aqua.jpg"), filename: 'super_aqua.jpg', content_type: 'image/jpg')
+end
+
 puts "All complete"
