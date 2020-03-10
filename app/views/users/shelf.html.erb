@@ -5,14 +5,20 @@
 <% end %>
 
 <div class="user-banner">
-  <h2>my shelf</h2>
+  <% if @user == current_user %>
+    <h2> My shelf</h2>
+  <% else %>
+    <% if @user.first_name[-1].include?('s') %>
+      <h2><%= @user.first_name+"'"+" "+'shelf' %></h2>
+    <% else %>
+      <h2><%= @user.first_name+'\'s'+ ' '+'shelf' %></h2>
+    <% end %>
+  <% end %>
   <div class="user-info">
     <%= cl_image_tag @path, alt: "user", class: "avatar-large"  %>
     <p><%= @user.first_name %></p>
   </div>
 </div>
-
-
 
 <div class="container">
 
