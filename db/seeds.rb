@@ -143,7 +143,7 @@ end
 
 puts "finding or creating tags"
 
-frances.tag_list = "sensitive skin, oily skin"
+frances.tag_list = "sensitive skin, oily skin, dry skin, allergens/irritants, reproductive toxicity, environmental concerns, preservatives, parabens, fragrance"
 frances.save
 frances.reload
 
