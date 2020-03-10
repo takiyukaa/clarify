@@ -1,8 +1,10 @@
 <div class="card-white flex">
 
   <div class="review-user">
+    <%= link_to shelf_user_path(review.user)  do %>
     <%= image_tag "avatar.jpg", alt: "user", class: "avatar"  %>
     <p><%= review.user.first_name %></p>
+    <% end %>
   </div>
 
   <div class="review">
