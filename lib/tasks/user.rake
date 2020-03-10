@@ -15,7 +15,6 @@ namespace :user do
       "https://avatars0.githubusercontent.com/u/59479470?s=400&v=4"
     ]
 
-
     PHOTOS_URLS.each do |url|
       user = User.create!(
         email: Faker::Internet.free_email,
