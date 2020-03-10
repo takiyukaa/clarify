@@ -56,6 +56,9 @@ unless yuka.photo.attached?
   yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
 end
 
+yuka.friend_request(frances)
+frances.accept_request(yuka)
+
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
 puts "find or create products"
