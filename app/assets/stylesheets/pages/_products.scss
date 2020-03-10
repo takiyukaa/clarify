@@ -21,12 +21,18 @@
 
 .card-flag {
   background-color: white;
-  padding: 8px;
-  margin: 8px;
+  padding: 16px;
+  margin: 16px;
   border-radius: 16px;
   justify-content: center;
   align-items: center;
   display: flex;
+  text-align: center;
+
+  i {
+    margin: 3px;
+    font-size: 32px;
+  }
 
   p {
     margin: 0;
