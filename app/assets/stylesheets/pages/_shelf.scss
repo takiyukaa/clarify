@@ -16,6 +16,7 @@
   text-align: center;
 
   img {
+    height: 140px;
     width: 140px;
     object-fit: cover;
     border-radius: 16px;
@@ -28,4 +29,9 @@
     white-space: nowrap;
   }
 
+}
+
+// for modal, make select2 full width
+.modal-body span.select2 {
+  width: 100% !important;
 }

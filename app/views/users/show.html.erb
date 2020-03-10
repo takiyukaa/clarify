@@ -51,13 +51,9 @@
   <div class="my-flag card-white">
 
     <p class="text-center my-skin-type">My flags</p>
+    <i class="fas fa-plus btn" data-toggle="modal" data-target="#flagsModal"></i>
+    <%= render 'flags/modal', ingredients: Ingredient.all  %>
 
-    <%= simple_form_for :flags, url: flags_multi_create_path, method: :post do |f| %>
-      <%= f.input :id, placeholder: 'Add flags', label: false, class: "w-100", as: :select, input_html: {class:'select2', multiple:'multiple'}, collection:
-            Ingredient.all
-            .sort_by { |ingredient| ingredient.name }, include_hidden: false %>
-      <%= f.submit %>
-    <% end %>
 
     <ul class="list-group list-group-flush">
       <% current_user.flags.each do |flag| %>
