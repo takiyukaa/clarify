@@ -1,14 +1,4 @@
-<%= form_tag products_path, method: :get, class: "search-form" do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control search-form-control",
-    placeholder: "Search"
-  %>
-  <%= button_tag type: 'submit', class: 'btn btn-flat' do %>
-    <i class="fas fa-search" style="color: white;"></i>
-  <% end %>
-<% end %>
-
+<%= render 'shared/search' %>
 <div class="banner">
   <div class="container">
     <h1>Clarify</h1>
@@ -17,21 +7,40 @@
 </div>
 
 <div class="container">
-  <div class="browse-by-category">
-    <h2>Browse by category</h2>
-
-    <div class="category-cards">
-
-      <% @products.pluck(:category).uniq.each do |category| %>
+  <h2>Browse by category</h2>
+  <div class="row">
+    <% @products.pluck(:category).uniq.each do |category| %>
+    <div class="col-6 col-md-3 col-lg-2">
         <%= link_to products_path do %>
-          <div class="card-category">
-            <%= category %>
-          </div>
+      <div class="card-category">
+        <% if category == "Face Mask" %>
+        <%= image_tag "categories/facial-treatment.svg", width: "80px", alt: "Mask" %>
+        <% elsif category == "Face Oil" %>
+        <%= image_tag "categories/drops.svg", width: "80px", alt: "Oil" %>
+        <% elsif category == "Moisturizer" %>
+        <%= image_tag "categories/cream.svg", width: "80px", alt: "Moisturizer" %>
+        <% elsif category == "Sunscreen" %>
+        <%= image_tag "categories/sunscreen.svg", width: "80px", alt: "sunscreen.svg" %>
+        <% elsif category == "Chemical Peel" %>
+        <%= image_tag "categories/peel.svg", width: "80px", alt: "peel" %>
+        <% elsif category == "Treatment" %>
+        <%= image_tag "categories/treatment.svg", width: "80px", alt: "treatment" %>
+        <% elsif category == "Toner" %>
+        <%= image_tag "categories/bottles.svg", width: "80px", alt: "toner" %>
+        <% elsif category == "Serum" %>
+        <%= image_tag "categories/serum.svg", width: "80px", alt: "serum" %>
+        <% elsif category == "Eye Cream" %>
+        <%= image_tag "categories/eye.svg", width: "80px", alt: "eye cream" %>
+        <% elsif category == "Exfoliator" %>
+        <%= image_tag "categories/exfoliator.svg", width: "80px", alt: "exfoliator.svg" %>
+        <% elsif category == "Cleanser" %>
+        <%= image_tag "categories/cleanser.svg", width: "80px", alt: "cleanser" %>
         <% end %>
-      <% end %>
-
+        <p><%= category %></p>
+      </div>
     </div>
-
-
+    <% end %>
+    <% end %>
   </div>
+
 </div>
