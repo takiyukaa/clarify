@@ -9,35 +9,37 @@
       <div class="product">
         <%= render 'shared/card-productinfo', product: @product, path: @path %>
       </div>
-    </div>
 
-    <div class="flags">
 
-      <% @product.ingredients.each do |ingredient|  %>
-        <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
-          <% @count += 1 %>
-        <% elsif current_user.ingredients.include?(ingredient) %>
-          <% @count += 1 %>
+
+      <div class="flags">
+
+        <% @product.ingredients.each do |ingredient|  %>
+          <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
+            <% @count += 1 %>
+          <% elsif current_user.ingredients.include?(ingredient) %>
+            <% @count += 1 %>
+          <% end %>
         <% end %>
-      <% end %>
 
-      <% if @count == 0 %>
-        <div class="card-flag">
-          <i class="far fa-thumbs-up green mr-2"></i>
-          <p>Good for you</p>
-        </div>
-      <% else %>
-        <div class="card-flag">
-          <i class="fab fa-font-awesome-flag red mr-2"></i>
-          <p>You may want to avoid <%= @count %> ingredients</p>
-        </div>
-      <% end %>
-    </div>
+        <% if @count == 0 %>
+          <div class="card-flag">
+            <i class="far fa-thumbs-up green"></i>
+            <p>Good for you</p>
+          </div>
+        <% else %>
+          <div class="card-flag">
+            <i class="fab fa-font-awesome-flag red"></i>
+            <p>You may want to avoid <%= @count %> ingredients</p>
+          </div>
+        <% end %>
+      </div>
 
-    <div class="friends">
-      <div class="card-flag">
-        <i class="far fa-smile green mr-2"></i>
-        <p>6 friends are using this product</p>
+      <div class="friends">
+        <div class="card-flag">
+          <i class="far fa-smile green"></i>
+          <p>6 friends are using this product</p>
+        </div>
       </div>
     </div>
 
