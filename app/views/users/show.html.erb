@@ -61,8 +61,16 @@
     <ul class="list-group list-group-flush">
       <% current_user.flags.each do |flag| %>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i><p><%= flag.ingredient.name %></p></div>
-      </li>
+          <div class="flex justify-content-between"></div>
+            <div class="flex align-items-center flag-item">
+              <i class="fab fa-font-awesome-flag mr-2"></i>
+              <p><%= flag.ingredient.name %></p>
+            </div>
+            <%= link_to flag_path(flag), method: :delete, data: { confirm: "Are you sure?"} do %>
+              <p><strong><i class="fas fa-trash-alt"></i></strong></p>
+            <% end %>
+          </div>
+        </li>
       <% end %>
 
     </ul>

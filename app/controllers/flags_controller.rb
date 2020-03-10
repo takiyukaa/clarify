@@ -22,6 +22,13 @@ class FlagsController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def destroy
+    @flag = Flag.find(params[:id])
+      authorize @flag
+    @flag.destroy
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def flag_params
