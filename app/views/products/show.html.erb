@@ -38,7 +38,19 @@
       <div class="friends">
         <div class="card-flag">
           <i class="far fa-smile green"></i>
-          <p>3 friends are using this product</p>
+          <% if current_user.voted_up_on? @product %>
+            <% if @product.get_likes.size - 1 == 1 %>
+              <p>1 friend is using it</p>
+            <% else %>
+            <p><%= @product.get_likes.size - 1 %> friends are using it</p>
+            <% end %>
+          <% else %>
+            <% if @product.get_likes.size == 1 %>
+              <p>1 friend is using it</p>
+            <% else %>
+            <p><%= @product.get_likes.size %> friends are using it</p>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
