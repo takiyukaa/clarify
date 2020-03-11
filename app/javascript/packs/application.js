@@ -1,4 +1,7 @@
 import "bootstrap";
+import JQuery from 'jquery';
+window.$ = window.JQuery = JQuery;
+import 'owl.carousel';
 
 $(document).ready(function(){
   $(".category-choice").click(function(){

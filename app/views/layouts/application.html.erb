@@ -39,9 +39,9 @@
     <%= yield %>
     <%= javascript_include_tag 'application' %>
 
-
     <%= render 'shared/navbar' %>
     <%= javascript_pack_tag 'application' %>
+    <%= yield :after_js %>
   </body>
 </html>
   </body>
