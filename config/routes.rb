@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   get 'scan', to: 'products#scan'
+  get 'products/compare', to: 'products#compare', as: :products_compare
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, only: [:create, :new, :show, :update] do
     get 'friends'

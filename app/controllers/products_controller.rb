@@ -36,4 +36,15 @@ class ProductsController < ApplicationController
   def scan
     authorize Product
   end
+
+
+  def compare
+    @first_product = Product.find(params["products"]["first_product"].to_i)
+    @second_product = Product.find(params["products"]["id"].first)
+
+
+    authorize Product
+  end
+
+
 end

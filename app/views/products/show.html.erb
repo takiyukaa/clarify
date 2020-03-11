@@ -10,6 +10,8 @@
         <%= render 'shared/card-productinfo', product: @product, path: @path %>
       </div>
 
+      <button class="btn btn-light-gray" data-toggle="modal" data-target="#compareModal">Compare</button>
+      <%= render 'comparemodal', first_product: @product, products: Product.all %>
 
 
       <div class="flags">
