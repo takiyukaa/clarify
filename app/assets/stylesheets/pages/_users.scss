@@ -1,6 +1,6 @@
 .user-banner {
   padding-top: 8px;
-  height: 10vh;
+  height: 96px;
   background-color: $creme;
   position: relative;
   margin-bottom: 80px;
@@ -24,7 +24,7 @@
   // width: 90px;
   height: 90px;
   position: absolute;
-  bottom: -60px;
+  bottom: -47px;
   // left: calc(50% - 32px);
   left: 50%;
   transform: translateX(-50%);
@@ -100,4 +100,9 @@
     top: 8px;
     right: 2px;
   }
+}
+
+
+.fa-trash-alt {
+  color: gray;
 }
