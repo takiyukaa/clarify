@@ -149,6 +149,7 @@ frances.reload
 
 lavender = Ingredient.find_by(name: "lavandula angustifolia (lavender)")
 lavender.tag_list = "sensitive skin"
+lavender.save
 
 Flag.find_or_create_by!(ingredient: lavender, user: frances)
 
