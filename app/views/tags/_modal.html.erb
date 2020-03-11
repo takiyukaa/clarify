@@ -14,23 +14,19 @@
             <label class="control-label check_boxes optional">Skin concerns</label>
             <input type="hidden" name="user[tag_list][]" value="">
             <div class="category-choices">
-              <% ActsAsTaggableOn::Tag.all.each do |tag| %>
-                <input type="checkbox" class="d-none" value="<%= tag.name %>" name="user[tag_list][]" id="user_tag_list_<%= tag.name %>" <%= "checked" if current_user.tag_list.include?(tag.name) %>>
-                <label for="user_tag_list_<%= tag.name %>" class="category-choice <%= "active" if current_user.tag_list.include?(tag.name) %>">
-                  <%= tag.name %>
+              <% User::TAG_OPTIONS.each do |tag| %>
+                <input type="checkbox" class="d-none" value="<%= tag %>" name="user[tag_list][]" id="user_tag_list_<%= tag %>" <%= "checked" if current_user.tag_list.include?(tag) %>>
+                <label for="user_tag_list_<%= tag %>" class="category-choice <%= "active" if current_user.tag_list.include?(tag) %>">
+                  <%= tag %>
                   <!-- <i class="fa fa-check"></i> -->
                 </label>
               <% end %>
-             </div>
+            </div>
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light-gray" data-dismiss="modal">Close</button>
-<<<<<<< HEAD
-          <%= f.submit 'update', class: "btn btn-sky"%>
-=======
           <%= f.submit "Update", class: "btn btn-sky"%>
->>>>>>> 7e632ff3e242d304310c518f2a9ae05220a691ee
         <% end %>
       </div>
     </div>

@@ -15,6 +15,8 @@ class User < ApplicationRecord
   validates :second_name, presence: true
   validates :email, presence: true
 
+  TAG_OPTIONS = ["sensitive skin", "oily skin", "dry skin", "allergens/irritants", "reproductive toxicity", "environmental concerns", "preservatives", "parabens", "fragrance"]
+
   def full_name
     "#{first_name} #{second_name}"
   end

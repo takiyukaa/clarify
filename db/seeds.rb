@@ -148,21 +148,25 @@ frances.save
 frances.reload
 
 lavender = Ingredient.find_by(name: "lavandula angustifolia (lavender)")
-lavender.tag_list = "sensitive skin"
+lavender.tag_list = "bad for sensitive skin"
 lavender.save
 
 Flag.find_or_create_by!(ingredient: lavender, user: frances)
 
-oily_ingredients = []
-oily_ingredients << Ingredient.find_by(name: "zea mays (corn) starch")
-oily_ingredients << Ingredient.find_by(name: "stearic acid")
-oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea) butter")
+bad_for_oily_ingredients = []
+bad_for_oily_ingredients << Ingredient.find_by(name: "zea mays (corn) starch")
+bad_for_oily_ingredients << Ingredient.find_by(name: "stearic acid")
+bad_for_oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea) butter")
 
-oily_ingredients.each do |ingredient|
-  ingredient.tag_list.add("oily skin")
+bad_for_oily_ingredients.each do |ingredient|
+  ingredient.tag_list.add("bad for oily skin")
   ingredient.save
   Flag.find_or_create_by!(ingredient: ingredient, user: frances)
 end
+
+good_for_oily_ingredient = Ingredient.find_by(name: "hyaluronic acid")
+good_for_oily_ingredient.tag_list.add("good for oily skin")
+good_for_oily_ingredient.save
 
 mask = Product.find_by(name: "moisture bond sleeping recovery masque")
 toner = Product.find_by(name: "don't worry bee care calendula toner")
