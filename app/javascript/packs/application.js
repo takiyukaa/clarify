@@ -6,6 +6,8 @@ $(document).ready(function(){
   });
 });
 
+import { accordion } from '../components/accordion';
 import { initSelect2 } from '../components/init_select2';
 
 initSelect2();
+accordion();

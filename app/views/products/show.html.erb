@@ -30,7 +30,7 @@
         <% else %>
           <div class="card-flag">
             <i class="fab fa-font-awesome-flag red"></i>
-            <p>You may want to avoid <%= @count %> ingredients</p>
+            <p><%= @count %> flagged ingredients</p>
           </div>
         <% end %>
       </div>
@@ -60,10 +60,10 @@
   <div class="text-center">
     <ul class="nav nav-tabs justify-content-center my-3" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients (<%= @product.ingredients.count %>)</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Reviews</a>
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Reviews (<%= @product.reviews.count %>)</a>
       </li>
     </ul>
   </div>
@@ -130,19 +130,38 @@
 
 
 
+            <div class="accordion-wrap">
 
-            <% @normal_ings.each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <p><%= ingredient.name %></p>
-                <%= simple_form_for(Flag.new) do |f| %>
-                  <%= f.association :ingredient, as: :hidden, input_html: {value: ingredient.id} %>
-                  <%= f.input :product_id, as: :hidden, input_html: {value: @product.id} %>
-                  <%= button_tag class: "border-0" do %>
-                    <i class="fas fa-plus"></i>
-                  <% end %>
+
+
+              <div class="accordion-item">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <p class="accordion-header">more ingredients (<%= @normal_ings.count %>)</p><i class="fa fa-angle-down" aria-hidden="true"></i>
+                </li>
+              </div>
+
+              <div class="accordion-text">
+
+
+                <% @normal_ings.each do |ingredient| %>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <p><%= ingredient.name %></p>
+                    <%= simple_form_for(Flag.new) do |f| %>
+                      <%= f.association :ingredient, as: :hidden, input_html: {value: ingredient.id} %>
+                      <%= f.input :product_id, as: :hidden, input_html: {value: @product.id} %>
+                      <%= button_tag class: "border-0" do %>
+                        <i class="fas fa-plus"></i>
+                      <% end %>
+                    <% end %>
+                  </li>
                 <% end %>
-              </li>
-            <% end %>
+
+              </div>
+
+
+
+            </div>
+
             </ul>
           </div>
         </div>
