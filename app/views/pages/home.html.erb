@@ -6,18 +6,20 @@
   </div>
 </div>
 
-<div class="owl-carousel owl-theme">
-  <% current_user.friends.each do |friend| %>
-    <% friend.find_up_voted_items.each do |product| %>
-      <% if product.photo.attached? %>
-        <% @path_pro = product.photo.key %>
-      <% else %>
-        <% @path_pro = 'no_image' %>
+  <% if current_user %>
+  <div class="owl-carousel owl-theme">
+    <% current_user.friends.each do |friend| %>
+      <% friend.find_up_voted_items.each do |product| %>
+        <% if product.photo.attached? %>
+          <% @path_pro = product.photo.key %>
+        <% else %>
+          <% @path_pro = 'no_image' %>
+        <% end %>
+        <%= cl_image_tag @path_pro, alt: "product" %>
       <% end %>
-      <%= cl_image_tag @path_pro, alt: "product" %>
     <% end %>
   <% end %>
- </div>
+  </div>
 
 <%= content_for(:after_js) do %>
 <script type="text/javascript">
