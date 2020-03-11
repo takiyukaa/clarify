@@ -12,4 +12,8 @@ class FlagPolicy < ApplicationPolicy
   def multi_create?
     true
   end
+
+  def destroy?
+    true
+  end
 end
