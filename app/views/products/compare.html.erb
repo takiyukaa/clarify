@@ -87,6 +87,23 @@
 
     <div class="row">
       <div class="col-12">
+        <p>Total number ingredients</p>
+      </div>
+    </div>
+
+    <div class="row px-3">
+      <div class="col-6">
+        <p><%= @first_product.ingredients.count %></p>
+      </div>
+      <div class="col-6">
+        <p><%= @second_product.ingredients.count %></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-12">
         <p>Flagged ingredients</p>
       </div>
     </div>
@@ -94,34 +111,52 @@
     <div class="row px-3">
       <div class="col-6">
         <% if @first_product.count_flag(current_user) == 0 %>
-            <i class="far fa-thumbs-up green"></i>
-            <p>No flagged ingredients</p>
+          <i class="far fa-thumbs-up green"></i>
+          <p>No flagged ingredients</p>
         <% else %>
-            <i class="fab fa-font-awesome-flag red"></i>
-            <p><%= @first_product.count_flag(current_user) %> flagged ingredients</p>
+          <i class="fab fa-font-awesome-flag red"></i>
+          <p class="mb-4"><%= @first_product.count_flag(current_user) %> flagged ingredients</p>
 
-            <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush">
             <% @first_product.flag_ings(current_user).each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <p><%= ingredient.name %></p>
+              <li class="list-group-item d-flex justify-content-center align-items-center">
+                <p style="color: gray"><%= ingredient.name %></p>
               </li>
             <% end %>
-            </ul>
+
+            <% @first_product.tag_ings(current_user).each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-center align-items-center">
+                <p style="color: gray"><%= ingredient.name %></p>
+              </li>
+            <% end %>
+          </ul>
         <% end %>
       </div>
 
       <div class="col-6">
         <% if @second_product.count_flag(current_user) == 0 %>
-            <i class="far fa-thumbs-up green"></i>
-            <p>No flagged ingredients</p>
+          <i class="far fa-thumbs-up green"></i>
+          <p>No flagged ingredients</p>
         <% else %>
-            <i class="fab fa-font-awesome-flag red"></i>
-            <p><%= @second_product.count_flag(current_user) %> flagged ingredients</p>
+          <i class="fab fa-font-awesome-flag red"></i>
+          <p class="mb-4"><%= @second_product.count_flag(current_user) %> flagged ingredients</p>
+
+          <ul class="list-group list-group-flush">
+            <% @second_product.flag_ings(current_user).each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-center align-items-center">
+                <p style="color: gray"><%= ingredient.name %></p>
+              </li>
+            <% end %>
+
+            <% @second_product.tag_ings(current_user).each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-center align-items-center">
+                <p style="color: gray"><%= ingredient.name %></p>
+              </li>
+            <% end %>
+          </ul>
         <% end %>
       </div>
     </div>
-
-    <hr>
 
 
   </div>
