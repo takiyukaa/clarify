@@ -79,14 +79,17 @@
             <ul class="list-group list-group-flush">
 
             <% @flag_ings = [] %>
-            <% @tag_ings = [] %>
+            <% @good_tag_ings = [] %>
+            <% @bad_tag_ings = [] %>
             <% @normal_ings = [] %>
 
             <% @product.ingredients.each do |ingredient| %>
               <% if current_user.ingredients.include?(ingredient) %>
                 <% @flag_ings << ingredient %>
-              <% elsif current_user.tag_list.include?(ingredient.tag_list.first) %>
-                <% @tag_ings << ingredient %>
+              <% elsif current_user.tag_list.map {|tag| "good for #{tag}" }.include?(ingredient.tag_list.first) %>
+                <% @good_tag_ings << ingredient %>
+              <% elsif current_user.tag_list.map {|tag| "bad for #{tag}" }.include?(ingredient.tag_list.first) %>
+                <% @bad_tag_ings << ingredient %>
               <% else %>
                 <% @normal_ings << ingredient %>
               <% end %>
@@ -103,19 +106,44 @@
 
 
 
-            <% @tag_ings.each do |ingredient| %>
+            <% @good_tag_ings.each do |ingredient| %>
 
 
-              <% if ingredient.tag_list.first == "dry skin" %>
+              <% if ingredient.tag_list.first == "good for dry skin" %>
                 <% @skintypecolor = "#e0ae8d" %>
                 <% @skintypeicon = "fas fa-fire-alt" %>
-              <% elsif ingredient.tag_list.first == "oily skin" %>
+              <% elsif ingredient.tag_list.first == "good for oily skin" %>
                 <% @skintypecolor = "#f9f59f" %>
                 <% @skintypeicon = "fas fa-tint" %>
-              <% elsif ingredient.tag_list.first == "sensitive skin" %>
+              <% elsif ingredient.tag_list.first == "good for sensitive skin" %>
                 <% @skintypecolor = "#a8e28e" %>
                 <% @skintypeicon = "fas fa-feather" %>
-              <% elsif tag == "fragrance" %>
+              <% elsif tag == "good for fragrance" %>
+                <% @skintypecolor = "#ddbff2" %>
+                <% @skintypeicon = "fas fa-apple-alt" %>
+              <% else %>
+                <% @skintypecolor = "#a6caed" %>
+                <% @skintypeicon = "fas fa-surprise" %>
+              <% end %>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p><%= ingredient.name %></p>
+                <div class="flex align-items-center flag-item"><i class="<%= @skintypeicon %>" style="color: <%= @skintypecolor %>"></i><p style="color: gray"><%= ingredient.tag_list.first %></p></div>
+              </li>
+            <% end %>
+
+            <% @bad_tag_ings.each do |ingredient| %>
+
+              <% if ingredient.tag_list.first == "bad for dry skin" %>
+                <% @skintypecolor = "#e0ae8d" %>
+                <% @skintypeicon = "fas fa-fire-alt" %>
+              <% elsif ingredient.tag_list.first == "bad for oily skin" %>
+                <% @skintypecolor = "#f9f59f" %>
+                <% @skintypeicon = "fas fa-tint" %>
+              <% elsif ingredient.tag_list.first == "bad for sensitive skin" %>
+                <% @skintypecolor = "#a8e28e" %>
+                <% @skintypeicon = "fas fa-feather" %>
+              <% elsif tag == "bad for fragrance" %>
                 <% @skintypecolor = "#ddbff2" %>
                 <% @skintypeicon = "fas fa-apple-alt" %>
               <% else %>
@@ -203,18 +231,21 @@
 
   <div class="product-cards">
     <% @product.related_products.each do |product| %>
-      <% if product.photo.attached? %>
-        <% @path = product.photo.key %>
+      <% if product == @product %>
       <% else %>
-        <% @path = 'no_image' %>
-      <% end %>
-      <%= link_to product_path(product) do %>
-        <div class="card-product">
-          <%= cl_image_tag @path, alt: "product" %>
-          <p class="mt-2"><%= product.brand.truncate(16) %></p>
-          <p><%= product.name.truncate(16) %></p>
-          <p><%= product.category.truncate(16) %></p>
-        </div>
+        <% if product.photo.attached? %>
+          <% @path = product.photo.key %>
+        <% else %>
+          <% @path = 'no_image' %>
+        <% end %>
+        <%= link_to product_path(product) do %>
+          <div class="card-product">
+            <%= cl_image_tag @path, alt: "product" %>
+            <p class="mt-2"><%= product.brand.truncate(16) %></p>
+            <p><%= product.name.truncate(16) %></p>
+            <p><%= product.category.truncate(16) %></p>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>
