@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     post "unlike", to: 'products#unlike'
     end
   end
-  resources :flags, only: [:create]
+  resources :flags, only: [:create, :destroy]
 end
 
 
