@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   def index
     if params[:query].present?
       @products = policy_scope(Product).global_search(params[:query])
@@ -39,10 +40,12 @@ class ProductsController < ApplicationController
 
 
   def compare
+    @count = 0
     @first_product = Product.find(params["products"]["first_product"].to_i)
     @second_product = Product.find(params["products"]["id"].first)
     authorize Product
   end
+
 
 
 end

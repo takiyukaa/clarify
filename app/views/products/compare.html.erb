@@ -1,9 +1,128 @@
 <div class="container">
+  <div class="white-big-card my-3">
 
-  <h1><%= @first_product.name %></h1>
-  <hr>
-  <h1><%= @second_product.name %></h1>
+    <div class="row px-3">
+        <div class="col-6">
+
+          <%= link_to product_path(@first_product) do %>
+
+            <%= cl_image_tag @first_product.photo.key, alt: "first_product", class: "img-compare" %>
+            <p><%= @first_product.brand %></p>
+            <p><%= @first_product.name %></p>
+
+          <% end %>
+        </div>
+
+      <div class="col-6">
+        <%= link_to product_path(@second_product) do %>
+          <%= cl_image_tag @second_product.photo.key, alt: "second_product", class: "img-compare" %>
+          <p><%= @second_product.brand %></p>
+          <p><%= @second_product.name %></p>
+        <% end %>
+      </div>
 
 
+    </div>
 
+    <hr>
+
+      <div class="row">
+        <div class="col-12">
+          <p>Category</p>
+        </div>
+      </div>
+
+      <div class="row px-3">
+        <div class="col-6">
+          <p><%= @first_product.category %></p>
+        </div>
+        <div class="col-6">
+          <p><%= @second_product.category %></p>
+        </div>
+      </div>
+
+
+    <hr>
+
+    <div class="row">
+      <div class="col-12">
+        <p>Reviews</p>
+      </div>
+    </div>
+
+
+    <div class="row px-3">
+      <div class="col-6">
+        <div class="score-rating">
+          <p id="rate"><%= @first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length %>.0</p>
+          <p id="rating"><%= @first_product.reviews.size %><br>ratings</p>
+        </div>
+        <div class="stars">
+          <% (@first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length).times do %>
+            <i class="fas fa-star" id="star-pink"></i>
+          <% end %>
+          <% (5 - @first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length).times do %>
+            <i class="fas fa-star" id="star-gray"></i>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="score-rating">
+          <p id="rate"><%= @second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length %>.0</p>
+          <p id="rating"><%= @second_product.reviews.size %><br>ratings</p>
+        </div>
+        <div class="stars">
+          <% (@second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length).times do %>
+            <i class="fas fa-star" id="star-pink"></i>
+          <% end %>
+          <% (5 - @second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length).times do %>
+            <i class="fas fa-star" id="star-gray"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-12">
+        <p>Flagged ingredients</p>
+      </div>
+    </div>
+
+    <div class="row px-3">
+      <div class="col-6">
+        <% if @first_product.count_flag(current_user) == 0 %>
+            <i class="far fa-thumbs-up green"></i>
+            <p>No flagged ingredients</p>
+        <% else %>
+            <i class="fab fa-font-awesome-flag red"></i>
+            <p><%= @first_product.count_flag(current_user) %> flagged ingredients</p>
+
+            <ul class="list-group list-group-flush">
+            <% @first_product.flag_ings(current_user).each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p><%= ingredient.name %></p>
+              </li>
+            <% end %>
+            </ul>
+        <% end %>
+      </div>
+
+      <div class="col-6">
+        <% if @second_product.count_flag(current_user) == 0 %>
+            <i class="far fa-thumbs-up green"></i>
+            <p>No flagged ingredients</p>
+        <% else %>
+            <i class="fab fa-font-awesome-flag red"></i>
+            <p><%= @second_product.count_flag(current_user) %> flagged ingredients</p>
+        <% end %>
+      </div>
+    </div>
+
+    <hr>
+
+
+  </div>
 </div>
