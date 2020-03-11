@@ -14,6 +14,7 @@
 
 
       <div class="card-flag">
+        <h5>Relevant for you:</h5>
         <% @product.ingredients.each do |ingredient|  %>
           <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
             <% @count += 1 %>
@@ -23,18 +24,18 @@
         <% end %>
 
         <% if @count == 0 %>
-          <div>
+          <div class="border-green d-flex">
             <i class="far fa-thumbs-up green"></i>
             <p>Good for you</p>
           </div>
         <% else %>
-          <div>
+          <div class="border-red d-flex">
             <i class="fab fa-font-awesome-flag red"></i>
             <p><%= @count %> flagged ingredients</p>
           </div>
         <% end %>
 
-        <div>
+        <div class="border-green d-flex">
           <i class="far fa-smile green"></i>
           <% count = 0 %>
           <% current_user.friends.each do |friend| %>
@@ -43,9 +44,9 @@
             <% end %>
           <% end %>
           <% if count == 1 %>
-            <p>1 friend is using it</p>
+            <p>1 friend is using this product</p>
           <% else %>
-            <p><%= count %> friends are using it</p>
+            <p><%= count %> friends are using this product</p>
           <% end %>
         </div>
       </div>
