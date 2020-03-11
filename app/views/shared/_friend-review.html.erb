@@ -1,0 +1,41 @@
+<div class="card-border flex">
+
+  <% if review.user.photo.attached? %>
+    <% @path = review.user.photo.key %>
+  <% else %>
+    <% @path = 'profile_whubsg' %>
+  <% end %>
+
+
+
+
+  <div class="review-user">
+    <%= link_to shelf_user_path(review.user)  do %>
+    <%= cl_image_tag @path, alt: "user", class: "avatar"  %>
+    <p><%= review.user.first_name %></p>
+    <% end %>
+  </div>
+
+  <div class="review">
+
+    <div class="title-and-star">
+      <div class="stars">
+        <% (review.rating).times do %>
+          <i class="fas fa-star" id="star-pink"></i>
+        <% end %>
+        <% (5 - review.rating).times do %>
+          <i class="fas fa-star" id="star-gray"></i>
+        <% end %>
+      </div>
+      <div class="review-title">
+        <p><%= review.title %></p>
+      </div>
+    </div>
+
+    <div class="review-content">
+      <p><%= review.content %></p>
+    </div>
+
+  </div>
+
+</div>

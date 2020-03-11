@@ -7,8 +7,7 @@
 <div class="user-banner">
   <h2>My Profile</h2>
   <div class="user-info">
-    <%= cl_image_tag @path, alt: "user", class: "avatar-large"  %>
-    <p><%= current_user.first_name %></p>
+    <%= cl_image_tag @path, alt: "user", class: "avatar-large" %>
   </div>
 
 </div>
@@ -27,7 +26,7 @@
           <% @skintypecolor = "#e0ae8d" %>
           <% @skintypeicon = "fas fa-fire-alt" %>
         <% elsif tag == "oily skin" %>
-          <% @skintypecolor = "#f9f59f" %>
+          <% @skintypecolor = "#ece030" %>
           <% @skintypeicon = "fas fa-tint" %>
         <% elsif tag == "sensitive skin" %>
           <% @skintypecolor = "#a8e28e" %>
