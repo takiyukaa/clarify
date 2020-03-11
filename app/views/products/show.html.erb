@@ -38,7 +38,17 @@
       <div class="friends">
         <div class="card-flag">
           <i class="far fa-smile green"></i>
-          <p>3 friends are using this product</p>
+          <% count = 0 %>
+          <% current_user.friends.each do |friend| %>
+            <% if friend.voted_up_on? @product %>
+              <% count += 1 %>
+            <% end %>
+          <% end %>
+          <% if count == 1 %>
+            <p>1 friend is using it</p>
+          <% else %>
+            <p><%= count %> friends are using it</p>
+          <% end %>
         </div>
       </div>
     </div>
