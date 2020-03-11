@@ -233,7 +233,9 @@
 
   </div>
 
-  <div class="product-cards">
+  <p class="text-center mt-5">Related products (<%= @product.related_products.size %>)</p>
+
+  <div class="owl-carousel owl-theme">
     <% @product.related_products.each do |product| %>
       <% if product == @product %>
       <% else %>
@@ -247,12 +249,32 @@
             <%= cl_image_tag @path, alt: "product" %>
             <p class="mt-2"><%= product.brand.truncate(16) %></p>
             <p><%= product.name.truncate(16) %></p>
-            <p><%= product.category.truncate(16) %></p>
           </div>
         <% end %>
       <% end %>
     <% end %>
   </div>
+
+  <%= content_for(:after_js) do %>
+  <script type="text/javascript">
+    $('.owl-carousel').owlCarousel({
+      stagePadding: 50,
+      loop:true,
+      autoplay:true,
+      autoplaySpeed:10000,
+      margin:10,
+      nav:true,
+      responsive:{
+          0:{
+              items:1
+          },
+          600:{
+              items:3
+          }
+      }
+  })
+  </script>
+  <% end %>
 
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
