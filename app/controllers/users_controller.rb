@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def show
     @flag_ings = []
-    @tag_ings = []
+    @good_tag_ings = []
+    @bad_tag_ings = []
     @normal_ings =[]
     @skintypeicon = ""
     @path = ""
