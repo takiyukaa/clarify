@@ -36,9 +36,6 @@ gem 'cloudinary', '~> 1.12.0'
 #acts_as_votable
 gem 'acts_as_votable', '~> 0.12.1'
 
-#nokogiri
-gem 'nokogiri', '~> 1.10', '>= 1.10.9'
-
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
