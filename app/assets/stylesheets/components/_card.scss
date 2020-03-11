@@ -1,9 +1,40 @@
 //products#show
+.border-red {
+  padding: 16px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: $pink;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.border-green {
+  padding: 16px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #a8e28e;
+  border-radius: 8px;
+  margin-top: 16px;
+}
 
 .card-white {
   background-color: white;
   padding: 16px;
-  margin: 16px;
+  margin-top: 16px;
+  border-radius: 16px;
+
+  p {
+    text-align: left;
+  }
+}
+
+.card-border {
+  border-style: solid;
+  border-color: $pink;
+  background-color: white;
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
   border-radius: 16px;
 
   p {
