@@ -199,6 +199,24 @@
 
   </div>
 
+  <div class="product-cards">
+    <% @product.related_products.each do |product| %>
+      <% if product.photo.attached? %>
+        <% @path = product.photo.key %>
+      <% else %>
+        <% @path = 'no_image' %>
+      <% end %>
+      <%= link_to product_path(product) do %>
+        <div class="card-product">
+          <%= cl_image_tag @path, alt: "product" %>
+          <p class="mt-2"><%= product.brand.truncate(16) %></p>
+          <p><%= product.name.truncate(16) %></p>
+          <p><%= product.category.truncate(16) %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
       <div class="d-flex justify-content-center">

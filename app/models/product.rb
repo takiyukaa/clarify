@@ -19,4 +19,11 @@ class Product < ApplicationRecord
       tsearch: { prefix: true }
     }
 
+    def ingredients_tag_list_good
+      ingredients.map(&:tag_list).flatten.uniq.delete_if {|ingredient| ingredient.start_with?("bad")}
+    end
+
+    def related_products
+      Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq
+    end
 end
