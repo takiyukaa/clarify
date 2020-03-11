@@ -240,6 +240,7 @@ DEPENDENCIES
   has_friendship (~> 1.1, >= 1.1.8)
   jbuilder (~> 2.0)
   listen (~> 3.0.5)
+  nokogiri (~> 1.10, >= 1.10.9)
   pg (~> 0.21)
   pg_search (~> 2.3, >= 2.3.2)
   pry-byebug
