@@ -9,11 +9,13 @@
   <div class="owl-carousel owl-theme">
     <% current_user.friends.each do |friend| %>
       <% friend.find_up_voted_items.each do |product| %>
-        <div class="item">
-          <div class="card-product">
-            <%= cl_image_tag product.photo_path, alt: "product", crop: "limit" %>
+        <%= link_to product_path(product) do %>
+          <div class="item">
+            <div class="card-product">
+              <%= cl_image_tag product.photo_path, alt: "product", crop: "limit" %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
