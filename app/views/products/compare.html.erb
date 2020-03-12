@@ -49,32 +49,41 @@
 
     <div class="row px-3">
       <div class="col-6">
-        <div class="score-rating">
-          <p id="rate"><%= @first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length %>.0</p>
-          <p id="rating"><%= @first_product.reviews.size %><br>ratings</p>
-        </div>
-        <div class="stars">
-          <% (@first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length).times do %>
-            <i class="fas fa-star" id="star-pink"></i>
-          <% end %>
-          <% (5 - @first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length).times do %>
-            <i class="fas fa-star" id="star-gray"></i>
-          <% end %>
-        </div>
+        <% if @first_product.reviews.empty? %>
+          <p>No Ratings yet</p>
+        <% else %>
+          <div class="score-rating">
+            <p id="rate"><%= @first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length %>.0</p>
+            <p id="rating"><%= @first_product.reviews.size %><br>ratings</p>
+          </div>
+          <div class="stars">
+            <% (@first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length).times do %>
+              <i class="fas fa-star" id="star-pink"></i>
+            <% end %>
+            <% (5 - @first_product.reviews.pluck(:rating).sum / @first_product.reviews.pluck(:rating).length).times do %>
+              <i class="fas fa-star" id="star-gray"></i>
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="col-6">
-        <div class="score-rating">
-          <p id="rate"><%= @second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length %>.0</p>
-          <p id="rating"><%= @second_product.reviews.size %><br>ratings</p>
-        </div>
-        <div class="stars">
-          <% (@second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length).times do %>
-            <i class="fas fa-star" id="star-pink"></i>
-          <% end %>
-          <% (5 - @second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length).times do %>
-            <i class="fas fa-star" id="star-gray"></i>
-          <% end %>
-        </div>
+
+        <% if @second_product.reviews.empty? %>
+          <p>No Ratings yet</p>
+        <% else %>
+          <div class="score-rating">
+            <p id="rate"><%= @second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length %>.0</p>
+            <p id="rating"><%= @second_product.reviews.size %><br>ratings</p>
+          </div>
+          <div class="stars">
+            <% (@second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length).times do %>
+              <i class="fas fa-star" id="star-pink"></i>
+            <% end %>
+            <% (5 - @second_product.reviews.pluck(:rating).sum / @second_product.reviews.pluck(:rating).length).times do %>
+              <i class="fas fa-star" id="star-gray"></i>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
 

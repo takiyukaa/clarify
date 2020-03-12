@@ -37,8 +37,6 @@ class Product < ApplicationRecord
     @path
   end
 
-
-
   def count_bad(user)
     @count = 0
     self.ingredients.each do |ingredient|
