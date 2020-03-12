@@ -10,7 +10,7 @@
 <div class="container">
   <div class="skin-type card-white">
 
-    <p class="my-skin-type">My skin concern</p>
+    <p class="my-skin-type">Skin concerns</p>
     <i class="fas fa-edit btn" data-toggle="modal" data-target="#tagsModal"></i>
     <%= render 'tags/modal' %>
 
@@ -47,7 +47,7 @@
 
   <div class="my-flag card-white">
 
-    <p class="text-center my-skin-type">My flags</p>
+    <p class="text-center my-skin-type">Flagged ingredients</p>
     <i class="fas fa-plus btn" data-toggle="modal" data-target="#flagsModal"></i>
     <%= render 'flags/modal', ingredients: Ingredient.all  %>
 
@@ -59,7 +59,7 @@
             <p><%= flag.ingredient.name %></p>
           </div>
           <%= link_to flag_path(flag), method: :delete, data: { confirm: "Are you sure?"} do %>
-            <p><strong><i class="fas fa-trash-alt"></i></strong></p>
+            <i class="fas fa-times" style="color: lightgray"></i>
           <% end %>
         </li>
       <% end %>
