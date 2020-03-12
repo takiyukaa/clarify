@@ -11,10 +11,6 @@
         <%= render 'shared/card-productinfo', product: @product, path: @path %>
       </div>
 
-      <button class="btn btn-flat mt-3" data-toggle="modal" data-target="#compareModal">Compare</button>
-      <%= render 'comparemodal', first_product: @product, products: Product.all, path: @path %>
-
-
       <div class="card-flag">
         <h5>Relevant for you:</h5>
 
