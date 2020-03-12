@@ -51,8 +51,6 @@ class Product < ApplicationRecord
     @flag_ings
   end
 
-
-
   def tag_ings(user)
     @tag_ings = []
 

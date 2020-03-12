@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="white-big-card my-3">
+  <div class="white-big-card my-3 p-3">
     <div class="row">
       <div class="col-12">
         <h2 class="my-3">Product overview</h2>
@@ -101,56 +101,79 @@
       </div>
     </div>
 
+
     <div class="row px-3">
       <div class="col-6">
         <% if @first_product.count_flag(current_user) == 0 %>
           <i class="far fa-thumbs-up green"></i>
           <p>No flagged ingredients</p>
+
+
         <% else %>
-          <i class="fab fa-font-awesome-flag red"></i>
-          <p class="mb-4"><%= @first_product.count_flag(current_user) %> flagged ingredients</p>
-          <ul class="list-group list-group-flush">
-            <% @first_product.flag_ings(current_user).each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-center align-items-center">
-                <p style="color: gray"><%= ingredient.name %></p>
-              </li>
-            <% end %>
-            <% @first_product.tag_ings(current_user).each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-center align-items-center">
-                <p style="color: gray"><%= ingredient.name %></p>
-              </li>
-            <% end %>
-          </ul>
+          <div class="accordion-wrap">
+            <div class="accordion-item">
+              <i class="fab fa-font-awesome-flag red"></i>
+              <p class="accordion-header"><%= @first_product.count_flag(current_user) %> flagged ingredients</p><i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+
+            <div class="accordion-text">
+              <ul class="list-group list-group-flush">
+                <% @first_product.flag_ings(current_user).each do |ingredient| %>
+                  <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <p style="color: gray"><%= ingredient.name %></p>
+                  </li>
+                <% end %>
+                <% @first_product.tag_ings(current_user).each do |ingredient| %>
+                  <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <p style="color: gray"><%= ingredient.name %></p>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         <% end %>
       </div>
+
+
+
       <div class="col-6">
         <% if @second_product.count_flag(current_user) == 0 %>
           <i class="far fa-thumbs-up green"></i>
           <p>No flagged ingredients</p>
+
         <% else %>
-          <i class="fab fa-font-awesome-flag red"></i>
-          <p class="mb-4"><%= @second_product.count_flag(current_user) %> flagged ingredients</p>
-          <ul class="list-group list-group-flush">
-            <% @second_product.flag_ings(current_user).each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-center align-items-center">
-                <p style="color: gray"><%= ingredient.name %></p>
-              </li>
-            <% end %>
-            <% @second_product.tag_ings(current_user).each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-center align-items-center">
-                <p style="color: gray"><%= ingredient.name %></p>
-              </li>
-            <% end %>
-          </ul>
+
+          <div class="accordion-wrap">
+            <div class="accordion-item">
+              <i class="fab fa-font-awesome-flag red"></i>
+              <p class="accordion-header"><%= @second_product.count_flag(current_user) %> flagged ingredients</p><i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+
+            <div class="accordion-text">
+              <ul class="list-group list-group-flush">
+                <% @second_product.flag_ings(current_user).each do |ingredient| %>
+                  <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <p style="color: gray"><%= ingredient.name %></p>
+                  </li>
+                <% end %>
+                <% @second_product.tag_ings(current_user).each do |ingredient| %>
+                  <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <p style="color: gray"><%= ingredient.name %></p>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         <% end %>
+
       </div>
     </div>
   </div>
 
-  <div class="white-big-card my-3">
+  <div class="white-big-card my-3 p-3">
     <div class="row">
       <div class="col-12">
-        <h2 class="my-3">Ingredients</h2>
+        <h2 class="my-3">Ingredient overview</h2>
       </div>
     </div>
     <div class="row">
