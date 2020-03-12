@@ -18,10 +18,24 @@
       <div class="card-flag">
         <h5>Relevant for you:</h5>
 
+        <% if @product.count_good(current_user) != 0  %>
+          <div class="border-green d-flex">
+            <i class="far fa-thumbs-up green"></i>
+            <p><%= @product.count_good(current_user) %> good ingredient</p>
+          </div>
+
+        <% else %>
+          <div class="border-green d-flex">
+            <i class="far fa-thumbs-up green"></i>
+            <p><%= @product.count_good(current_user) %> good ingredient</p>
+          </div>
+
+        <% end %>
+
         <% if @product.count_bad(current_user) == 0 %>
           <div class="border-green d-flex">
             <i class="far fa-thumbs-up green"></i>
-            <p>Good for you</p>
+            <p>0 bad ingredient</p>
           </div>
         <% else %>
           <div class="border-red d-flex">
