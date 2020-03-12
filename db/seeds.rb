@@ -126,9 +126,9 @@ product2 = Product.find_or_create_by!(
   description: "Rich in grape seed oil, the Verbena Body Milk moisturizes * and nourishes the epidermis. Thanks to the Verbena extract, it softens the skin leaving a light scented veil. * upper layers of the epidermis."
   )
 
-unless product2.photo.attached?
-  product2.photo.attach(io: File.open('app/assets/images/muji.jpg'), filename: 'muji.jpg', content_type: 'image/jpg')
-end
+
+  product2.photo.attach(io: File.open('app/assets/images/loccitane.jpg'), filename: 'loccitane.jpg', content_type: 'image/jpg')
+
 
 ingredients2 = %w(AQUA/WATER GLYCERIN BUTYROSPERMUM\ PARKII\ (SHEA)\ BUTTER CETEARYL\ ALCOHOL VITIS\ VINIFERA\ (GRAPE)\ SEED\ OIL DICAPRYLYL\ CARBONATE HYDROXYETHYL\ ACRYLATE/SODIUM\ ACRYLOYLDIMETHYL\ TAURATE\ COPOLYMER CETYL\ ALCOHOL DIMETHICONE LAVANDULA\ ANGUSTIFOLIA\ (LAVENDER)\ OIL COCOS\ NUCIFERA\ (COCONUT)\ OIL CERA\ ALBA\ (BEESWAX) HELIANTHUS\ ANNUUS\ (SUNFLOWER)\ SEED\ OIL ROSMARINUS\ OFFICINALIS\ (ROSEMARY)\ LEAF\ EXTRACT CETEARYL\ GLUCOSIDE TOCOPHEROL POLYSORBATE\ 60 SORBITAN\ ISOSTEARATE PHENOXYETHANOL CORN\ STARCH\ MODIFIED CHLORPHENESIN PARFUM/FRAGRANCE XANTHAN\ GUM ETHYLHEXYLGLYCERIN COUMARIN LINALOOL LIMONENE GERANIOL)
 
@@ -235,7 +235,7 @@ unless snail.photo.attached?
   snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
 end
 
-photoes to products (by Hiro)
+# photoes to products (by Hiro)
 white = Product.find_by(name: "white pore facial cleanser")
 wonder = Product.find_by(name: "wonder pore deep foaming cleanser")
 green_tea = Product.find_by(name: "the green tea seed oil")
@@ -292,6 +292,29 @@ end
 
 unless super_aqua.photo.attached?
   super_aqua.photo.attach(io: File.open("app/assets/images/seed_photos/toner/super_aqua.jpg"), filename: 'super_aqua.jpg', content_type: 'image/jpg')
+end
+
+#related products to Muji/L'OCCITAN
+
+anti_blemish = Product.find_by(name: "base toner ph 5.6")
+treatment_cleansing = Product.find_by(name: "aloe vera oil-free moisture cream")
+powder_wash = Product.find_by(name: "natural bha skin returning emulsion")
+time_response = Product.find_by(name: "geo wrinkle care gold cream")
+
+unless anti_blemish.photo.attached?
+  anti_blemish.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/anti_blemish.jpg"), filename: 'anti_blemish.jpg', content_type: 'image/jpg')
+end
+
+unless treatment_cleansing.photo.attached?
+  treatment_cleansing.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/treatment_cleansing.jpg"), filename: 'treatment_cleansing.jpg', content_type: 'image/jpg')
+end
+
+unless powder_wash.photo.attached?
+  powder_wash.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/powder_wash.jpg"), filename: 'powder_wash.jpg', content_type: 'image/jpg')
+end
+
+unless time_response.photo.attached?
+  time_response.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/time_response.jpg"), filename: 'time_response.jpg', content_type: 'image/jpg')
 end
 
 puts "All complete"
