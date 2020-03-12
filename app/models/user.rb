@@ -30,4 +30,7 @@ class User < ApplicationRecord
     @path
   end
 
+  def shelf_hash
+    @shelf_products = self.find_up_voted_items.group_by { |item| item.category }
+  end
 end
