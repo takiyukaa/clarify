@@ -118,6 +118,26 @@ ingredients1.each do |ingredient|
   ProductsIngredient.create(product: product1, ingredient: ing_name)
 end
 
+product2 = Product.find_or_create_by!(
+  name: "CRÈME MAINS LAVANDE 30 ML",
+  category: "Moisturizer",
+  brand: "L'OCCITANE",
+  barcode: "3253581207031",
+  description: "Rich in grape seed oil, the Verbena Body Milk moisturizes * and nourishes the epidermis. Thanks to the Verbena extract, it softens the skin leaving a light scented veil. * upper layers of the epidermis."
+  )
+
+unless product2.photo.attached?
+  product2.photo.attach(io: File.open('app/assets/images/muji.jpg'), filename: 'muji.jpg', content_type: 'image/jpg')
+end
+
+ingredients2 = %w(AQUA/WATER GLYCERIN BUTYROSPERMUM\ PARKII\ (SHEA)\ BUTTER CETEARYL\ ALCOHOL VITIS\ VINIFERA\ (GRAPE)\ SEED\ OIL DICAPRYLYL\ CARBONATE HYDROXYETHYL\ ACRYLATE/SODIUM\ ACRYLOYLDIMETHYL\ TAURATE\ COPOLYMER CETYL\ ALCOHOL DIMETHICONE LAVANDULA\ ANGUSTIFOLIA\ (LAVENDER)\ OIL COCOS\ NUCIFERA\ (COCONUT)\ OIL CERA\ ALBA\ (BEESWAX) HELIANTHUS\ ANNUUS\ (SUNFLOWER)\ SEED\ OIL ROSMARINUS\ OFFICINALIS\ (ROSEMARY)\ LEAF\ EXTRACT CETEARYL\ GLUCOSIDE TOCOPHEROL POLYSORBATE\ 60 SORBITAN\ ISOSTEARATE PHENOXYETHANOL CORN\ STARCH\ MODIFIED CHLORPHENESIN PARFUM/FRAGRANCE XANTHAN\ GUM ETHYLHEXYLGLYCERIN COUMARIN LINALOOL LIMONENE GERANIOL)
+
+ingredients2.each do |ingredient|
+  ingredient.downcase!
+  ing_name = Ingredient.find_or_create_by!(name: ingredient)
+  ProductsIngredient.create(product: product2, ingredient: ing_name)
+end
+
 puts "Find or create new reviews"
 
 review_attributes = [
@@ -143,15 +163,19 @@ end
 
 puts "finding or creating tags"
 
-frances.tag_list = "sensitive skin, oily skin, dry skin, allergens/irritants, reproductive toxicity, environmental concerns, preservatives, parabens, fragrance"
-frances.save
-frances.reload
+# frances.tag_list = "sensitive skin, oily skin, dry skin, allergens/irritants, reproductive toxicity, environmental concerns, preservatives, parabens, fragrance"
+# frances.save
+# frances.reload
 
 lavender = Ingredient.find_by(name: "lavandula angustifolia (lavender)")
 lavender.tag_list = "bad for sensitive skin"
 lavender.save
 
-Flag.find_or_create_by!(ingredient: lavender, user: frances)
+lavender_oil = Ingredient.find_by(name: "lavandula angustifolia (lavender) oil")
+lavender_oil.tag_list = "bad for sensitive skin"
+lavender_oil.save
+
+# Flag.find_or_create_by!(ingredient: lavender, user: frances)
 
 bad_for_oily_ingredients = []
 bad_for_oily_ingredients << Ingredient.find_by(name: "zea mays (corn) starch")
@@ -161,12 +185,23 @@ bad_for_oily_ingredients << Ingredient.find_by(name: "butyrospermum parkii (shea
 bad_for_oily_ingredients.each do |ingredient|
   ingredient.tag_list.add("bad for oily skin")
   ingredient.save
-  Flag.find_or_create_by!(ingredient: ingredient, user: frances)
+  # Flag.find_or_create_by!(ingredient: ingredient, user: frances)
 end
 
-good_for_oily_ingredient = Ingredient.find_by(name: "hyaluronic acid")
-good_for_oily_ingredient.tag_list.add("good for oily skin")
-good_for_oily_ingredient.save
+
+good_for_sensitive_ingredients = []
+good_for_sensitive_ingredients << Ingredient.find_by(name: "cocos nucifera (coconut) oil")
+good_for_sensitive_ingredients << Ingredient.find_by(name: "allantoin")
+
+good_for_sensitive_ingredients.each do |ingredient|
+  ingredient.tag_list.add("good for sensitive skin")
+  ingredient.save
+  # Flag.find_or_create_by!(ingredient: ingredient, user: frances)
+end
+
+# good_for_sensitive_ingredient = Ingredient.find_by(name: "cocos nucifera (coconut) oil")
+# good_for_sensitive_ingredient.tag_list.add("good for sensitive skin")
+# good_for_sensitive_ingredient.save
 
 mask = Product.find_by(name: "moisture bond sleeping recovery masque")
 toner = Product.find_by(name: "don't worry bee care calendula toner")
@@ -200,12 +235,11 @@ unless snail.photo.attached?
   snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
 end
 
-# photoes to products (by Hiro)
+photoes to products (by Hiro)
 white = Product.find_by(name: "white pore facial cleanser")
 wonder = Product.find_by(name: "wonder pore deep foaming cleanser")
 green_tea = Product.find_by(name: "the green tea seed oil")
 rice_water = Product.find_by(name: "rice water cleansing oil")
-strawberry = Product.find_by(name: "strawberry face scrub")
 creamy = Product.find_by(name: "creamy deep moist moisturizer")
 oil = Product.find_by(name: "oil control fresh moisturizer")
 priming = Product.find_by(name: "priming moisturizer")
@@ -213,7 +247,7 @@ ac_clinic = Product.find_by(name: "ac clinic daily toner")
 aloe = Product.find_by(name: "aloe bha skin toner")
 super_aqua = Product.find_by(name: "super aqua hydrating toner")
 
-yuka_liked = [white, wonder, green_tea, rice_water, strawberry, creamy, oil, priming, ac_clinic, aloe, super_aqua]
+yuka_liked = [white, wonder, green_tea, rice_water, creamy, oil, priming, ac_clinic, aloe, super_aqua]
 
 yuka_liked.each do |product|
   yuka.likes product
@@ -233,10 +267,6 @@ end
 
 unless rice_water.photo.attached?
   rice_water.photo.attach(io: File.open("app/assets/images/seed_photos/face_oil/rice_water.jpg"), filename: 'rice_water.jpg', content_type: 'image/jpg')
-end
-
-unless strawberry.photo.attached?
-  strawberry.photo.attach(io: File.open("app/assets/images/seed_photos/face_oil/strawberry.jpg"), filename: 'strawberry.jpg', content_type: 'image/jpg')
 end
 
 unless creamy.photo.attached?
