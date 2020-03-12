@@ -6,15 +6,9 @@
       <div class="modal-body form-tag">
         <p>Search and Choose a Product to compare with</p>
 
-        <% if first_product.photo.attached? %>
-          <% path = first_product.photo.key %>
-        <% else %>
-          <% path = 'no_image' %>
-        <% end %>
-
 
         <div class="card-product">
-          <%= cl_image_tag path, alt: "product" %>
+          <%= cl_image_tag first_product.photo_path, alt: "product" %>
           <p class="mt-2"><%= first_product.brand %></p>
           <p><%= first_product.name %></p>
           <p><%= first_product.category %></p>
