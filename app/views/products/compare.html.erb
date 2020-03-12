@@ -150,14 +150,36 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <p mb-4>Common ingredients</p>
-        <% @common_ings = @first_product.ingredients & @second_product.ingredients %>
+        <p class="my-3">Common ingredients (<%= @common_ings.count %>)</p>
         <% @common_ings.each do |ing| %>
+          <p style="color: gray"><%= ing.name %></p>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <p class="my-3">only in <%= @first_product.name %> (<%= @only_first_ings.count %>)</p>
+        <% @only_first_ings.each do |ing| %>
+          <p style="color: gray"><%= ing.name %></p>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+     <div class="row">
+      <div class="col-12">
+        <p class="my-3">only in <%= @second_product.name %> (<%= @only_second_ings.count %>)</p>
+        <% @only_second_ings.each do |ing| %>
           <p style="color: gray"><%= ing.name %></p>
         <% end %>
       </div>
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12">
+      <a href="#top" class="btn btn-ghost">Go to top</a>
+    </div>
+  </div>
 
 </div>

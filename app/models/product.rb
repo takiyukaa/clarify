@@ -77,4 +77,6 @@ class Product < ApplicationRecord
     Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select {|product| product.category == category}
   end
 
+
+
 end

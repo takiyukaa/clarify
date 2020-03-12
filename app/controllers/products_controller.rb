@@ -40,10 +40,17 @@ class ProductsController < ApplicationController
 
 
   def compare
-    @common_ings = ""
+
+
     @count = 0
     @first_product = Product.find(params["products"]["first_product"].to_i)
     @second_product = Product.find(params["products"]["id"].first)
+
+    @common_ings = @first_product.ingredients & @second_product.ingredients
+    @only_first_ings = @first_product.ingredients - @second_product.ingredients
+    @only_second_ings = @second_product.ingredients - @first_product.ingredients
+
+
     authorize Product
   end
 
