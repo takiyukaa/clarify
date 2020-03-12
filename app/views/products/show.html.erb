@@ -2,6 +2,7 @@
 <% content_for :meta_description, @product.description %>
 <% content_for :meta_image, cl_image_path(@product.photo) %>
 
+<%= render 'shared/search' %>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
@@ -14,8 +15,8 @@
       <%= render 'comparemodal', first_product: @product, products: Product.all, path: @path %>
 
 
-      <div class="flags">
-
+      <div class="card-flag">
+        <h5>Relevant for you:</h5>
         <% @product.ingredients.each do |ingredient|  %>
           <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
             <% @count += 1 %>
@@ -25,20 +26,18 @@
         <% end %>
 
         <% if @count == 0 %>
-          <div class="card-flag">
+          <div class="border-green d-flex">
             <i class="far fa-thumbs-up green"></i>
             <p>Good for you</p>
           </div>
         <% else %>
-          <div class="card-flag">
+          <div class="border-red d-flex">
             <i class="fab fa-font-awesome-flag red"></i>
             <p><%= @count %> flagged ingredients</p>
           </div>
         <% end %>
-      </div>
 
-      <div class="friends">
-        <div class="card-flag">
+        <div class="border-green d-flex">
           <i class="far fa-smile green"></i>
           <% count = 0 %>
           <% current_user.friends.each do |friend| %>
@@ -47,12 +46,13 @@
             <% end %>
           <% end %>
           <% if count == 1 %>
-            <p>1 friend is using it</p>
+            <p>1 friend is using this product</p>
           <% else %>
-            <p><%= count %> friends are using it</p>
+            <p><%= count %> friends are using this product</p>
           <% end %>
         </div>
       </div>
+
     </div>
 
   </div>
@@ -60,7 +60,7 @@
 
 
   <div class="text-center">
-    <ul class="nav nav-tabs justify-content-center my-3" id="myTab" role="tablist">
+    <ul class="nav nav-pills justify-content-center my-3" id="myTab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ingredients (<%= @product.ingredients.count %>)</a>
       </li>
@@ -203,33 +203,41 @@
     <% random_reviews = [] %>
 
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <div class="reviews col-xs-12 col-sm-8 offset-sm-2">
-          <% if @product.reviews.empty? %>
-            <p style="font-size: 16px;"><strong>No Reviews yet</strong></p>
-          <% else %>
-        <h5>Reviews from friends</h5>
+      <div class="reviews">
+      <div class="col-xs-12 col-sm-8 offset-sm-2">
         <% @product.reviews.each do |review| %>
           <% if current_user.friends.include?(review.user) %>
             <% friend_reviews << review %>
-            <%= render 'shared/card-review', review: review %>
-          <% end %>
-          <% end %>
-        <% end %>
-
-        <h5>Other Reviews</h5>
-        <% @product.reviews.each do |review| %>
-          <% if !current_user.friends.include?(review.user) %>
+          <% else %>
             <% random_reviews << review %>
-            <%= render 'shared/card-review', review: review %>
           <% end %>
         <% end %>
 
+        <% if @product.reviews.empty? %>
+          <p style="font-size: 16px;"><strong>No Reviews yet</strong></p>
+        <% elsif friend_reviews.empty? %>
+          <% @product.reviews.each do |review| %>
+          <%= render 'shared/card-review', review: review %>
+          <% end %>
+        <% else %>
+          <h5>Reviews from friends</h5>
+          <% friend_reviews.each do |review| %>
+            <%= render 'shared/friend-review', review: review %>
+            <% end %>
+          <h5>Other Reviews</h5>
+            <% random_reviews.each do |review| %>
+            <%= render 'shared/card-review', review: review %>
+            <% end %>
+          <% end %>
       </div>
+    </div>
     </div>
 
   </div>
 
-  <div class="product-cards">
+  <p class="text-center mt-5">Related products (<%= @product.related_products.size %>)</p>
+
+  <div class="owl-carousel owl-theme">
     <% @product.related_products.each do |product| %>
       <% if product == @product %>
       <% else %>
@@ -243,12 +251,32 @@
             <%= cl_image_tag @path, alt: "product" %>
             <p class="mt-2"><%= product.brand.truncate(16) %></p>
             <p><%= product.name.truncate(16) %></p>
-            <p><%= product.category.truncate(16) %></p>
           </div>
         <% end %>
       <% end %>
     <% end %>
   </div>
+
+  <%= content_for(:after_js) do %>
+  <script type="text/javascript">
+    $('.owl-carousel').owlCarousel({
+      stagePadding: 50,
+      loop:true,
+      autoplay:true,
+      autoplaySpeed:10000,
+      margin:10,
+      nav:true,
+      responsive:{
+          0:{
+              items:1
+          },
+          600:{
+              items:3
+          }
+      }
+  })
+  </script>
+  <% end %>
 
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">

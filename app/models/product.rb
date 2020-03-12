@@ -59,7 +59,6 @@ class Product < ApplicationRecord
     self.ingredients.each do |ingredient|
       @tag_ings << ingredient if user.tag_list.include?(ingredient.tag_list.first)
     end
-
     @tag_ings
   end
 
@@ -72,6 +71,10 @@ class Product < ApplicationRecord
       end
     end
     @normal_ings
+  end
+
+  def related_products
+    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select {|product| product.category == category}
   end
 
 end
