@@ -24,18 +24,27 @@ class Product < ApplicationRecord
   end
 
   def related_products
-    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq
+    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select {|product| product.category == category}
   end
 
 
-  def count_flag(user)
+
+  def count_bad(user)
     @count = 0
     self.ingredients.each do |ingredient|
-      if user.tag_list.include?(ingredient.tag_list.first)
+      if user.tag_list.map {|tag| "bad for #{tag}" }.include?(ingredient.tag_list.first)
         @count += 1
       elsif user.ingredients.include?(ingredient)
         @count += 1
       end
+    end
+    @count
+  end
+
+  def count_good(user)
+    @count = 0
+    self.ingredients.each do |ingredient|
+      @count += 1 if user.tag_list.map {|tag| "good for #{tag}" }.include?(ingredient.tag_list.first)
     end
     @count
   end
@@ -51,13 +60,22 @@ class Product < ApplicationRecord
     @flag_ings
   end
 
-  def tag_ings(user)
-    @tag_ings = []
+  def badtag_ings(user)
+    @badtag_ings = []
 
     self.ingredients.each do |ingredient|
-      @tag_ings << ingredient if user.tag_list.include?(ingredient.tag_list.first)
+      @badtag_ings << ingredient if user.tag_list.map {|tag| "bad for #{tag}" }.include?(ingredient.tag_list.first)
     end
-    @tag_ings
+    @badtag_ings
+  end
+
+  def goodtag_ings(user)
+    @goodtag_ings = []
+
+    self.ingredients.each do |ingredient|
+      @goodtag_ings << ingredient if user.tag_list.map {|tag| "good for #{tag}" }.include?(ingredient.tag_list.first)
+    end
+    @goodtag_ings
   end
 
   def normal_ings(user)
@@ -70,11 +88,5 @@ class Product < ApplicationRecord
     end
     @normal_ings
   end
-
-  def related_products
-    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select {|product| product.category == category}
-  end
-
-
 
 end
