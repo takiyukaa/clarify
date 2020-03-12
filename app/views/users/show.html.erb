@@ -11,7 +11,7 @@
   </div>
 
 </div>
-    <p style="text-align:center;"><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "text-center" %></p>
+    <!-- <p style="text-align:center;"><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "text-center" %></p> -->
 
 <div class="container">
   <div class="skin-type card-white">
@@ -56,7 +56,6 @@
     <p class="text-center my-skin-type">My flags</p>
     <i class="fas fa-plus btn" data-toggle="modal" data-target="#flagsModal"></i>
     <%= render 'flags/modal', ingredients: Ingredient.all  %>
-
 
     <ul class="list-group list-group-flush">
       <% current_user.flags.each do |flag| %>

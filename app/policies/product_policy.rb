@@ -20,4 +20,8 @@ class ProductPolicy < ApplicationPolicy
   def scan?
     true
   end
+
+  def compare?
+    true
+  end
 end

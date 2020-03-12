@@ -15,7 +15,9 @@
         <% else %>
           <% @path_pro = 'no_image' %>
         <% end %>
-        <%= cl_image_tag @path_pro, alt: "product" %>
+        <div class="item">
+          <%= cl_image_tag @path_pro, alt: "product", crop: "limit" %>
+        </div>
       <% end %>
     <% end %>
   <% end %>
@@ -25,19 +27,20 @@
 <script type="text/javascript">
   $('.owl-carousel').owlCarousel({
     stagePadding: 50,
+    autoWidth:true,
     loop:true,
     autoplay:true,
-    autoplaySpeed:10000,
-    margin:10,
+    autoplaySpeed:5000,
+    margin:24,
     nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        }
-    }
+    // responsive:{
+    //     0:{
+    //         items:1
+    //     },
+    //     600:{
+    //         items:3
+    //     }
+    // }
 })
 </script>
 <% end %>
