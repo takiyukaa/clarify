@@ -14,9 +14,11 @@
         <% else %>
           <% @path_pro = 'no_image' %>
         <% end %>
+        <%= link_to product_path(product) do %>
         <div class="item">
           <div class="card-product">
             <%= cl_image_tag @path_pro, alt: "product", crop: "limit" %>
+        <% end %>
           </div>
         </div>
       <% end %>

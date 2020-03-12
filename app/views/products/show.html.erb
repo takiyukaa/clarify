@@ -223,8 +223,6 @@
         <%= link_to product_path(product) do %>
           <div class="card-product">
             <%= cl_image_tag @path, alt: "product" %>
-            <p class="mt-2"><%= product.brand.truncate(16) %></p>
-            <p><%= product.name.truncate(16) %></p>
           </div>
         <% end %>
       <% end %>
