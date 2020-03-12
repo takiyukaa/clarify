@@ -10,14 +10,14 @@
     <div class="row px-3">
       <div class="col-6">
         <%= link_to product_path(@first_product) do %>
-          <%= cl_image_tag @first_product.photo.key, alt: "first_product", class: "img-compare" %>
+          <%= cl_image_tag @first_product.photo_path, alt: "first_product", class: "img-compare" %>
           <p><%= @first_product.brand %></p>
           <p><%= @first_product.name %></p>
         <% end %>
       </div>
       <div class="col-6">
         <%= link_to product_path(@second_product) do %>
-          <%= cl_image_tag @second_product.photo.key, alt: "second_product", class: "img-compare" %>
+          <%= cl_image_tag @second_product.photo_path, alt: "second_product", class: "img-compare" %>
           <p><%= @second_product.brand %></p>
           <p><%= @second_product.name %></p>
         <% end %>

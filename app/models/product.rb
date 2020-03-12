@@ -28,6 +28,16 @@ class Product < ApplicationRecord
   end
 
 
+  def photo_path
+    if self.photo.attached?
+      @path = self.photo.key
+    else
+      @path = 'no_image'
+    end
+    @path
+  end
+
+
 
   def count_bad(user)
     @count = 0
