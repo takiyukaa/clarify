@@ -24,7 +24,8 @@ class Product < ApplicationRecord
   end
 
   def related_products
-    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select { |product| product.category == category}.first(5)
+    # Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select { |product| product.category == category}.first(5)
+    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select { |product| product.category == category}.sort_by(&:created_at).first(5)
   end
 
 
