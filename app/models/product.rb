@@ -24,7 +24,7 @@ class Product < ApplicationRecord
   end
 
   def related_products
-    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq
+    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select { |product| product.category == category}.first(5)
   end
 
 
@@ -72,7 +72,7 @@ class Product < ApplicationRecord
   end
 
   def related_products
-    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select {|product| product.category == category}
+    Ingredient.tagged_with(ingredients_tag_list_good, any: true).map(&:products).flatten.uniq.select {|product| product.category == category}.first(5)
   end
 
 
