@@ -11,29 +11,29 @@
         <%= render 'shared/card-productinfo', product: @product, path: @path %>
       </div>
 
-      <button class="btn btn-light-gray" data-toggle="modal" data-target="#compareModal">Compare</button>
+      <button class="btn btn-flat mt-3" data-toggle="modal" data-target="#compareModal">Compare</button>
       <%= render 'comparemodal', first_product: @product, products: Product.all, path: @path %>
 
 
       <div class="card-flag">
         <h5>Relevant for you:</h5>
-        <% @product.ingredients.each do |ingredient|  %>
-          <% if current_user.tag_list.include?(ingredient.tag_list.first) %>
-            <% @count += 1 %>
-          <% elsif current_user.ingredients.include?(ingredient) %>
-            <% @count += 1 %>
-          <% end %>
-        <% end %>
 
-        <% if @count == 0 %>
+        <% if @product.count_good(current_user) != 0  %>
           <div class="border-green d-flex">
             <i class="far fa-thumbs-up green"></i>
-            <p>Good for you</p>
+            <p><%= @product.count_good(current_user) %> good ingredient</p>
+          </div>
+        <% end %>
+
+        <% if @product.count_bad(current_user) == 0 %>
+          <div class="border-green d-flex">
+            <i class="far fa-thumbs-up green"></i>
+            <p>0 bad ingredient</p>
           </div>
         <% else %>
           <div class="border-red d-flex">
             <i class="fab fa-font-awesome-flag red"></i>
-            <p><%= @count %> flagged ingredients</p>
+            <p><%= @product.count_bad(current_user) %> bad ingredients</p>
           </div>
         <% end %>
 
@@ -78,35 +78,7 @@
           <div class="card-white">
             <ul class="list-group list-group-flush">
 
-            <% @flag_ings = [] %>
-            <% @good_tag_ings = [] %>
-            <% @bad_tag_ings = [] %>
-            <% @normal_ings = [] %>
-
-            <% @product.ingredients.each do |ingredient| %>
-              <% if current_user.ingredients.include?(ingredient) %>
-                <% @flag_ings << ingredient %>
-              <% elsif current_user.tag_list.map {|tag| "good for #{tag}" }.include?(ingredient.tag_list.first) %>
-                <% @good_tag_ings << ingredient %>
-              <% elsif current_user.tag_list.map {|tag| "bad for #{tag}" }.include?(ingredient.tag_list.first) %>
-                <% @bad_tag_ings << ingredient %>
-              <% else %>
-                <% @normal_ings << ingredient %>
-              <% end %>
-            <% end %>
-
-
-            <% @flag_ings.each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <p><%= ingredient.name %></p>
-                <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i></div>
-              </li>
-            <% end %>
-
-
-
-
-            <% @good_tag_ings.each do |ingredient| %>
+            <% @product.goodtag_ings(current_user).each do |ingredient| %>
 
 
               <% if ingredient.tag_list.first == "good for dry skin" %>
@@ -132,7 +104,8 @@
               </li>
             <% end %>
 
-            <% @bad_tag_ings.each do |ingredient| %>
+
+            <% @product.badtag_ings(current_user).each do |ingredient| %>
 
               <% if ingredient.tag_list.first == "bad for dry skin" %>
                 <% @skintypecolor = "#e0ae8d" %>
@@ -159,21 +132,25 @@
             <% end %>
 
 
+            <% @product.flag_ings(current_user).each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p><%= ingredient.name %></p>
+                <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i></div>
+              </li>
+            <% end %>
+
+
+
 
             <div class="accordion-wrap">
-
-
-
               <div class="accordion-item">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <p class="accordion-header">more ingredients (<%= @normal_ings.count %>)</p><i class="fa fa-angle-down" aria-hidden="true"></i>
+                  <p class="accordion-header">more ingredients (<%= @product.normal_ings(current_user).count %>)</p><i class="fa fa-angle-down" aria-hidden="true"></i>
                 </li>
               </div>
 
               <div class="accordion-text">
-
-
-                <% @normal_ings.each do |ingredient| %>
+                <% @product.normal_ings(current_user).each do |ingredient| %>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <p><%= ingredient.name %></p>
                     <%= simple_form_for(Flag.new) do |f| %>
@@ -188,10 +165,7 @@
 
               </div>
 
-
-
             </div>
-
             </ul>
           </div>
         </div>
