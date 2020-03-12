@@ -306,6 +306,10 @@ anti_blemish = Product.find_by(name: "base toner ph 5.6")
 treatment_cleansing = Product.find_by(name: "aloe vera oil-free moisture cream")
 powder_wash = Product.find_by(name: "natural bha skin returning emulsion")
 time_response = Product.find_by(name: "geo wrinkle care gold cream")
+anti_redness = Product.find_by(name: "moisture bond rejuvenating cr̬me")
+treatment_enzyme = Product.find_by(name: "pore white cake pack")
+vitamin_e5 = Product.find_by(name: "vitamin e5 max cream")
+
 
 unless anti_blemish.photo.attached?
   anti_blemish.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/anti_blemish.jpg"), filename: 'anti_blemish.jpg', content_type: 'image/jpg')
@@ -322,5 +326,18 @@ end
 unless time_response.photo.attached?
   time_response.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/time_response.jpg"), filename: 'time_response.jpg', content_type: 'image/jpg')
 end
+
+unless anti_redness.photo.attached?
+  anti_redness.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/anti_redness.jpeg"), filename: 'anti_redness.jpeg', content_type: 'image/jpeg')
+end
+
+unless treatment_enzyme.photo.attached?
+  treatment_enzyme.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/treatment_enzyme.jpeg"), filename: 'treatment_enzyme.jpeg', content_type: 'image/jpeg')
+end
+
+unless vitamin_e5.photo.attached?
+  vitamin_e5.photo.attach(io: File.open("app/assets/images/seed_photos/related_products/vitamin_e5.jpg"), filename: 'vitamin_e5.jpg', content_type: 'image/jpg')
+end
+
 
 puts "All complete"
