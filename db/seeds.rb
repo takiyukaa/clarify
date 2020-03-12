@@ -235,7 +235,7 @@ unless snail.photo.attached?
   snail.photo.attach(io: File.open("app/assets/images/snail.jpg"), filename: 'snail.jpg', content_type: 'image/jpg')
 end
 
-photoes to products (by Hiro)
+# photoes to products (by Hiro)
 white = Product.find_by(name: "white pore facial cleanser")
 wonder = Product.find_by(name: "wonder pore deep foaming cleanser")
 green_tea = Product.find_by(name: "the green tea seed oil")

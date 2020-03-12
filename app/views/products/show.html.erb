@@ -11,7 +11,7 @@
         <%= render 'shared/card-productinfo', product: @product, path: @path %>
       </div>
 
-      <button class="btn btn-light-gray" data-toggle="modal" data-target="#compareModal">Compare</button>
+      <button class="btn btn-flat mt-3" data-toggle="modal" data-target="#compareModal">Compare</button>
       <%= render 'comparemodal', first_product: @product, products: Product.all, path: @path %>
 
 
@@ -23,13 +23,6 @@
             <i class="far fa-thumbs-up green"></i>
             <p><%= @product.count_good(current_user) %> good ingredient</p>
           </div>
-
-        <% else %>
-          <div class="border-green d-flex">
-            <i class="far fa-thumbs-up green"></i>
-            <p><%= @product.count_good(current_user) %> good ingredient</p>
-          </div>
-
         <% end %>
 
         <% if @product.count_bad(current_user) == 0 %>
@@ -40,7 +33,7 @@
         <% else %>
           <div class="border-red d-flex">
             <i class="fab fa-font-awesome-flag red"></i>
-            <p><%= @product.count_bad(current_user) %> flagged ingredients</p>
+            <p><%= @product.count_bad(current_user) %> bad ingredients</p>
           </div>
         <% end %>
 
@@ -85,16 +78,6 @@
           <div class="card-white">
             <ul class="list-group list-group-flush">
 
-
-            <% @product.flag_ings(current_user).each do |ingredient| %>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <p><%= ingredient.name %></p>
-                <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i></div>
-              </li>
-            <% end %>
-
-
-
             <% @product.goodtag_ings(current_user).each do |ingredient| %>
 
 
@@ -120,6 +103,7 @@
                 <div class="flex align-items-center flag-item"><i class="<%= @skintypeicon %>" style="color: <%= @skintypecolor %>"></i><p style="color: gray"><%= ingredient.tag_list.first %></p></div>
               </li>
             <% end %>
+
 
             <% @product.badtag_ings(current_user).each do |ingredient| %>
 
@@ -148,11 +132,17 @@
             <% end %>
 
 
+            <% @product.flag_ings(current_user).each do |ingredient| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p><%= ingredient.name %></p>
+                <div class="flex align-items-center flag-item"><i class="fab fa-font-awesome-flag mr-2"></i></div>
+              </li>
+            <% end %>
+
+
+
 
             <div class="accordion-wrap">
-
-
-
               <div class="accordion-item">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <p class="accordion-header">more ingredients (<%= @product.normal_ings(current_user).count %>)</p><i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -160,8 +150,6 @@
               </div>
 
               <div class="accordion-text">
-
-
                 <% @product.normal_ings(current_user).each do |ingredient| %>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <p><%= ingredient.name %></p>
@@ -177,10 +165,7 @@
 
               </div>
 
-
-
             </div>
-
             </ul>
           </div>
         </div>
