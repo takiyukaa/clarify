@@ -161,6 +161,12 @@ review_attributes.each do |hash|
   Review.find_or_create_by!(hash)
 end
 
+puts "adding friends"
+  frances = User.first
+  yuka = User.second
+  frances.friend_request(yuka)
+  yuka.accept_request(frances)
+
 puts "finding or creating tags"
 
 # frances.tag_list = "sensitive skin, oily skin, dry skin, allergens/irritants, reproductive toxicity, environmental concerns, preservatives, parabens, fragrance"
