@@ -1,27 +1,27 @@
 .banner {
   // background-color: $creme;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), asset_url("skincare.png");
+  background-image: asset_url("skincare.png");
   background-size: cover;
-  color: $navy;
+  background-repeat: no-repeat;
+  color: #b3a584;
   height: 40vh;
   display: flex;
   align-items: center;
   margin-bottom: 24px;
+  position: relative;
+  background-position: 85%;
 }
 
 .banner {
-  text-align: center;
 
   h1 {
     margin: 0;
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 16px;
-  }
-
-  p {
-  font-size: 20px;
-  opacity: .7;
+    position: absolute;
+    left: 10%;
+    top: 10%;
   }
 
 }
