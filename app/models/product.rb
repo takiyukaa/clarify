@@ -28,6 +28,14 @@ class Product < ApplicationRecord
   end
 
 
+  def photo_path
+    if self.photo.attached?
+      @path = self.photo.key
+    else
+      @path = 'no_image'
+    end
+    @path
+  end
 
   def count_bad(user)
     @count = 0
@@ -82,7 +90,7 @@ class Product < ApplicationRecord
     @normal_ings = []
 
     self.ingredients.each do |ingredient|
-      unless user.ingredients.include?(ingredient) || user.tag_list.include?(ingredient.tag_list.first)
+      unless user.ingredients.include?(ingredient) || user.tag_list.map {|tag| "good for #{tag}" }.include?(ingredient.tag_list.first) || user.tag_list.map {|tag| "bad for #{tag}" }.include?(ingredient.tag_list.first)
         @normal_ings << ingredient
       end
     end

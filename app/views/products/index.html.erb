@@ -10,16 +10,9 @@
   <div class="product-cards">
 
     <% @products.each do |product| %>
-
-      <% if product.photo.attached? %>
-        <% @path_pro = product.photo.key %>
-      <% else %>
-        <% @path_pro = 'no_image' %>
-      <% end %>
-
       <%= link_to product_path(product) do %>
         <div class="card-product">
-          <%= cl_image_tag @path_pro, alt: "product" %>
+          <%= cl_image_tag product.photo_path, alt: "product" %>
           <p class="mt-2"><%= product.brand.truncate(16) %></p>
           <p><%= product.name.truncate(16) %></p>
           <p><%= product.category.truncate(16) %></p>
