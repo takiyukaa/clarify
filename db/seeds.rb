@@ -142,11 +142,11 @@ puts "Find or create new reviews"
 
 review_attributes = [
   {
-    title: "I am disappointed that Crabtree & Evelyn discontinued the Lavender Hand Therapy",
-    content: "The new Lavender's fragrance is much too strong for me. I can't tell that it has lavender in it. The only reason I gave it a second star was that the rich, non-greasy texture is the same. Unfortunately, the strong, masculine fragrance is not to my liking.",
-    rating: 5,
+    title: "Overpriced",
+    content: "L'Occitane has some stunning products. Sadly, they are overpriced as you pay for the brand. This hand cream is no exception. Thankfully, I received it as a gift! It is a lightweight formula, which absorbs easily into the skin and has a clean smell (which reminds me of baby products). Personally, there are cheaper hand creams on the market which contain shea butter or are more moisturising, for half the price. Palmer's Lotion has a lovely coconut oil hand cream - which is extremely nourishing, but sometimes a bit greasy. The Body Shop has a shea butter hand cream - which is light, smells fresh and clean (which you can buy in the same sizes, for almost 1/3 of the price). Pros - Smells great (clean &amp; fresh) - Lightweight Cons - Expensive - Not very moisturising",
+    rating: 2,
     user: yuka,
-    product: product0
+    product: product2
   },
   {
     title: "Wonderful for sensitive skin!",
