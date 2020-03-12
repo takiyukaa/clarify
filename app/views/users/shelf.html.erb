@@ -1,9 +1,3 @@
-<% if @user.photo.attached? %>
-  <% @path = @user.photo.key %>
-<% else %>
-  <% @path = 'profile_whubsg' %>
-<% end %>
-
 <div class="user-banner">
   <% if @user == current_user %>
     <h2> My Shelf</h2>
@@ -15,7 +9,7 @@
     <% end %>
   <% end %>
   <div class="user-info">
-    <%= cl_image_tag @path, alt: "user", class: "avatar-large"  %>
+    <%= cl_image_tag @user.photo_path, alt: "user", class: "avatar-large"  %>
   </div>
 </div>
 
@@ -25,11 +19,6 @@
   <div class="my-shelf">
     <div class="product-cards">
       <% @user.find_up_voted_items.each do |product| %>
-        <% if product.photo.attached? %>
-          <% @path_pro = product.photo.key %>
-        <% else %>
-          <% @path_pro = 'no_image' %>
-        <% end %>
 
         <%= link_to product_path(product) do %>
         <div class="card-product">
@@ -41,7 +30,7 @@
           <%# end %>
 
 
-          <%= cl_image_tag @path_pro, alt: "product" %>
+          <%= cl_image_tag product.photo_path, alt: "product" %>
             <strong><p class="mt-2"><%= product.brand.truncate(16) %></p></strong>
             <p><%= product.name.truncate(16) %></p>
             <!-- <p><%= product.category.truncate(16) %></p> -->

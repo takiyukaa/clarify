@@ -21,4 +21,13 @@ class User < ApplicationRecord
     "#{first_name} #{second_name}"
   end
 
+  def photo_path
+    if self.photo.attached?
+      @path = self.photo.key
+    else
+      @path = 'profile_whubsg'
+    end
+    @path
+  end
+
 end

@@ -1,13 +1,7 @@
-<% if current_user.photo.attached? %>
-  <% @path = current_user.photo.key %>
-<% else %>
-  <% @path = 'profile_whubsg' %>
-<% end %>
-
 <div class="user-banner">
   <h2>My Profile</h2>
   <div class="user-info">
-    <%= cl_image_tag @path, alt: "user", class: "avatar-large" %>
+    <%= cl_image_tag current_user.photo_path, alt: "user", class: "avatar-large" %>
   </div>
 
 </div>
