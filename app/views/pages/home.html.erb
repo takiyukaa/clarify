@@ -1,11 +1,10 @@
 <%= render 'shared/search' %>
 <div class="banner">
-  <div class="container">
     <h1>Clarify</h1>
-    <p>A skincare app that helps you make smart decisions</p>
-  </div>
 </div>
 
+<div class="container">
+  <h2>Your friends' recently added</h2>
   <% if current_user %>
   <div class="owl-carousel owl-theme">
     <% current_user.friends.each do |friend| %>
@@ -16,7 +15,9 @@
           <% @path_pro = 'no_image' %>
         <% end %>
         <div class="item">
-          <%= cl_image_tag @path_pro, alt: "product", crop: "limit" %>
+          <div class="card-product">
+            <%= cl_image_tag @path_pro, alt: "product", crop: "limit" %>
+          </div>
         </div>
       <% end %>
     <% end %>
@@ -45,7 +46,6 @@
 </script>
 <% end %>
 
-<div class="container">
   <h2>Browse by category</h2>
   <div class="row">
     <% @products.pluck(:category).uniq.each do |category| %>
