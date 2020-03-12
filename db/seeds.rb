@@ -205,7 +205,7 @@ white = Product.find_by(name: "white pore facial cleanser")
 wonder = Product.find_by(name: "wonder pore deep foaming cleanser")
 green_tea = Product.find_by(name: "the green tea seed oil")
 rice_water = Product.find_by(name: "rice water cleansing oil")
-strawberry = Product.find_by(name: "strawberry face scrub")
+# strawberry = Product.find_by(name: "strawberry face scrub")
 creamy = Product.find_by(name: "creamy deep moist moisturizer")
 oil = Product.find_by(name: "oil control fresh moisturizer")
 priming = Product.find_by(name: "priming moisturizer")
@@ -213,7 +213,7 @@ ac_clinic = Product.find_by(name: "ac clinic daily toner")
 aloe = Product.find_by(name: "aloe bha skin toner")
 super_aqua = Product.find_by(name: "super aqua hydrating toner")
 
-yuka_liked = [white, wonder, green_tea, rice_water, strawberry, creamy, oil, priming, ac_clinic, aloe, super_aqua]
+yuka_liked = [white, wonder, green_tea, rice_water, creamy, oil, priming, ac_clinic, aloe, super_aqua]
 
 yuka_liked.each do |product|
   yuka.likes product
@@ -233,10 +233,6 @@ end
 
 unless rice_water.photo.attached?
   rice_water.photo.attach(io: File.open("app/assets/images/seed_photos/face_oil/rice_water.jpg"), filename: 'rice_water.jpg', content_type: 'image/jpg')
-end
-
-unless strawberry.photo.attached?
-  strawberry.photo.attach(io: File.open("app/assets/images/seed_photos/face_oil/strawberry.jpg"), filename: 'strawberry.jpg', content_type: 'image/jpg')
 end
 
 unless creamy.photo.attached?
