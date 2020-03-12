@@ -24,6 +24,7 @@ require 'open-uri'
 
 #frances find_by email, unless frances, create user
 
+
 frances = User.find_by(email: "frances@gmail.com")
 unless frances
   frances = User.create!(
@@ -56,6 +57,7 @@ unless yuka.photo.attached?
   yuka.photo.attach(io: File.open('app/assets/images/avatar.jpg'), filename: 'avatar.jpg', content_type: 'image/jpg')
 end
 
+yuka.remove_friend(frances)
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
 puts "find or create products"
@@ -160,6 +162,10 @@ review_attributes = [
 review_attributes.each do |hash|
   Review.find_or_create_by!(hash)
 end
+
+puts "adding friends"
+  frances.friend_request(yuka)
+  yuka.accept_request(frances)
 
 puts "finding or creating tags"
 
