@@ -34,6 +34,14 @@
 
         <%= link_to product_path(product) do %>
         <div class="card-product">
+
+
+          <%# if profuct.count_flag == 0 %>
+            <!-- <i class="far fa-thumbs-up green"></i> -->
+          <%# else %>
+          <%# end %>
+
+
           <%= cl_image_tag @path_pro, alt: "product" %>
             <p class="mt-2"><%= product.brand.truncate(16) %></p>
             <p><%= product.name.truncate(16) %></p>

@@ -1,0 +1,39 @@
+.white-big-card {
+  background-color: white;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 16px;
+}
+
+.img-compare {
+    height: 140px;
+    width: 140px;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+.col-12 {
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+
+.col-6 {
+  text-align: center;
+  padding: 16px 8px;
+
+  p {
+    margin: 0;
+  }
+
+  .stars {
+    text-align: center;
+  }
+
+  .score-rating {
+    justify-content: center;
+  }
+}

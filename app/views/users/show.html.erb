@@ -57,7 +57,6 @@
     <i class="fas fa-plus btn" data-toggle="modal" data-target="#flagsModal"></i>
     <%= render 'flags/modal', ingredients: Ingredient.all  %>
 
-
     <ul class="list-group list-group-flush">
       <% current_user.flags.each do |flag| %>
         <li class="list-group-item d-flex justify-content-between align-items-center">
