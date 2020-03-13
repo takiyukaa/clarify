@@ -12,6 +12,20 @@
   background-position: 85%;
 }
 
+.banner-shelf {
+  // background-color: $creme;
+  background-image: asset_url("shelf.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #b3a584;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  position: relative;
+  background-position: 85%;
+}
+
 .banner {
 
   h1 {
