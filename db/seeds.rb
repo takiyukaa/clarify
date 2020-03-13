@@ -38,7 +38,7 @@ unless frances
 end
 
 # unless frances.photo.attached?
-  frances.photo.attach(io: File.open('app/assets/images/frances.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
+  frances.photo.attach(io: File.open('app/assets/images/francesc.jpg'), filename: 'frances.jpg', content_type: 'image/jpg')
 # end
 
 yuka = User.find_by(email: "yuka@gmail.com")
