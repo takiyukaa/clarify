@@ -10,9 +10,6 @@
   margin-bottom: 24px;
   position: relative;
   background-position: 85%;
-}
-
-.banner {
 
   h1 {
     margin: 0;
@@ -25,3 +22,45 @@
   }
 
 }
+
+
+.user-banner {
+  background-image: asset_url("shelf.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding-top: 8px;
+  height: 160px;
+  background-color: $creme;
+  position: relative;
+  margin-bottom: 64px;
+
+  .fa-cog {
+    position: absolute;
+    color: gray;
+    font-size: 24px;
+    top: 16px;
+    left: 16px;
+  }
+
+  h2 {
+    margin-top: 36px;
+    text-align: center;
+    color: $sky;
+  }
+
+}
+
+.user-info {
+  // width: 90px;
+  height: 90px;
+  position: absolute;
+  bottom: -47px;
+  // left: calc(50% - 32px);
+  left: 50%;
+  transform: translateX(-50%);
+  p {
+    color: white;
+  }
+}
+
