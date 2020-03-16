@@ -130,7 +130,7 @@
               <ul class="list-group list-group-flush">
                 <% @first_product.goodtag_ings(current_user).each do |ingredient| %>
                   <li class="list-group-item d-flex justify-content-center align-items-center">
-                    <i class="<%= ingredient.icon %> mr-2" style="color: <%= ingredient.color %>"></i>
+                    <i class="<%= ingredient.icon %> mr-2" style="color: gray"></i>
                     <p style="color: gray"><%= ingredient.name %></p>
                   </li>
                 <% end %>
@@ -155,6 +155,7 @@
               <ul class="list-group list-group-flush">
                 <% @second_product.goodtag_ings(current_user).each do |ingredient| %>
                   <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <i class="<%= ingredient.icon %> mr-2" style="color: gray"></i>
                     <p style="color: gray"><%= ingredient.name %></p>
                   </li>
                 <% end %>
@@ -204,6 +205,7 @@
                 <% end %>
                 <% @first_product.badtag_ings(current_user).each do |ingredient| %>
                   <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <i class="<%= ingredient.icon %> mr-2" style="color: gray"></i>
                     <p style="color: gray"><%= ingredient.name %></p>
                   </li>
                 <% end %>
@@ -234,6 +236,7 @@
                 <% end %>
                 <% @second_product.badtag_ings(current_user).each do |ingredient| %>
                   <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <i class="<%= ingredient.icon %> mr-2" style="color: gray"></i>
                     <p style="color: gray"><%= ingredient.name %></p>
                   </li>
                 <% end %>
