@@ -30,7 +30,7 @@ class Ingredient < ApplicationRecord
 
   def color
     if self.tag_list.first.include?("bad")
-      @skintypecolor = "#aaa2a2"#red
+      @skintypecolor = "#ff5555"#red
     elsif self.tag_list.first.include?("dry")
       @skintypecolor = "#e0ae8d"#
     elsif self.tag_list.first.include?("oily")
