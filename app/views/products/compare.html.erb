@@ -130,6 +130,7 @@
               <ul class="list-group list-group-flush">
                 <% @first_product.goodtag_ings(current_user).each do |ingredient| %>
                   <li class="list-group-item d-flex justify-content-center align-items-center">
+                    <i class="<%= ingredient.icon %> mr-2" style="color: <%= ingredient.color %>"></i>
                     <p style="color: gray"><%= ingredient.name %></p>
                   </li>
                 <% end %>
