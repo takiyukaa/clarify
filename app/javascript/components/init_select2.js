@@ -7,5 +7,10 @@ const initSelect2 = () => {
   });
 };
 
+const initSelect3 = () => {
+  $('.select3').select2();
+};
+
 
 export { initSelect2 };
+export { initSelect3 };
