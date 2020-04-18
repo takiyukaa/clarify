@@ -1,26 +1,38 @@
 Rails.application.routes.draw do
-  get 'flags/create'
-  post 'flags/multi_create', to: 'flags#multi_create', as: :flags_multi_create
-  devise_for :users
+
   root to: 'pages#home'
-  get 'scan', to: 'products#scan'
-  get 'products/compare', to: 'products#compare', as: :products_compare
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
+
+  resources :flags, only: [:create, :destroy]
+
+  resources :flags do
+    collection do
+      post 'multi_create', to: 'flags#multi_create', as: :flags_multi_create
+    end
+  end
+
   resources :users, only: [:create, :new, :show, :update] do
     get 'friends'
     post 'friend_request'
+
     resources :review, only: [:new, :create]
+
     member do
       get 'shelf'
     end
   end
+
   resources :products, only: [:index, :show] do
+
+    collection do
+      get 'scan', to: 'products#scan'
+      get 'compare', to: 'products#compare', as: :products_compare
+    end
+
     member do
-    post "like", to: 'products#like'
-    post "unlike", to: 'products#unlike'
+      post "like", to: 'products#like'
+      post "unlike", to: 'products#unlike'
     end
   end
-  resources :flags, only: [:create, :destroy]
+
 end
-
-

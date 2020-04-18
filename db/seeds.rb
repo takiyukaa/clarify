@@ -58,6 +58,7 @@ unless yuka.photo.attached?
 end
 
 yuka.remove_friend(frances)
+
 CATEGORIES = ["Cleanser", "Exfoliator", "Treatment", "Serum", "Face Oil", "Sunscreen", "Moisturizer", "Chemical Peel", "Toner", "Face Mask", "Eye Cream"]
 
 puts "find or create products"
