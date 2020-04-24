@@ -15,7 +15,7 @@
         </div>
 
 
-        <%= simple_form_for :products, url: products_compare_path, method: :get do |f| %>
+        <%= simple_form_for :products, url: compare_products_path, method: :get do |f| %>
           <%= f.input :id, hint: 'Search and Choose a Product to compare with', label: false, as: :select, input_html: {class:'select3'}, collection:
                 products.sort_by { |product| product.name }, include_hidden: false %>
           <%= f.input :first_product, as: :hidden, :input_html => { :value => first_product.id } %>

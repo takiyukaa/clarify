@@ -5,7 +5,7 @@
       </div>
       <div class="modal-body form-tag">
         <p>Add flags</p>
-        <%= simple_form_for :flags, url: flags_multi_create_path, method: :post do |f| %>
+        <%= simple_form_for :flags, url: multi_create_flags_path, method: :post do |f| %>
           <%= f.input :id, placeholder: 'Add flags', label: false, as: :select, input_html: {class:'select2', multiple:'multiple'}, collection:
                 ingredients
                 .sort_by { |ingredient| ingredient.name }, include_hidden: false %>

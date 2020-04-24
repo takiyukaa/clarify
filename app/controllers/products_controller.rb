@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
       else
         Product.find_by_barcode(params[:barcode])
       end
-        authorize @product
+    authorize @product
   end
 
   def scan
@@ -40,8 +40,6 @@ class ProductsController < ApplicationController
 
 
   def compare
-
-
     @count = 0
     @first_product = Product.find(params["products"]["first_product"].to_i)
     @second_product = Product.find(params["products"]["id"].first)
@@ -49,7 +47,6 @@ class ProductsController < ApplicationController
     @common_ings = @first_product.ingredients & @second_product.ingredients
     @only_first_ings = @first_product.ingredients - @second_product.ingredients
     @only_second_ings = @second_product.ingredients - @first_product.ingredients
-
 
     authorize Product
   end
