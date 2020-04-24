@@ -25,6 +25,13 @@ class UsersController < ApplicationController
     authorize current_user
   end
 
+  def friends
+    @user = User.find(params[:id])
+    @path = ""
+    @path_pro = ""
+    authorize @user
+  end
+
   private
 
   def user_params

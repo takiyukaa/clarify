@@ -1,4 +1,32 @@
-<h1>my friends</h1>
-<% current_user.friends.each do |friend| %>
-<%= friend.name %>
-<% end %>
+<%= render 'shared/search' %>
+
+<div class="user-banner">
+  <% if @user == current_user %>
+    <h2> My Friends</h2>
+  <% else %>
+    <% if @user.first_name[-1].include?('s') %>
+      <h2><%= @user.first_name+"'"+" "+'Friends' %></h2>
+    <% else %>
+      <h2><%= @user.first_name+'\'s'+ ' '+'Friends' %></h2>
+    <% end %>
+  <% end %>
+  <div class="user-info">
+    <%= cl_image_tag @user.photo_path, alt: "user", class: "avatar-large"  %>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="friends">
+
+  <% current_user.friends.each do |friend| %>
+    <div class="friend card-white d-flex align-items-center">
+      <%= cl_image_tag friend.photo_path , alt: "alttext", class: "avatar-large" %>
+      <%= link_to shelf_user_path(friend) do %>
+        <p class="mx-3 my-0"><%= friend.full_name %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  </div>
+</div>

@@ -16,10 +16,10 @@ Rails.application.routes.draw do
 
     member do
       get :shelf
+      get :friends
+      post :friend_request
     end
 
-    get 'friends'
-    post 'friend_request'
   end
 
   resources :products, only: [:index, :show] do

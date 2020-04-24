@@ -4,6 +4,11 @@
       <%= image_tag "home.png", alt: "home", class: "navbar-img" %>
     <% end %>
 
+    <%= link_to friends_user_path(current_user) do %>
+      <i class="fas fa-user-friends navbar-img"></i>
+    <% end %>
+
+
     <%= link_to scan_products_path do %>
       <%= image_tag "scan.png", alt: "scan", class: "navbar-img" %>
     <% end %>
